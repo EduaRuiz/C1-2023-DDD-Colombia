@@ -1,6 +1,6 @@
-import { ValueObjectBase } from 'src/shared/sofka/bases';
+import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmptyValidation } from 'src/shared/validations';
+import { IsEmptyValidation } from '@validations';
 
 /**
  * Clase que se va a usar para tipar y validar el WeekDay en la entidad ClassDay

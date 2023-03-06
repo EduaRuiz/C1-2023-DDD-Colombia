@@ -1,4 +1,4 @@
-import { ValueObjectBase } from 'src/shared/sofka/bases';
+import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
 import {
   IsEmptyValidation,
