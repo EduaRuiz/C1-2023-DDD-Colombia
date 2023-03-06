@@ -16,8 +16,10 @@ export class GroupIdValueObject extends ValueObjectBase<string> {
   /**
    * Crea una instancia de GroupIdValueObject.
    * Si no se envia el valor asigna uno por defecto.
+   * Tambien pide que se envie un query para validar la existencia del id en la base
    *
    * @param {string} [value]
+   * @param {GroupIdExistQuery} [groupIdExistQuery]
    * @memberof GroupIdValueObject
    */
   constructor(value?: string, groupIdExistQuery?: GroupIdExistQuery) {
