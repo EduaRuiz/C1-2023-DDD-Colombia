@@ -67,8 +67,8 @@ export class SemesterIdValueObject extends ValueObjectBase<string> {
   ): Promise<void> {
     if (this.value && !(await SemesterIdExistQuery.query(this.value))) {
       this.setError({
-        field: 'SemesterId',
-        message: 'El "SemesterId" informado no existe o aún no esta creado',
+        field: 'semesterId',
+        message: 'El "semesterId" informado no existe o aún no esta creado',
       } as IErrorValueObject);
     }
   }
