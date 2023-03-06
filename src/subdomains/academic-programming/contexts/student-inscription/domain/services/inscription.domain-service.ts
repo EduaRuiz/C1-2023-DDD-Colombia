@@ -8,7 +8,7 @@ import { InscriptionDomainEntity } from '../entities';
  * @template entity
  */
 export interface IInscriptionDomainService<
-  entity extends InscriptionDomainEntity,
+  entity extends InscriptionDomainEntity = InscriptionDomainEntity,
 > {
   /**
    * Metodo que deberá retornar un objeto del tipo InscriptionDomainEntity

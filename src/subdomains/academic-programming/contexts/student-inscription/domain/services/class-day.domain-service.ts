@@ -7,7 +7,9 @@ import { ClassDayDomainEntity } from '../entities';
  * @interface IClassDayDomainService
  * @template entity
  */
-export interface IClassDayDomainService<entity extends ClassDayDomainEntity> {
+export interface IClassDayDomainService<
+  entity extends ClassDayDomainEntity = ClassDayDomainEntity,
+> {
   /**
    * Metodo que deberá retornar un objeto del tipo ClassDayDomainEntity
    *

@@ -7,7 +7,9 @@ import { StudentDomainEntity } from '../entities';
  * @interface IStudentDomainService
  * @template entity
  */
-export interface IStudentDomainService<entity extends StudentDomainEntity> {
+export interface IStudentDomainService<
+  entity extends StudentDomainEntity = StudentDomainEntity,
+> {
   /**
    * Metodo que deberá retornar un objeto del tipo StudentDomainEntity
    *

@@ -7,7 +7,9 @@ import { GroupDomainEntity } from '../entities';
  * @interface IGroupDomainService
  * @template entity
  */
-export interface IGroupDomainService<entity extends GroupDomainEntity> {
+export interface IGroupDomainService<
+  entity extends GroupDomainEntity = GroupDomainEntity,
+> {
   /**
    * Metodo que deberá retornar un objeto del tipo GroupDomainEntity
    *
