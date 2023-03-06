@@ -1,3 +1,4 @@
+export * from './current-date-time.validation';
 export * from './is-empty.validation';
 export * from './is-institutional-mail.validation';
 export * from './is-mail-structure.validation';
