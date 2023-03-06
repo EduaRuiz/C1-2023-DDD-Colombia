@@ -1,4 +1,4 @@
-import { IErrorValueObject } from '../interface';
+import { IErrorValueObject } from '@sofka/interfaces';
 
 export abstract class ValueObjectErrorHandler {
   private _errors: Array<IErrorValueObject>;

@@ -16,6 +16,17 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@contexts/student-inscription/*": [
+        "./src/subdomains/academic-programming/contexts/student-inscription/*"
+      ],
+      "@sofka/*": [
+        "./src/shared/sofka/*"
+      ],
+      "@validations": [
+        "./src/shared/validations"
+      ],
+    }
   }
 }

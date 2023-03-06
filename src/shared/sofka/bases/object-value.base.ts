@@ -1,4 +1,4 @@
-import { IErrorValueObject } from '../interface';
+import { IErrorValueObject } from '@sofka/interfaces';
 
 /**
  * Abstract class for representing an object value
