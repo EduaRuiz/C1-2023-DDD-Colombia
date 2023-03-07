@@ -1,32 +1,35 @@
-import { v4 as uuid } from 'uuid';
-
 import { IsUUID4 } from '@validations';
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
 import { ClassDayIdExistQuery } from '@contexts/student-inscription/domain/queries';
 
 /**
- * Clase que se va a usar para tipar y validar el ID en la entidad ClassDay
+ * Clase que se va a usar para establecer el tipo y validar el ID en la entidad correspondiente
  *
  * @export
  * @class ClassDayIdValueObject
- * @extends {ValueObjectBase<string>}
+ * @extends {ValueObjectBase<string>} Base principal de todos los ValueObjects
  */
 export class ClassDayIdValueObject extends ValueObjectBase<string> {
   /**
-   * Crea una instancia de ClassDayIdValueObject.
-   * Si no se envia el valor asigna uno por defecto.
-   * Tambien pide que se envie un query para validar la existencia del id en la base
+   * Query de consulta de existencia del ID
    *
-   * @param {string} [value]
-   * @param {ClassDayIdExistQuery} [classDayIdExistQuery]
+   * @private
+   * @type {ClassDayIdExistQuery}
    * @memberof ClassDayIdValueObject
    */
-  constructor(value?: string, classDayIdExistQuery?: ClassDayIdExistQuery) {
-    super(value ?? uuid());
-    if (classDayIdExistQuery) {
-      this.validateClassDayExist(classDayIdExistQuery);
-    }
+  private readonly classDayIdExistQuery: ClassDayIdExistQuery;
+
+  /**
+   * Crea una instancia de ClassDayIdValueObject.
+   *
+   * @param {string} [value] Valor inicial del ValueObject
+   * @param {ClassDayIdExistQuery} [classDayIdExistQuery] Query que se va a usar para validar si el ID existe
+   * @memberof ClassDayIdValueObject
+   */
+  constructor(value: string, classDayIdExistQuery: ClassDayIdExistQuery) {
+    super(value);
+    this.classDayIdExistQuery = classDayIdExistQuery;
   }
 
   /**
@@ -36,11 +39,12 @@ export class ClassDayIdValueObject extends ValueObjectBase<string> {
    */
   validateData(): void {
     this.validateStructure();
+    this.validateClassDayExist();
   }
 
   /**
-   * Valida si el id enviado cumple con la estructura de un uuid v4
-   * Para esto se uson el repositorio de UUID
+   * Valida si el id enviado cumple con la estructura de un UUID v4
+   * Para esto se usó el repositorio de UUID v4
    *
    * @private
    * @memberof ClassDayIdValueObject
@@ -55,17 +59,14 @@ export class ClassDayIdValueObject extends ValueObjectBase<string> {
   }
 
   /**
-   * Valida si el ClassDayId enviado existe en el contexto que lo gestiona
+   * Valida si el Id enviado existe en el contexto que lo gestiona
    *
    * @private
-   * @param {ClassDayIdExistQuery} classDayIdExistQuery
-   * @return {*}  {Promise<void>}
+   * @return  {Promise<void>} Establece el error correspondiente si la respuesta es negativa
    * @memberof ClassDayIdValueObject
    */
-  private async validateClassDayExist(
-    classDayIdExistQuery: ClassDayIdExistQuery,
-  ): Promise<void> {
-    if (this.value && !(await classDayIdExistQuery.query(this.value))) {
+  private async validateClassDayExist(): Promise<void> {
+    if (this.value && !(await this.classDayIdExistQuery.query(this.value))) {
       this.setError({
         field: 'classDayId',
         message: 'El "classDayId" informado no existe o aún no esta creado',

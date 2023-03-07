@@ -1,12 +1,12 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmptyValidation } from '@validations';
+import { IsEmpty } from '@validations';
 
 /**
- * Clase que se va a usar para tipar y validar el estado del Group en la entidad Group
+ * Clase que se va a usar para establecer el tipo y validar el estado del Group en la entidad Group
  *
  * @export
- * @class InscriprionStateValueObject
+ * @class InscriptionStateValueObject
  * @extends {ValueObjectBase<string>}
  */
 export class GroupStateValueObject extends ValueObjectBase<string> {
@@ -17,7 +17,7 @@ export class GroupStateValueObject extends ValueObjectBase<string> {
    * @memberof GroupStateValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'GroupState',
         message: 'El "GroupState" no puede ser vacío',

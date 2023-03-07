@@ -1,9 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmptyValidation } from '@validations';
+import { IsEmpty } from '@validations';
 
 /**
- * Clase que se va a usar para tipar y validar Part en la entidad Semester
+ * Clase que se va a usar para establecer el tipo y validar Part en la entidad Semester
  *
  * @export
  * @class PartObjectId
@@ -17,7 +17,7 @@ export class PartValueObject extends ValueObjectBase<number> {
    * @memberof PartObjectId
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'professorName',
         message: 'El "professorName" no puede ser vacío',

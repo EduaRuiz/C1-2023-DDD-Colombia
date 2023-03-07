@@ -5,7 +5,7 @@ import { IsUUID4 } from '@validations';
 import { IErrorValueObject } from '@sofka/interfaces';
 
 /**
- * Clase que se va a usar para tipar y validar el ID en la entidad Inscription
+ * Clase que se va a usar para establecer el tipo y validar el ID en la entidad Inscription
  *
  * @export
  * @class InscriptionIdValueObject
@@ -14,7 +14,7 @@ import { IErrorValueObject } from '@sofka/interfaces';
 export class InscriptionIdValueObject extends ValueObjectBase<string> {
   /**
    * Crea una instancia de InscriptionIdValueObject.
-   * Si no se envia el valor asigna uno por defecto.
+   * Si no se envía el valor asigna uno por defecto.
    *
    * @param {string} [value]
    * @memberof InscriptionIdValueObject
@@ -34,7 +34,7 @@ export class InscriptionIdValueObject extends ValueObjectBase<string> {
 
   /**
    * Valida si el id enviado cumple con la estructura de un uuid v4
-   * Para esto se uson el repositorio de UUID
+   * Para esto se usó el repositorio de UUID
    *
    * @private
    * @memberof InscriptionIdValueObject

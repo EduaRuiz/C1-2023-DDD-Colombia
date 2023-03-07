@@ -12,19 +12,24 @@ import {
   ISemesterDomainService,
   IStudentDomainService,
 } from '../../services';
-import { ChangedInscriptionStateEventPublisher } from '../../events/publishers';
+import {
+  ChangedInscriptionStateEventPublisher,
+  CommittedInscriptionEventPublisher,
+  GotClassDayEventPublisher,
+  GotGroupInfoEventPublisher,
+  GotGroupsEventPublisher,
+  GotInscriptionInfoEventPublisher,
+  GotInscriptionsEventPublisher,
+  GotSemesterInfoEventPublisher,
+  GotStudentInfoEventPublisher,
+  MatchedClassDayDataEventPublisher,
+  MatchedGroupDataEventPublisher,
+  MatchedSemesterDataEventPublisher,
+  MatchedStudentDataEventPublisher,
+  SubscribedGroupEventPublisher,
+  UnsubscribedGroupEventPublisher,
+} from '../../events/publishers';
 
-/**
- * Classe Agregado Root Inscription
- *
- * @export
- * @class InscriptionAggregateRoot
- * @implements {IClassDayDomainService}
- * @implements {IGroupDomainService}
- * @implements {IInscriptionDomainService}
- * @implements {ISemesterDomainService}
- * @implements {IStudentDomainService}
- */
 export class InscriptionAggregateRoot
   implements
     IClassDayDomainService,
@@ -33,37 +38,95 @@ export class InscriptionAggregateRoot
     ISemesterDomainService,
     IStudentDomainService
 {
-  private readonly classday$?: IClassDayDomainService;
+  private readonly classDay$?: IClassDayDomainService;
   private readonly group$?: IGroupDomainService;
   private readonly inscription$?: IInscriptionDomainService;
   private readonly semester$?: ISemesterDomainService;
   private readonly student$?: IStudentDomainService;
 
   private readonly changedInscriptionStateEventPublisher?: ChangedInscriptionStateEventPublisher;
+  private readonly committedInscriptionEventPublisher?: CommittedInscriptionEventPublisher;
+  private readonly gotClassDayEventPublisher?: GotClassDayEventPublisher;
+  private readonly gotGroupInfoEventPublisher?: GotGroupInfoEventPublisher;
+  private readonly gotGroupsEventPublisher?: GotGroupsEventPublisher;
+  private readonly gotInscriptionInfoEventPublisher?: GotInscriptionInfoEventPublisher;
+  private readonly gotInscriptionsEventPublisher?: GotInscriptionsEventPublisher;
+  private readonly gotSemesterInfoEventPublisher?: GotSemesterInfoEventPublisher;
+  private readonly gotStudentInfoEventPublisher?: GotStudentInfoEventPublisher;
+  private readonly matchedClassDayDataEventPublisher?: MatchedClassDayDataEventPublisher;
+  private readonly matchedGroupDataEventPublisher?: MatchedGroupDataEventPublisher;
+  private readonly matchedSemesterDataEventPublisher?: MatchedSemesterDataEventPublisher;
+  private readonly matchedStudentDataEventPublisher?: MatchedStudentDataEventPublisher;
+  private readonly subscribedGroupEventPublisher?: SubscribedGroupEventPublisher;
+  private readonly unsubscribedGroupEventPublisher?: UnsubscribedGroupEventPublisher;
 
   constructor({
-    classday$,
+    classDay$,
     group$,
     inscription$,
     semester$,
     student$,
     changedInscriptionStateEventPublisher,
+    committedInscriptionEventPublisher,
+    gotClassDayEventPublisher,
+    gotGroupInfoEventPublisher,
+    gotGroupsEventPublisher,
+    gotInscriptionInfoEventPublisher,
+    gotInscriptionsEventPublisher,
+    gotSemesterInfoEventPublisher,
+    gotStudentInfoEventPublisher,
+    matchedClassDayDataEventPublisher,
+    matchedGroupDataEventPublisher,
+    matchedSemesterDataEventPublisher,
+    matchedStudentDataEventPublisher,
+    subscribedGroupEventPublisher,
+    unsubscribedGroupEventPublisher,
   }: {
-    classday$?: IClassDayDomainService;
+    classDay$?: IClassDayDomainService;
     group$?: IGroupDomainService;
     inscription$?: IInscriptionDomainService;
     semester$?: ISemesterDomainService;
     student$?: IStudentDomainService;
     changedInscriptionStateEventPublisher?: ChangedInscriptionStateEventPublisher;
+    committedInscriptionEventPublisher?: CommittedInscriptionEventPublisher;
+    gotClassDayEventPublisher?: GotClassDayEventPublisher;
+    gotGroupInfoEventPublisher?: GotGroupInfoEventPublisher;
+    gotGroupsEventPublisher?: GotGroupsEventPublisher;
+    gotInscriptionInfoEventPublisher?: GotInscriptionInfoEventPublisher;
+    gotInscriptionsEventPublisher?: GotInscriptionsEventPublisher;
+    gotSemesterInfoEventPublisher?: GotSemesterInfoEventPublisher;
+    gotStudentInfoEventPublisher?: GotStudentInfoEventPublisher;
+    matchedClassDayDataEventPublisher?: MatchedClassDayDataEventPublisher;
+    matchedGroupDataEventPublisher?: MatchedGroupDataEventPublisher;
+    matchedSemesterDataEventPublisher?: MatchedSemesterDataEventPublisher;
+    matchedStudentDataEventPublisher?: MatchedStudentDataEventPublisher;
+    subscribedGroupEventPublisher?: SubscribedGroupEventPublisher;
+    unsubscribedGroupEventPublisher?: UnsubscribedGroupEventPublisher;
   }) {
-    this.classday$ = classday$;
+    this.classDay$ = classDay$;
     this.group$ = group$;
     this.inscription$ = inscription$;
     this.semester$ = semester$;
     this.student$ = student$;
     this.changedInscriptionStateEventPublisher =
       changedInscriptionStateEventPublisher;
+    this.committedInscriptionEventPublisher =
+      committedInscriptionEventPublisher;
+    this.gotClassDayEventPublisher = gotClassDayEventPublisher;
+    this.gotGroupInfoEventPublisher = gotGroupInfoEventPublisher;
+    this.gotGroupsEventPublisher = gotGroupsEventPublisher;
+    this.gotInscriptionInfoEventPublisher = gotInscriptionInfoEventPublisher;
+    this.gotInscriptionsEventPublisher = gotInscriptionsEventPublisher;
+    this.gotSemesterInfoEventPublisher = gotSemesterInfoEventPublisher;
+    this.gotStudentInfoEventPublisher = gotStudentInfoEventPublisher;
+    this.matchedClassDayDataEventPublisher = matchedClassDayDataEventPublisher;
+    this.matchedGroupDataEventPublisher = matchedGroupDataEventPublisher;
+    this.matchedSemesterDataEventPublisher = matchedSemesterDataEventPublisher;
+    this.matchedStudentDataEventPublisher = matchedStudentDataEventPublisher;
+    this.subscribedGroupEventPublisher = subscribedGroupEventPublisher;
+    this.unsubscribedGroupEventPublisher = unsubscribedGroupEventPublisher;
   }
+
   getClassDay(classDayId: string): Promise<ClassDayDomainEntity> {
     throw new Error('Method not implemented.');
   }

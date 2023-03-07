@@ -1,12 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import {
-  IsEmptyValidation,
-  NumberRangeValidation,
-} from 'src/shared/validations';
+import { IsEmpty, NumberRange } from 'src/shared/validations';
 
 /**
- * Clase que se va a usar para tipar y validar la cuota disponible en la entidad Group
+ * Clase que se va a usar para establecer el tipo y validar la cuota disponible en la entidad Group
  *
  * @export
  * @class QuotaAvailableValueObject
@@ -20,7 +17,7 @@ export class QuotaAvailableValueObject extends ValueObjectBase<number> {
    * @memberof QuotaAvailableValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'professorName',
         message: 'El "professorName" no puede ser vacío',
@@ -37,7 +34,7 @@ export class QuotaAvailableValueObject extends ValueObjectBase<number> {
    * @memberof QuotaAvailableValueObject
    */
   private validateRange(): void {
-    if (this.value && !NumberRangeValidation(this.value, 1, 30)) {
+    if (this.value && !NumberRange(this.value, 1, 30)) {
       this.setError({
         field: 'quotaAvailable',
         message:

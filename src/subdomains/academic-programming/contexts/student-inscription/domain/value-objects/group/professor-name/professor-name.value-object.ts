@@ -1,9 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmptyValidation, StringRangeLength } from '@validations';
+import { IsEmpty, StringRangeLength } from '@validations';
 
 /**
- * Clase que se va a usar para tipar y validar el professorName en la entidad Group
+ * Clase que se va a usar para establecer el tipo y validar el professorName en la entidad Group
  *
  * @export
  * @class ProfessorNameValueObject
@@ -17,24 +17,24 @@ export class ProfessorNameValueObject extends ValueObjectBase<string> {
    * @memberof ProfessorNameValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'professorName',
         message: 'El "professorName" no puede ser vacío',
       } as IErrorValueObject);
     } else {
-      this.validateLenght();
+      this.validateLength();
     }
   }
 
   /**
    * Valida si la longitud de professorName se encuentra dentro del rango
-   * minimo 5 caracteres y maximo 255 caracteres
+   * mínimo 5 caracteres y máximo 255 caracteres
    *
    * @private
    * @memberof ProfessorNameValueObject
    */
-  private validateLenght(): void {
+  private validateLength(): void {
     if (this.value && !StringRangeLength(this.value, 5, 255)) {
       this.setError({
         field: 'professorName',

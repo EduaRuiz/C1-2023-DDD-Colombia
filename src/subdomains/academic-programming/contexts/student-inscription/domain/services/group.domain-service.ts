@@ -28,7 +28,7 @@ export interface IGroupDomainService<
   getAllGroups(): Promise<entity[]>;
 
   /**
-   * Metodo que debera retornar una confirmacion en la subscripcion de un grupo
+   * Metodo que debera retornar una confirmaciónen la subscripciónde un grupo
    *
    * @param {string} groupId
    * @return {*}  {Promise<boolean>}
@@ -37,7 +37,7 @@ export interface IGroupDomainService<
   subscribeGroup(groupId: string): Promise<boolean>;
 
   /**
-   * Metodo que debera retornar una confirmacion al darse de baja en un grupo
+   * Metodo que debera retornar una confirmaciónal darse de baja en un grupo
    *
    * @param {string} groupId
    * @return {*}  {Promise<boolean>}

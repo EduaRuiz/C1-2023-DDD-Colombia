@@ -1,9 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
-import { CurrentDateTimeValidation } from '@validations';
+import { CurrentDateTime } from '@validations';
 import { IErrorValueObject } from '@sofka/interfaces';
 
 /**
- * Clase que se va a usar para tipar y validar la fecha de creacion en la entidad Inscription
+ * Clase que se va a usar para establecer el tipo y validar la fecha de creaciónen la entidad Inscription
  *
  * @export
  * @class DateTimeValueObject
@@ -49,7 +49,7 @@ export class DateTimeValueObject extends ValueObjectBase<Date> {
    * @memberof DateTimeValueObject
    */
   private validateCurrentDate(): void {
-    if (this.value && !CurrentDateTimeValidation(this.value, this.now)) {
+    if (this.value && !CurrentDateTime(this.value, this.now, 1)) {
       this.setError({
         field: 'dateTime',
         message:

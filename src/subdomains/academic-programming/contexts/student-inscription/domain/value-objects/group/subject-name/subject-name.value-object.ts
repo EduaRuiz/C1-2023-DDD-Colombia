@@ -1,9 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmptyValidation, StringRangeLength } from '@validations';
+import { IsEmpty, StringRangeLength } from '@validations';
 
 /**
- * Clase que se va a usar para tipar y validar el nombre de la materia en la entidad Group
+ * Clase que se va a usar para establecer el tipo y validar el nombre de la materia en la entidad Group
  *
  * @export
  * @class SubjectNameValueObject
@@ -17,13 +17,13 @@ export class SubjectNameValueObject extends ValueObjectBase<string> {
    * @memberof SubjectNameValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'subjectName',
         message: 'El "subjectName" no puede ser vacío',
       } as IErrorValueObject);
     } else {
-      this.validateLenght();
+      this.validateLength();
     }
   }
 
@@ -34,7 +34,7 @@ export class SubjectNameValueObject extends ValueObjectBase<string> {
    * @private
    * @memberof SubjectNameValueObject
    */
-  private validateLenght(): void {
+  private validateLength(): void {
     if (this.value && !StringRangeLength(this.value, 3, 255)) {
       this.setError({
         field: 'subjectName',

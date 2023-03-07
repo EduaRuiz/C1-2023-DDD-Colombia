@@ -15,15 +15,15 @@ export abstract class UnsubscribedGroupEventPublisher<
   Response = GroupDomainEntity,
 > extends EventPublisherBase<Response> {
   /**
-   * Metodo de publicacion del evento
-   * Publica en el brocker la accion realizada
+   * Metodo de publicacióndel evento
+   * Publica en el brocker la acciónrealizada
    *
    * @template Result
-   * @return {*}  {Promise<Result>}
+   * @return {Promise<Result>} Informacióndel brocker
    * @memberof UnsubscribedGroupEventPublisher
    */
   publish<Result = any>(): Promise<Result> {
-    return this.send(
+    return this.emit(
       'student-inscription.unsubscribed-group',
       JSON.stringify(this.response),
     );

@@ -18,5 +18,8 @@
     "titleBar.inactiveBackground": "#13247d99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "#13247d"
+  "peacock.color": "#13247d",
+  "cSpell.words": [
+    "sofka"
+  ]
 }

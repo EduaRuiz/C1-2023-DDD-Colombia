@@ -1,9 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmptyValidation, StringRangeLength } from '@validations';
+import { IsEmpty, StringRangeLength } from '@validations';
 
 /**
- * Clase que se va a usar para tipar y validar el FullName en la entidad Student
+ * Clase que se va a usar para establecer el tipo y validar el FullName en la entidad Student
  *
  * @export
  * @class FullNameValueObject
@@ -17,13 +17,13 @@ export class FullNameValueObject extends ValueObjectBase<string> {
    * @memberof FullNameValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'fullName',
         message: 'El "fullName" no puede ser vacío',
       } as IErrorValueObject);
     } else {
-      this.validateLenght();
+      this.validateLength();
     }
   }
 
@@ -34,7 +34,7 @@ export class FullNameValueObject extends ValueObjectBase<string> {
    * @private
    * @memberof FullNameValueObject
    */
-  private validateLenght(): void {
+  private validateLength(): void {
     if (this.value && !StringRangeLength(this.value, 10, 255)) {
       this.setError({
         field: 'fullName',

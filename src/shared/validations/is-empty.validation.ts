@@ -2,10 +2,10 @@
  * Valida si cualquier tipo de valor enviado dentro de los siguientes se encuentra vacío:
  * boolean | number | bigint | [] | object | string | null | undefined
  *
- * @param {(boolean | number | bigint | [] | object | string | null | undefined)} value
- * @return {*}  {boolean}
+ * @param {(boolean | number | bigint | [] | object | string | null | undefined)} value Valor a evaluar
+ * @return {boolean} Indica si la variable enviada esta vacía o no
  */
-export const IsEmptyValidation = (
+export const IsEmpty = (
   value: boolean | number | bigint | [] | object | string | null | undefined,
 ): boolean => {
   if (typeof value === 'string') return value.trim() === '' ? true : false;

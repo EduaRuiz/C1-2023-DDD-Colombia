@@ -1,9 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmptyValidation } from '@validations';
+import { IsEmpty } from '@validations';
 
 /**
- * Clase que se va a usar para tipar y validar el estado de la Inscription en la entidad Inscription
+ * Clase que se va a usar para establecer el tipo y validar el estado de la Inscription en la entidad Inscription
  *
  * @export
  * @class InscriprionStateValueObject
@@ -17,7 +17,7 @@ export class InscriptionStateValueObject extends ValueObjectBase<string> {
    * @memberof InscriptionStateValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'inscriptionState',
         message: 'El "inscriptionState" no puede ser vacío',

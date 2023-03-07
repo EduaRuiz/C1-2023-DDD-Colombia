@@ -1,14 +1,11 @@
 /**
  * Valida si el dominio del correo coincide con el dominio enviado
  *
- * @param {string} value
- * @param {string} domain
- * @return {*}  {boolean}
+ * @param {string} value Mail a validar
+ * @param {string} domain Dominio para comparar ejemplo: @domain.com.co
+ * @return {boolean} Indica si el mail contiene el dominio indicado
  */
-export const IsInstitutionalMailValidation = (
-  value: string,
-  domain: string,
-): boolean => {
+export const IsInstitutionalMail = (value: string, domain: string): boolean => {
   const index = value.indexOf(domain);
   return index === -1
     ? false

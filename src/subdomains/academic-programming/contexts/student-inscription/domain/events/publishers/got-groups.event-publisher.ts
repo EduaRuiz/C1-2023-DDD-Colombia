@@ -2,7 +2,7 @@ import { GroupDomainEntity } from '../../entities';
 import { EventPublisherBase } from '@sofka/bases/event-publisher.base';
 
 /**
- * Publisher encargado de informar la obtencion de informacion de una lista de Groups
+ * Publisher encargado de informar la obtenciónde informaciónde una lista de Groups
  * Clase absctracta que establece el canal de emision y publica el evento
  *
  * @export
@@ -15,8 +15,8 @@ export abstract class GotGroupsEventPublisher<
   Response = GroupDomainEntity[],
 > extends EventPublisherBase<Response> {
   /**
-   * Metodo de publicacion del evento
-   * Publica en el brocker la accion realizada
+   * Metodo de publicacióndel evento
+   * Publica en el brocker la acciónrealizada
    *
    * @template Result
    * @return {*}  {Promise<Result>}

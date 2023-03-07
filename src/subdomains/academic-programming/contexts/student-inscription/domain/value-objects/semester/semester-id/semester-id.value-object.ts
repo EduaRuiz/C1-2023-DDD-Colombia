@@ -1,12 +1,10 @@
-import { v4 as uuid } from 'uuid';
-
 import { IsUUID4 } from 'src/shared/validations';
 import { ValueObjectBase } from 'src/shared/sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
 import { SemesterIdExistQuery } from '@contexts/student-inscription/domain/queries';
 
 /**
- * Clase que se va a usar para tipar y validar el ID en la entidad Semester
+ * Clase que se va a usar para establecer el tipo y validar el ID en la entidad Semester
  *
  * @export
  * @class SemesterIdValueObject
@@ -14,19 +12,24 @@ import { SemesterIdExistQuery } from '@contexts/student-inscription/domain/queri
  */
 export class SemesterIdValueObject extends ValueObjectBase<string> {
   /**
+   * Query de consulta de existencia del ID
+   *
+   * @private
+   * @type {SemesterIdExistQuery}
+   * @memberof SemesterIdValueObject
+   */
+  private readonly semesterIdExistQuery: SemesterIdExistQuery;
+
+  /**
    * Crea una instancia de SemesterIdValueObject.
-   * Si no se envia el valor asigna uno por defecto.
-   * Tambien pide que se envie un query para validar la existencia del id en la base
    *
    * @param {string} [value]
    * @param {SemesterIdExistQuery} [semesterIdExistQuery]
    * @memberof SemesterIdValueObject
    */
-  constructor(value?: string, semesterIdExistQuery?: SemesterIdExistQuery) {
-    super(value ?? uuid());
-    if (semesterIdExistQuery) {
-      this.validateSemesterExist(semesterIdExistQuery);
-    }
+  constructor(value: string, semesterIdExistQuery: SemesterIdExistQuery) {
+    super(value);
+    this.semesterIdExistQuery = semesterIdExistQuery;
   }
 
   /**
@@ -36,11 +39,12 @@ export class SemesterIdValueObject extends ValueObjectBase<string> {
    */
   validateData(): void {
     this.validateStructure();
+    this.validateSemesterExist();
   }
 
   /**
-   * Valida si el id enviado cumple con la estructura de un uuid v4
-   * Para esto se uson el repositorio de UUID
+   * Valida si el id enviado cumple con la estructura de un UUID v4
+   * Para esto se usó el repositorio de UUID v4
    *
    * @private
    * @memberof SemesterIdValueObject
@@ -55,17 +59,14 @@ export class SemesterIdValueObject extends ValueObjectBase<string> {
   }
 
   /**
-   * Valida si el Semester enviado existe en el contexto que lo gestiona
+   * Valida si el Id enviado existe en el contexto que lo gestiona
    *
    * @private
-   * @param {SemesterIdExistQuery} SemesterIdExistQuery
-   * @return {*}  {Promise<void>}
+   * @return {Promise<void>} Establece el error correspondiente si la respuesta es negativa
    * @memberof SemesterIdValueObject
    */
-  private async validateSemesterExist(
-    SemesterIdExistQuery: SemesterIdExistQuery,
-  ): Promise<void> {
-    if (this.value && !(await SemesterIdExistQuery.query(this.value))) {
+  private async validateSemesterExist(): Promise<void> {
+    if (this.value && !(await this.semesterIdExistQuery.query(this.value))) {
       this.setError({
         field: 'semesterId',
         message: 'El "semesterId" informado no existe o aún no esta creado',

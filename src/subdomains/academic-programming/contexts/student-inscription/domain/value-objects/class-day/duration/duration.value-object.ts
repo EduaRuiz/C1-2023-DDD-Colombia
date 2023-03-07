@@ -1,11 +1,8 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import {
-  IsEmptyValidation,
-  NumberRangeValidation,
-} from 'src/shared/validations';
+import { IsEmpty, NumberRange } from '@validations';
 /**
- * Clase que se va a usar para tipar y validar Duration en la entidad ClassDay
+ * Clase que se va a usar para establecer el tipo y validar Duration en la entidad ClassDay
  *
  * @export
  * @class DurationValueObject
@@ -19,7 +16,7 @@ export class DurationValueObject extends ValueObjectBase<number> {
    * @memberof DurationValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'duration',
         message: 'El "duration" no puede ser vacío',
@@ -38,7 +35,7 @@ export class DurationValueObject extends ValueObjectBase<number> {
   private validateRange(): void {
     if (
       this.value &&
-      !NumberRangeValidation(this.value, 60 * 60 * 1000, 60 * 60 * 1000 * 2)
+      !NumberRange(this.value, 60 * 60 * 1000, 60 * 60 * 1000 * 2)
     ) {
       this.setError({
         field: 'duration',

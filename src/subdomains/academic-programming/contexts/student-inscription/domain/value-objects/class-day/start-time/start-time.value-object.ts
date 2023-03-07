@@ -1,12 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import {
-  IsEmptyValidation,
-  NumberRangeValidation,
-} from 'src/shared/validations';
+import { IsEmpty, NumberRange } from '@validations';
 
 /**
- * Clase que se va a usar para tipar y validar el StartTime en la entidad ClassDay
+ * Clase que se va a usar para establecer el tipo y validar el StartTime en la entidad ClassDay
  *
  * @export
  * @class StartTimeValueObject
@@ -20,7 +17,7 @@ export class StartTimeValueObject extends ValueObjectBase<number> {
    * @memberof StartTimeValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'startTime',
         message: 'El "startTime" no puede ser vacío',
@@ -40,7 +37,7 @@ export class StartTimeValueObject extends ValueObjectBase<number> {
   private validateRange(): void {
     if (
       this.value &&
-      !NumberRangeValidation(this.value, 7, 20) &&
+      !NumberRange(this.value, 7, 20) &&
       this.value !== 13
     ) {
       this.setError({

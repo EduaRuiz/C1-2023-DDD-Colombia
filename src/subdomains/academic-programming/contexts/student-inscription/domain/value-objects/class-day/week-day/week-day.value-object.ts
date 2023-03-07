@@ -1,9 +1,9 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmptyValidation } from '@validations';
+import { IsEmpty } from '@validations';
 
 /**
- * Clase que se va a usar para tipar y validar el WeekDay en la entidad ClassDay
+ * Clase que se va a usar para establecer el tipo y validar el WeekDay en la entidad ClassDay
  *
  * @export
  * @class WeekDayValueObject
@@ -17,7 +17,7 @@ export class WeekDayValueObject extends ValueObjectBase<string> {
    * @memberof WeekDayValueObject
    */
   validateData(): void {
-    if (IsEmptyValidation(this.value)) {
+    if (IsEmpty(this.value)) {
       this.setError({
         field: 'weekDay',
         message: 'El "weekDay" no puede ser vacío',

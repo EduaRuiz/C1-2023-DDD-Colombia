@@ -28,7 +28,7 @@ export interface IInscriptionDomainService<
   getAllInscriptions(): Promise<entity[]>;
 
   /**
-   * Metodo que deberar retornar la confirmacion al cambio del estado de una inscripcion
+   * Metodo que deberar retornar la confirmaciónal cambio del estado de una inscripcion
    * se usara en dado que caso de cancelar o completar una inscripcion
    *
    * @param {entity} inscription

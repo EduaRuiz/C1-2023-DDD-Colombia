@@ -2,7 +2,7 @@ import { EventPublisherBase } from '@sofka/bases';
 import { InscriptionDomainEntity } from '../../entities';
 
 /**
- * Publisher encargado de informar la generacion de una nueva Inscription
+ * Publisher encargado de informar la generaciónde una nueva Inscription
  * Clase absctracta que establece el canal de emision y publica el evento
  *
  * @export
@@ -15,8 +15,8 @@ export abstract class CommittedInscriptionEventPublisher<
   Response = InscriptionDomainEntity,
 > extends EventPublisherBase<Response> {
   /**
-   * Metodo de publicacion del evento
-   * Publica en el brocker la accion realizada
+   * Metodo de publicacióndel evento
+   * Publica en el brocker la acciónrealizada
    *
    * @template Result
    * @return {*}  {Promise<Result>}
