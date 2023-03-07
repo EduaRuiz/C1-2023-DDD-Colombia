@@ -1,7 +1,8 @@
-import { EventPublisherBase } from '@sofka/bases/event-publisher.base';
-import { InscriptionDomainEntity } from '../../entities/inscription.domain-entity';
+import { EventPublisherBase } from '@sofka/bases';
+import { InscriptionDomainEntity } from '../../entities';
 
 /**
+ * Publisher encargado de informar la optencion de informacion de un ClassDay
  * Clase absctracta que establece el canal de emision y publica el evento
  *
  * @export
@@ -14,7 +15,8 @@ export abstract class ChangedInscriptionStateEventPublisher<
   Response = InscriptionDomainEntity,
 > extends EventPublisherBase<Response> {
   /**
-   * Publica en el brocker el cambio en cuestion realizado
+   * Metodo de publicacion del evento
+   * Publica en el brocker la accion realizada
    *
    * @template Result
    * @return {*}  {Promise<Result>}
