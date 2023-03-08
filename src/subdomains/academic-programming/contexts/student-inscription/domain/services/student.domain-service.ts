@@ -11,10 +11,10 @@ export interface IStudentDomainService<
   entity extends StudentDomainEntity = StudentDomainEntity,
 > {
   /**
-   * Metodo que deberá retornar un objeto del tipo StudentDomainEntity
+   * Método que deberá retornar un objeto del tipo StudentDomainEntity
    *
    * @param {string} studentId
-   * @return {*}  {Promise<entity>}
+   * @return {Promise<entity>} EStudiante concreto
    * @memberof IStudentDomainService
    */
   getStudent(studentId: string): Promise<entity>;

@@ -19,7 +19,7 @@ export abstract class ChangedInscriptionStateEventPublisher<
    * Publica en el Broker la acción realizada
    *
    * @template Result Tipo de respuesta
-   * @return {Promise<Result>} Respuesta del Broker
+   * @return {Promise<Result>} Respuesta del Broker luego de la publicación
    * @memberof ChangedInscriptionStateEventPublisher
    */
   publish<Result = any>(): Promise<Result> {

@@ -11,18 +11,18 @@ export interface IClassDayDomainService<
   entity extends ClassDayDomainEntity = ClassDayDomainEntity,
 > {
   /**
-   * Metodo que deberá retornar un objeto del tipo ClassDayDomainEntity
+   * Método que deberá retornar un objeto del tipo ClassDayDomainEntity
    *
    * @param {string} classDayId
-   * @return {*}  {Promise<entity>}
+   * @return {Promise<entity>} Dia de clase concreto
    * @memberof IClassDayDomainService
    */
   getClassDay(classDayId: string): Promise<entity>;
 
   /**
-   * Medoto que debera retornar un array de objetos del tipo ClassDayDomainEntity
+   * Método que deberá retornar un array de objetos del tipo ClassDayDomainEntity
    *
-   * @return {*}  {Promise<entity[]>}
+   * @return {Promise<entity[]>} Lista de días de clase
    * @memberof IClassDayDomainService
    */
   getAllClassDay(): Promise<entity[]>;

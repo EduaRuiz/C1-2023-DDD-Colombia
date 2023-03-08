@@ -11,38 +11,38 @@ export interface IInscriptionDomainService<
   entity extends InscriptionDomainEntity = InscriptionDomainEntity,
 > {
   /**
-   * Metodo que deberá retornar un objeto del tipo InscriptionDomainEntity
+   * Método que deberá retornar un objeto del tipo InscriptionDomainEntity
    *
    * @param {string} inscription
-   * @return {*}  {Promise<entity>}
+   * @return {Promise<entity>} Inscripción concreta
    * @memberof IInscriptionDomainService
    */
   getInscription(inscription: string): Promise<entity>;
 
   /**
-   * Metodo que deberá retornar un array de objetos del tipo InscriptionDomainEntity
+   * Método que deberá retornar un array de objetos del tipo InscriptionDomainEntity
    *
-   * @return {*}  {Promise<entity[]>}
+   * @return {Promise<entity[]>} Lista de inscripciones
    * @memberof IInscriptionDomainService
    */
   getAllInscriptions(): Promise<entity[]>;
 
   /**
-   * Metodo que deberar retornar la confirmaciónal cambio del estado de una inscripcion
-   * se usara en dado que caso de cancelar o completar una inscripcion
+   * Método que deberá retornar la confirmación al cambio del estado de una inscripción
+   * se usara en dado que caso de cancelar o completar una inscripción
    *
    * @param {entity} inscription
-   * @return {*}  {Promise<boolean>}
+   * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IInscriptionDomainService
    */
   changeInscriptionState(inscription: entity): Promise<boolean>;
 
   /**
-   * Metodo que debera retornar un objeto del tipo InscriptionDomainEntity
-   * se usara para guardar una nueva inscripcion
+   * Método que deberá retornar un objeto del tipo InscriptionDomainEntity
+   * se usara para guardar una nueva inscripción
    *
    * @param {entity} inscription
-   * @return {*}  {Promise<entity>}
+   * @return {Promise<entity>} Confirmación del proceso
    * @memberof IInscriptionDomainService
    */
   commitInscription(inscription: entity): Promise<entity>;

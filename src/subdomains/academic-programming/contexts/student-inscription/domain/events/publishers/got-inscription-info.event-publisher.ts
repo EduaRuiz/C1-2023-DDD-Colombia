@@ -15,11 +15,11 @@ export abstract class GotInscriptionInfoEventPublisher<
   Response = InscriptionDomainEntity,
 > extends EventPublisherBase<Response> {
   /**
-   * Metodo de publicacióndel evento
-   * Publica en el brocker la acciónrealizada
+   * Método de publicación del evento
+   * Publica en el Broker la acción realizada
    *
    * @template Result
-   * @return {*}  {Promise<Result>}
+   * @return {Promise<Result>} Respuesta del Broker luego de la publicación
    * @memberof GotInscriptionInfoEventPublisher
    */
   publish<Result = any>(): Promise<Result> {

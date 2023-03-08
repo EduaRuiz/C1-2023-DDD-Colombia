@@ -11,10 +11,10 @@ export interface ISemesterDomainService<
   entity extends SemesterDomainEntity = SemesterDomainEntity,
 > {
   /**
-   * Metodo que deberá retornar un objeto del tipo SemesterDomainEntity
+   * Método que deberá retornar un objeto del tipo SemesterDomainEntity
    *
    * @param {string} semesterId
-   * @return {*}  {Promise<entity>}
+   * @return {Promise<entity>} Semestre concreto
    * @memberof ISemesterDomainService
    */
   getSemester(semesterId: string): Promise<entity>;

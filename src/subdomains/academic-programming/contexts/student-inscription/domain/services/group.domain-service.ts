@@ -11,36 +11,36 @@ export interface IGroupDomainService<
   entity extends GroupDomainEntity = GroupDomainEntity,
 > {
   /**
-   * Metodo que deberá retornar un objeto del tipo GroupDomainEntity
+   * Método que deberá retornar un objeto del tipo GroupDomainEntity
    *
    * @param {string} groupId
-   * @return {*}  {Promise<entity>}
+   * @return {Promise<entity>} Grupo concreto
    * @memberof IGroupDomainService
    */
   getGroup(groupId: string): Promise<entity>;
 
   /**
-   * Medoto que debera retornar un array de objetos del tipo GroupDomainEntity
+   * Método que deberá retornar un array de objetos del tipo GroupDomainEntity
    *
-   * @return {*}  {Promise<entity[]>}
+   * @return {Promise<entity[]>} Lista de grupos
    * @memberof IGroupDomainService
    */
   getAllGroups(): Promise<entity[]>;
 
   /**
-   * Metodo que debera retornar una confirmaciónen la subscripciónde un grupo
+   * Método que deberá retornar una confirmación en la suscripción a un grupo
    *
    * @param {string} groupId
-   * @return {*}  {Promise<boolean>}
+   * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IGroupDomainService
    */
   subscribeGroup(groupId: string): Promise<boolean>;
 
   /**
-   * Metodo que debera retornar una confirmaciónal darse de baja en un grupo
+   * Método que deberá retornar una confirmación al darse de baja en un grupo
    *
    * @param {string} groupId
-   * @return {*}  {Promise<boolean>}
+   * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IGroupDomainService
    */
   unsubscribeGroup(groupId: string): Promise<boolean>;

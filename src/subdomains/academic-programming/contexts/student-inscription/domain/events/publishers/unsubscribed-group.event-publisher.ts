@@ -3,7 +3,7 @@ import { EventPublisherBase } from '@sofka/bases';
 
 /**
  * Publisher encargado de informar la baja a un Group
- * Clase absctracta que establece el canal de emision y publica el evento
+ * Clase abstracta que establece el canal de emisión y publica el evento
  *
  * @export
  * @abstract
@@ -15,11 +15,11 @@ export abstract class UnsubscribedGroupEventPublisher<
   Response = GroupDomainEntity,
 > extends EventPublisherBase<Response> {
   /**
-   * Metodo de publicacióndel evento
-   * Publica en el brocker la acciónrealizada
+   * Método de publicación del evento
+   * Publica en el Broker la acción realizada
    *
    * @template Result
-   * @return {Promise<Result>} Informacióndel brocker
+   * @return {Promise<Result>} Respuesta del Broker luego de la publicación
    * @memberof UnsubscribedGroupEventPublisher
    */
   publish<Result = any>(): Promise<Result> {

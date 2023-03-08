@@ -2,8 +2,8 @@ import { EventPublisherBase } from '@sofka/bases';
 import { ClassDayDomainEntity } from '../../entities';
 
 /**
- * Publisher encargado de informar la obtenciónde informaciónde un ClassDay
- * Clase absctracta que establece el canal de emision y publica el evento
+ * Publisher encargado de informar la obtención de información de un ClassDay
+ * Clase abstracta que establece el canal de emisión y publica el evento
  *
  * @export
  * @abstract
@@ -19,7 +19,7 @@ export abstract class GotClassDayEventPublisher<
    * Publica en el Broker la acción realizada
    *
    * @template Result
-   * @return {Promise<Result>} Retorna
+   * @return {Promise<Result>} Respuesta del Broker luego de la publicación
    * @memberof GotClassDayEventPublisher
    */
   publish<Result = any>(): Promise<Result> {
