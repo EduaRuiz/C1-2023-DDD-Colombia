@@ -5,27 +5,27 @@ import { GroupDomainEntity } from '../entities';
  *
  * @export
  * @interface IGroupDomainService
- * @template entity
+ * @template Entity
  */
 export interface IGroupDomainService<
-  entity extends GroupDomainEntity = GroupDomainEntity,
+  Entity extends GroupDomainEntity = GroupDomainEntity,
 > {
   /**
    * Método que deberá retornar un objeto del tipo GroupDomainEntity
    *
    * @param {string} groupId
-   * @return {Promise<entity>} Grupo concreto
+   * @return {Promise<Entity>} Grupo concreto
    * @memberof IGroupDomainService
    */
-  getGroup(groupId: string): Promise<entity>;
+  getGroup(groupId: string): Promise<Entity>;
 
   /**
    * Método que deberá retornar un array de objetos del tipo GroupDomainEntity
    *
-   * @return {Promise<entity[]>} Lista de grupos
+   * @return {Promise<Entity[]>} Lista de grupos
    * @memberof IGroupDomainService
    */
-  getAllGroups(): Promise<entity[]>;
+  getAllGroups(): Promise<Entity[]>;
 
   /**
    * Método que deberá retornar una confirmación en la suscripción a un grupo

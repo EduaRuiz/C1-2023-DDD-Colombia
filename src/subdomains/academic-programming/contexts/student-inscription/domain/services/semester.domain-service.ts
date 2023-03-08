@@ -5,17 +5,17 @@ import { SemesterDomainEntity } from '../entities';
  *
  * @export
  * @interface ISemesterDomainService
- * @template entity
+ * @template Entity
  */
 export interface ISemesterDomainService<
-  entity extends SemesterDomainEntity = SemesterDomainEntity,
+  Entity extends SemesterDomainEntity = SemesterDomainEntity,
 > {
   /**
    * Método que deberá retornar un objeto del tipo SemesterDomainEntity
    *
    * @param {string} semesterId
-   * @return {Promise<entity>} Semestre concreto
+   * @return {Promise<Entity>} Semestre concreto
    * @memberof ISemesterDomainService
    */
-  getSemester(semesterId: string): Promise<entity>;
+  getSemester(semesterId: string): Promise<Entity>;
 }

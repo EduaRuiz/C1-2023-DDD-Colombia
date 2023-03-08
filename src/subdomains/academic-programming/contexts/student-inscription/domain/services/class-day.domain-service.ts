@@ -5,25 +5,25 @@ import { ClassDayDomainEntity } from '../entities';
  *
  * @export
  * @interface IClassDayDomainService
- * @template entity
+ * @template Entity
  */
 export interface IClassDayDomainService<
-  entity extends ClassDayDomainEntity = ClassDayDomainEntity,
+  Entity extends ClassDayDomainEntity = ClassDayDomainEntity,
 > {
   /**
    * Método que deberá retornar un objeto del tipo ClassDayDomainEntity
    *
    * @param {string} classDayId
-   * @return {Promise<entity>} Dia de clase concreto
+   * @return {Promise<Entity>} Dia de clase concreto
    * @memberof IClassDayDomainService
    */
-  getClassDay(classDayId: string): Promise<entity>;
+  getClassDay(classDayId: string): Promise<Entity>;
 
   /**
    * Método que deberá retornar un array de objetos del tipo ClassDayDomainEntity
    *
-   * @return {Promise<entity[]>} Lista de días de clase
+   * @return {Promise<Entity[]>} Lista de días de clase
    * @memberof IClassDayDomainService
    */
-  getAllClassDay(): Promise<entity[]>;
+  getAllClassDays(groupId: string): Promise<Entity[]>;
 }

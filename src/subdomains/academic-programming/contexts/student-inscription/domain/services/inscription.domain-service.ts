@@ -5,27 +5,27 @@ import { InscriptionDomainEntity } from '../entities';
  *
  * @export
  * @interface IInscriptionDomainService
- * @template entity
+ * @template Entity
  */
 export interface IInscriptionDomainService<
-  entity extends InscriptionDomainEntity = InscriptionDomainEntity,
+  Entity extends InscriptionDomainEntity = InscriptionDomainEntity,
 > {
   /**
    * Método que deberá retornar un objeto del tipo InscriptionDomainEntity
    *
    * @param {string} inscription
-   * @return {Promise<entity>} Inscripción concreta
+   * @return {Promise<Entity>} Inscripción concreta
    * @memberof IInscriptionDomainService
    */
-  getInscription(inscription: string): Promise<entity>;
+  getInscription(inscription: string): Promise<Entity>;
 
   /**
    * Método que deberá retornar un array de objetos del tipo InscriptionDomainEntity
    *
-   * @return {Promise<entity[]>} Lista de inscripciones
+   * @return {Promise<Entity[]>} Lista de inscripciones
    * @memberof IInscriptionDomainService
    */
-  getAllInscriptions(): Promise<entity[]>;
+  getAllInscriptions(): Promise<Entity[]>;
 
   /**
    * Método que deberá retornar la confirmación al cambio del estado de una inscripción
@@ -42,8 +42,8 @@ export interface IInscriptionDomainService<
    * se usara para guardar una nueva inscripción
    *
    * @param {entity} inscription
-   * @return {Promise<entity>} Confirmación del proceso
+   * @return {Promise<Entity>} Confirmación del proceso
    * @memberof IInscriptionDomainService
    */
-  commitInscription(inscription: entity): Promise<entity>;
+  commitInscription(inscription: entity): Promise<Entity>;
 }

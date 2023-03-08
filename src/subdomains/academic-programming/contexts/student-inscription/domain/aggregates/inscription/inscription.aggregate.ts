@@ -1,3 +1,4 @@
+import { EventPublisherBase } from '@sofka/bases';
 import {
   ClassDayDomainEntity,
   GroupDomainEntity,
@@ -12,23 +13,8 @@ import {
   ISemesterDomainService,
   IStudentDomainService,
 } from '../../services';
-import {
-  ChangedInscriptionStateEventPublisher,
-  CommittedInscriptionEventPublisher,
-  GotClassDayEventPublisher,
-  GotGroupInfoEventPublisher,
-  GotGroupsEventPublisher,
-  GotInscriptionInfoEventPublisher,
-  GotInscriptionsEventPublisher,
-  GotSemesterInfoEventPublisher,
-  GotStudentInfoEventPublisher,
-  MatchedClassDayDataEventPublisher,
-  MatchedGroupDataEventPublisher,
-  MatchedSemesterDataEventPublisher,
-  MatchedStudentDataEventPublisher,
-  SubscribedGroupEventPublisher,
-  UnsubscribedGroupEventPublisher,
-} from '../../events/publishers';
+import { Topic } from '../../events/publishers/enums';
+import { GetAllClassDaysHelper } from './helpers/get-all-class-days/get-all-class-days.helper';
 
 export class InscriptionAggregateRoot
   implements
@@ -43,22 +29,7 @@ export class InscriptionAggregateRoot
   private readonly inscription$?: IInscriptionDomainService;
   private readonly semester$?: ISemesterDomainService;
   private readonly student$?: IStudentDomainService;
-
-  private readonly changedInscriptionStateEventPublisher?: ChangedInscriptionStateEventPublisher;
-  private readonly committedInscriptionEventPublisher?: CommittedInscriptionEventPublisher;
-  private readonly gotClassDayEventPublisher?: GotClassDayEventPublisher;
-  private readonly gotGroupInfoEventPublisher?: GotGroupInfoEventPublisher;
-  private readonly gotGroupsEventPublisher?: GotGroupsEventPublisher;
-  private readonly gotInscriptionInfoEventPublisher?: GotInscriptionInfoEventPublisher;
-  private readonly gotInscriptionsEventPublisher?: GotInscriptionsEventPublisher;
-  private readonly gotSemesterInfoEventPublisher?: GotSemesterInfoEventPublisher;
-  private readonly gotStudentInfoEventPublisher?: GotStudentInfoEventPublisher;
-  private readonly matchedClassDayDataEventPublisher?: MatchedClassDayDataEventPublisher;
-  private readonly matchedGroupDataEventPublisher?: MatchedGroupDataEventPublisher;
-  private readonly matchedSemesterDataEventPublisher?: MatchedSemesterDataEventPublisher;
-  private readonly matchedStudentDataEventPublisher?: MatchedStudentDataEventPublisher;
-  private readonly subscribedGroupEventPublisher?: SubscribedGroupEventPublisher;
-  private readonly unsubscribedGroupEventPublisher?: UnsubscribedGroupEventPublisher;
+  private readonly events: Map<Topic, EventPublisherBase<any>>;
 
   constructor({
     classDay$,
@@ -66,71 +37,32 @@ export class InscriptionAggregateRoot
     inscription$,
     semester$,
     student$,
-    changedInscriptionStateEventPublisher,
-    committedInscriptionEventPublisher,
-    gotClassDayEventPublisher,
-    gotGroupInfoEventPublisher,
-    gotGroupsEventPublisher,
-    gotInscriptionInfoEventPublisher,
-    gotInscriptionsEventPublisher,
-    gotSemesterInfoEventPublisher,
-    gotStudentInfoEventPublisher,
-    matchedClassDayDataEventPublisher,
-    matchedGroupDataEventPublisher,
-    matchedSemesterDataEventPublisher,
-    matchedStudentDataEventPublisher,
-    subscribedGroupEventPublisher,
-    unsubscribedGroupEventPublisher,
+    events,
   }: {
     classDay$?: IClassDayDomainService;
     group$?: IGroupDomainService;
     inscription$?: IInscriptionDomainService;
     semester$?: ISemesterDomainService;
     student$?: IStudentDomainService;
-    changedInscriptionStateEventPublisher?: ChangedInscriptionStateEventPublisher;
-    committedInscriptionEventPublisher?: CommittedInscriptionEventPublisher;
-    gotClassDayEventPublisher?: GotClassDayEventPublisher;
-    gotGroupInfoEventPublisher?: GotGroupInfoEventPublisher;
-    gotGroupsEventPublisher?: GotGroupsEventPublisher;
-    gotInscriptionInfoEventPublisher?: GotInscriptionInfoEventPublisher;
-    gotInscriptionsEventPublisher?: GotInscriptionsEventPublisher;
-    gotSemesterInfoEventPublisher?: GotSemesterInfoEventPublisher;
-    gotStudentInfoEventPublisher?: GotStudentInfoEventPublisher;
-    matchedClassDayDataEventPublisher?: MatchedClassDayDataEventPublisher;
-    matchedGroupDataEventPublisher?: MatchedGroupDataEventPublisher;
-    matchedSemesterDataEventPublisher?: MatchedSemesterDataEventPublisher;
-    matchedStudentDataEventPublisher?: MatchedStudentDataEventPublisher;
-    subscribedGroupEventPublisher?: SubscribedGroupEventPublisher;
-    unsubscribedGroupEventPublisher?: UnsubscribedGroupEventPublisher;
+    events?: Map<Topic, EventPublisherBase<any>>;
   }) {
     this.classDay$ = classDay$;
     this.group$ = group$;
     this.inscription$ = inscription$;
     this.semester$ = semester$;
     this.student$ = student$;
-    this.changedInscriptionStateEventPublisher =
-      changedInscriptionStateEventPublisher;
-    this.committedInscriptionEventPublisher =
-      committedInscriptionEventPublisher;
-    this.gotClassDayEventPublisher = gotClassDayEventPublisher;
-    this.gotGroupInfoEventPublisher = gotGroupInfoEventPublisher;
-    this.gotGroupsEventPublisher = gotGroupsEventPublisher;
-    this.gotInscriptionInfoEventPublisher = gotInscriptionInfoEventPublisher;
-    this.gotInscriptionsEventPublisher = gotInscriptionsEventPublisher;
-    this.gotSemesterInfoEventPublisher = gotSemesterInfoEventPublisher;
-    this.gotStudentInfoEventPublisher = gotStudentInfoEventPublisher;
-    this.matchedClassDayDataEventPublisher = matchedClassDayDataEventPublisher;
-    this.matchedGroupDataEventPublisher = matchedGroupDataEventPublisher;
-    this.matchedSemesterDataEventPublisher = matchedSemesterDataEventPublisher;
-    this.matchedStudentDataEventPublisher = matchedStudentDataEventPublisher;
-    this.subscribedGroupEventPublisher = subscribedGroupEventPublisher;
-    this.unsubscribedGroupEventPublisher = unsubscribedGroupEventPublisher;
+    this.events = events ?? new Map<Topic, any>();
   }
 
   getClassDay(classDayId: string): Promise<ClassDayDomainEntity> {
     throw new Error('Method not implemented.');
   }
-  getAllClassDay(): Promise<ClassDayDomainEntity[]> {
+  getAllClassDays(groupId: string): Promise<ClassDayDomainEntity[]> {
+    return GetAllClassDaysHelper(
+      groupId,
+      this.classDay$,
+      this.events.get(Topic.GotClassDays),
+    );
     throw new Error('Method not implemented.');
   }
   getGroup(groupId: string): Promise<GroupDomainEntity> {

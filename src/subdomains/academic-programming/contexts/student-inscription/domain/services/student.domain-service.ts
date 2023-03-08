@@ -5,17 +5,17 @@ import { StudentDomainEntity } from '../entities';
  *
  * @export
  * @interface IStudentDomainService
- * @template entity
+ * @template Entity
  */
 export interface IStudentDomainService<
-  entity extends StudentDomainEntity = StudentDomainEntity,
+  Entity extends StudentDomainEntity = StudentDomainEntity,
 > {
   /**
    * Método que deberá retornar un objeto del tipo StudentDomainEntity
    *
    * @param {string} studentId
-   * @return {Promise<entity>} EStudiante concreto
+   * @return {Promise<Entity>} EStudiante concreto
    * @memberof IStudentDomainService
    */
-  getStudent(studentId: string): Promise<entity>;
+  getStudent(studentId: string): Promise<Entity>;
 }
