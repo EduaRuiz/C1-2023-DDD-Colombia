@@ -1,45 +1,33 @@
 import { GroupDomainEntity } from '@contexts/student-inscription/domain/entities';
-import {
-  MatchedClassDayDataEventPublisher,
-  MatchedGroupDataEventPublisher,
-  SubscribedGroupEventPublisher,
-} from '@contexts/student-inscription/domain/events';
 import { IGroupDomainService } from '@contexts/student-inscription/domain/services';
+import { SubscribedGroupEventPublisher } from '@contexts/student-inscription/domain/events';
 import { AggregateRootException } from '@sofka/exceptions';
 
+/**
+ * Función ayudante que ejecuta el cambio de estado de una inscripción
+ * Lanza los errores correspondientes al envió de campos indefinidos
+ *
+ * @param {GroupDomainEntity} group Contiene la información y estructura suficientes y necesarios para realizar la acción
+ * @param {IGroupDomainService} [service] Servicio usado para la ejecución de la acción
+ * @param {SubscribedGroupEventPublisher} [event] Evento publicador de la acción realizado en el canal correspondiente
+ * @return {Promise<GroupDomainEntity>} Retorna el objeto producto de la acción
+ */
 export const SubscribeGroupHelper = async (
   group: GroupDomainEntity,
   service?: IGroupDomainService,
-  events?: [
-    SubscribedGroupEventPublisher?,
-    MatchedClassDayDataEventPublisher?,
-    MatchedGroupDataEventPublisher?,
-  ],
+  event?: SubscribedGroupEventPublisher,
 ): Promise<GroupDomainEntity> => {
   if (service) {
-    if (events) {
-      const [
-        subscribedGroupEventPublisher,
-        matchedClassDayDataEventPublisher,
-        matchedGroupDataEventPublisher,
-      ] = events;
-      if (subscribedGroupEventPublisher) {
-        if (matchedClassDayDataEventPublisher) {
-          if (matchedGroupDataEventPublisher) {
-            matchedGroupDataEventPublisher.publish;
-            matchedClassDayDataEventPublisher.publish;
-            subscribedGroupEventPublisher.response =
-              await service.subscribeGroup(group);
-            subscribedGroupEventPublisher.publish;
-            return subscribedGroupEventPublisher.response;
-          }
-          throw new AggregateRootException('');
-        }
-        throw new AggregateRootException('');
-      }
-      throw new AggregateRootException('');
+    if (event) {
+      event.response = await service.subscribeGroup(group);
+      event.publish;
+      return event.response;
     }
-    throw new AggregateRootException('');
+    throw new AggregateRootException(
+      'Evento del tipo SubscribedGroupEventPublisher no recibido',
+    );
   }
-  throw new AggregateRootException('');
+  throw new AggregateRootException(
+    'Servicio del tipo IGroupDomainService no recibido',
+  );
 };

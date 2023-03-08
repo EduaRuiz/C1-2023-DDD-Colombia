@@ -4,7 +4,7 @@
  * @param {string} value Valor a evaluar
  * @param {number} min Mínimo que se usara en la comparación
  * @param {number} max Máximo que se usara en la comparación
- * @return {*}  {boolean}
+ * @return {boolean} Retorna la afirmación o negación según parámetros
  */
 export const NumberRange = (
   value: number,

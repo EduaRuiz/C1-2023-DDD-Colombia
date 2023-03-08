@@ -1,8 +1,17 @@
 import { GroupDomainEntity } from '@contexts/student-inscription/domain/entities';
-import { UnsubscribedGroupEventPublisher } from '@contexts/student-inscription/domain/events';
 import { IGroupDomainService } from '@contexts/student-inscription/domain/services';
+import { UnsubscribedGroupEventPublisher } from '@contexts/student-inscription/domain/events';
 import { AggregateRootException } from '@sofka/exceptions/aggregate-root.exception';
 
+/**
+ * Función ayudante que ejecuta el cambio de estado de una inscripción
+ * Lanza los errores correspondientes al envió de campos indefinidos
+ *
+ * @param {string} groupId Contiene la información y estructura suficientes y necesarios para realizar la acción
+ * @param {IGroupDomainService} [service] Servicio usado para la ejecución de la acción
+ * @param {UnsubscribedGroupEventPublisher} [event] Evento publicador de la acción realizado en el canal correspondiente
+ * @return {Promise<GroupDomainEntity>} Retorna el objeto producto de la acción
+ */
 export const UnsubscribeGroupHelper = async (
   groupId: string,
   service?: IGroupDomainService,
@@ -14,7 +23,11 @@ export const UnsubscribeGroupHelper = async (
       event.publish;
       return event.response;
     }
-    throw new AggregateRootException('');
+    throw new AggregateRootException(
+      'Evento del tipo UnsubscribedGroupEventPublisher no recibido',
+    );
   }
-  throw new AggregateRootException('');
+  throw new AggregateRootException(
+    'Servicio del tipo IGroupDomainService no recibido',
+  );
 };

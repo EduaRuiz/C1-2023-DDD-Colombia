@@ -100,11 +100,11 @@ export class InscriptionAggregateRoot
   }
 
   subscribeGroup(group: GroupDomainEntity): Promise<GroupDomainEntity> {
-    return SubscribeGroupHelper(group, this.group$, [
+    return SubscribeGroupHelper(
+      group,
+      this.group$,
       this.events.get(Topic.SubscribedGroup),
-      this.events.get(Topic.MatchedClassDayData),
-      this.events.get(Topic.MatchedGroupData),
-    ]);
+    );
   }
 
   unsubscribeGroup(groupId: string): Promise<GroupDomainEntity> {
