@@ -4,7 +4,7 @@ import { GotSemesterInfoEventPublisher } from '@contexts/student-inscription/dom
 import { AggregateRootException } from '@sofka/exceptions';
 
 /**
- * Función ayudante que ejecuta el cambio de estado de una inscripción
+ * Función ayudante que trae el semestre asociado
  * Lanza los errores correspondientes al envió de campos indefinidos
  *
  * @param {string} semesterId Contiene la información y estructura suficientes y necesarios para realizar la acción

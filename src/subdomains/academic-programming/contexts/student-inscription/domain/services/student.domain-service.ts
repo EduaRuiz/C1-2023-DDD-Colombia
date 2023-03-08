@@ -13,7 +13,7 @@ export interface IStudentDomainService<
   /**
    * Método que deberá retornar un objeto del tipo StudentDomainEntity
    *
-   * @param {string} studentId
+   * @param {string} studentId UUID v4 que contiene la información y estructura suficientes y necesarios para realizar la acción
    * @return {Promise<Entity>} EStudiante concreto
    * @memberof IStudentDomainService
    */

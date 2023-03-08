@@ -4,7 +4,7 @@ import { GotStudentInfoEventPublisher } from '@contexts/student-inscription/doma
 import { AggregateRootException } from '@sofka/exceptions';
 
 /**
- * Función ayudante que ejecuta el cambio de estado de una inscripción
+ * Función ayudante que trae el estudiante asociado
  * Lanza los errores correspondientes al envió de campos indefinidos
  *
  * @param {string} studentId Contiene la información y estructura suficientes y necesarios para realizar la acción

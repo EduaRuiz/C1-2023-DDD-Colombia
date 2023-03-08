@@ -13,7 +13,7 @@ export interface IGroupDomainService<
   /**
    * Método que deberá retornar un objeto del tipo GroupDomainEntity
    *
-   * @param {string} groupId
+   * @param {string} groupId Contiene la información y estructura suficientes y necesarios para realizar la acción
    * @return {Promise<Entity>} Grupo concreto
    * @memberof IGroupDomainService
    */
@@ -31,7 +31,7 @@ export interface IGroupDomainService<
   /**
    * Método que deberá retornar una confirmación en la suscripción a un grupo
    *
-   * @param {string} groupId
+   * @param {string} group Contiene la información y estructura suficientes y necesarios para realizar la acción
    * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IGroupDomainService
    */
@@ -40,7 +40,7 @@ export interface IGroupDomainService<
   /**
    * Método que deberá retornar una confirmación al darse de baja en un grupo
    *
-   * @param {string} groupId
+   * @param {string} groupId Contiene la información y estructura suficientes y necesarios para realizar la acción
    * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IGroupDomainService
    */

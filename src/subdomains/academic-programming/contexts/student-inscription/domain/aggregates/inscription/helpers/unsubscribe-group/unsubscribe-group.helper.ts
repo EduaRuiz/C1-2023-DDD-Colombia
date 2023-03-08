@@ -4,7 +4,7 @@ import { UnsubscribedGroupEventPublisher } from '@contexts/student-inscription/d
 import { AggregateRootException } from '@sofka/exceptions/aggregate-root.exception';
 
 /**
- * Función ayudante que ejecuta el cambio de estado de una inscripción
+ * Función ayudante que ejecuta el dada de baja de un grupo
  * Lanza los errores correspondientes al envió de campos indefinidos
  *
  * @param {string} groupId Contiene la información y estructura suficientes y necesarios para realizar la acción

@@ -4,7 +4,7 @@ import { GotInscriptionInfoEventPublisher } from '@contexts/student-inscription/
 import { AggregateRootException } from '@sofka/exceptions';
 
 /**
- * Función ayudante que ejecuta el cambio de estado de una inscripción
+ * Función ayudante que trae la inscripción asociada
  * Lanza los errores correspondientes al envió de campos indefinidos
  *
  * @param {string} inscriptionId Contiene la información y estructura suficientes y necesarios para realizar la acción

@@ -13,7 +13,7 @@ export interface IClassDayDomainService<
   /**
    * Método que deberá retornar un objeto del tipo ClassDayDomainEntity
    *
-   * @param {string} classDayId
+   * @param {string} classDayId UUID v4 que contiene la información y estructura suficientes y necesarios para realizar la acción
    * @return {Promise<Entity>} Dia de clase concreto
    * @memberof IClassDayDomainService
    */
@@ -22,6 +22,7 @@ export interface IClassDayDomainService<
   /**
    * Método que deberá retornar un array de objetos del tipo ClassDayDomainEntity
    *
+   * @param {string} groupId UUID v4 que contiene la información y estructura suficientes y necesarios para realizar la acción
    * @return {Promise<Entity[]>} Lista de días de clase
    * @memberof IClassDayDomainService
    */

@@ -4,7 +4,7 @@ import { GotClassDayInfoEventPublisher } from '@contexts/student-inscription/dom
 import { AggregateRootException } from '@sofka/exceptions';
 
 /**
- * Función ayudante que ejecuta el cambio de estado de una inscripción
+ * Función ayudante que trae el dia de clase asociado
  * Lanza los errores correspondientes al envió de campos indefinidos
  *
  * @param {string} classDayId Contiene la información y estructura suficientes y necesarios para realizar la acción
