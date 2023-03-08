@@ -13,11 +13,11 @@ export interface IInscriptionDomainService<
   /**
    * Método que deberá retornar un objeto del tipo InscriptionDomainEntity
    *
-   * @param {string} inscription
+   * @param {string} inscriptionId
    * @return {Promise<Entity>} Inscripción concreta
    * @memberof IInscriptionDomainService
    */
-  getInscription(inscription: string): Promise<Entity>;
+  getInscription(inscriptionId: string): Promise<Entity>;
 
   /**
    * Método que deberá retornar un array de objetos del tipo InscriptionDomainEntity
@@ -32,10 +32,10 @@ export interface IInscriptionDomainService<
    * se usara en dado que caso de cancelar o completar una inscripción
    *
    * @param {entity} inscription
-   * @return {Promise<boolean>} Confirmación del proceso
+   * @return {Promise<Entity>} Confirmación del proceso
    * @memberof IInscriptionDomainService
    */
-  changeInscriptionState(inscription: entity): Promise<boolean>;
+  changeInscriptionState(inscription: Entity): Promise<Entity>;
 
   /**
    * Método que deberá retornar un objeto del tipo InscriptionDomainEntity
@@ -45,5 +45,5 @@ export interface IInscriptionDomainService<
    * @return {Promise<Entity>} Confirmación del proceso
    * @memberof IInscriptionDomainService
    */
-  commitInscription(inscription: entity): Promise<Entity>;
+  commitInscription(inscription: Entity): Promise<Entity>;
 }

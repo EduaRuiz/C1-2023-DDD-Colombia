@@ -22,10 +22,11 @@ export interface IGroupDomainService<
   /**
    * Método que deberá retornar un array de objetos del tipo GroupDomainEntity
    *
+   * @param {string} inscriptionId UUID v4 de la inscripción que contiene los grupos
    * @return {Promise<Entity[]>} Lista de grupos
    * @memberof IGroupDomainService
    */
-  getAllGroups(): Promise<Entity[]>;
+  getAllGroups(inscriptionId: string): Promise<Entity[]>;
 
   /**
    * Método que deberá retornar una confirmación en la suscripción a un grupo
@@ -34,7 +35,7 @@ export interface IGroupDomainService<
    * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IGroupDomainService
    */
-  subscribeGroup(groupId: string): Promise<boolean>;
+  subscribeGroup(group: Entity): Promise<Entity>;
 
   /**
    * Método que deberá retornar una confirmación al darse de baja en un grupo
@@ -43,5 +44,5 @@ export interface IGroupDomainService<
    * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IGroupDomainService
    */
-  unsubscribeGroup(groupId: string): Promise<boolean>;
+  unsubscribeGroup(groupId: string): Promise<Entity>;
 }

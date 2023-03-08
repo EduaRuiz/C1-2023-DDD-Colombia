@@ -1,4 +1,5 @@
 import { EventPublisherBase } from '@sofka/bases';
+import { Topic } from '../../events/publishers/enums';
 import {
   ClassDayDomainEntity,
   GroupDomainEntity,
@@ -13,8 +14,16 @@ import {
   ISemesterDomainService,
   IStudentDomainService,
 } from '../../services';
-import { Topic } from '../../events/publishers/enums';
-import { GetAllClassDaysHelper } from './helpers/get-all-class-days/get-all-class-days.helper';
+import {
+  GetAllClassDaysHelper,
+  GetAllGroupsHelper,
+  GetAllInscriptionsHelper,
+  GetClassDayHelper,
+  GetGroupHelper,
+  GetInscriptionHelper,
+  SubscribeGroupHelper,
+  UnsubscribeGroupHelper,
+} from './helpers';
 
 export class InscriptionAggregateRoot
   implements
@@ -55,37 +64,71 @@ export class InscriptionAggregateRoot
   }
 
   getClassDay(classDayId: string): Promise<ClassDayDomainEntity> {
-    throw new Error('Method not implemented.');
+    return GetClassDayHelper(
+      classDayId,
+      this.classDay$,
+      this.events.get(Topic.GotClassDayInfo),
+    );
   }
+
   getAllClassDays(groupId: string): Promise<ClassDayDomainEntity[]> {
     return GetAllClassDaysHelper(
       groupId,
       this.classDay$,
       this.events.get(Topic.GotClassDays),
     );
-    throw new Error('Method not implemented.');
   }
+
   getGroup(groupId: string): Promise<GroupDomainEntity> {
-    throw new Error('Method not implemented.');
+    return GetGroupHelper(
+      groupId,
+      this.group$,
+      this.events.get(Topic.GotGroupInfo),
+    );
   }
-  getAllGroups(): Promise<GroupDomainEntity[]> {
-    throw new Error('Method not implemented.');
+
+  getAllGroups(inscriptionId: string): Promise<GroupDomainEntity[]> {
+    return GetAllGroupsHelper(
+      inscriptionId,
+      this.group$,
+      this.events.get(Topic.GotGroups),
+    );
   }
-  subscribeGroup(groupId: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+
+  subscribeGroup(group: GroupDomainEntity): Promise<GroupDomainEntity> {
+    return SubscribeGroupHelper(group, this.group$, [
+      this.events.get(Topic.SubscribedGroup),
+      this.events.get(Topic.MatchedClassDayData),
+      this.events.get(Topic.MatchedGroupData),
+    ]);
   }
-  unsubscribeGroup(groupId: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+
+  unsubscribeGroup(groupId: string): Promise<GroupDomainEntity> {
+    return UnsubscribeGroupHelper(
+      groupId,
+      this.group$,
+      this.events.get(Topic.UnsubscribedGroup),
+    );
   }
-  getInscription(inscription: string): Promise<InscriptionDomainEntity> {
-    throw new Error('Method not implemented.');
+
+  getInscription(inscriptionId: string): Promise<InscriptionDomainEntity> {
+    return GetInscriptionHelper(
+      inscriptionId,
+      this.inscription$,
+      this.events.get(Topic.GotInscriptionInfo),
+    );
   }
+
   getAllInscriptions(): Promise<InscriptionDomainEntity[]> {
-    throw new Error('Method not implemented.');
+    return GetAllInscriptionsHelper(
+      this.inscription$,
+      this.events.get(Topic.GotInscriptions),
+    );
   }
+
   changeInscriptionState(
     inscription: InscriptionDomainEntity,
-  ): Promise<boolean> {
+  ): Promise<InscriptionDomainEntity> {
     throw new Error('Method not implemented.');
   }
   commitInscription(

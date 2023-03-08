@@ -1,7 +1,7 @@
-import { IClassDayDomainService } from '@contexts/student-inscription/domain/services';
 import { AggregateRootException } from '@sofka/exceptions';
-import { GotClassDaysEventPublisher } from '../../../../events/publishers';
-import { ClassDayDomainEntity } from '../../../../entities';
+import { ClassDayDomainEntity } from '@contexts/student-inscription/domain/entities';
+import { GotClassDaysEventPublisher } from '@contexts/student-inscription/domain/events/publishers';
+import { IClassDayDomainService } from '@contexts/student-inscription/domain/services';
 
 export const GetAllClassDaysHelper = async (
   groupId: string,
