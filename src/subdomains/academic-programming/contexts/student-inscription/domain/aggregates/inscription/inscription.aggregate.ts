@@ -15,12 +15,16 @@ import {
   IStudentDomainService,
 } from '../../services';
 import {
+  ChangeInscriptionStateHelper,
+  CommitInscriptionHelper,
   GetAllClassDaysHelper,
   GetAllGroupsHelper,
   GetAllInscriptionsHelper,
   GetClassDayHelper,
   GetGroupHelper,
   GetInscriptionHelper,
+  GetSemesterHelper,
+  GetStudentHelper,
   SubscribeGroupHelper,
   UnsubscribeGroupHelper,
 } from './helpers';
@@ -129,17 +133,36 @@ export class InscriptionAggregateRoot
   changeInscriptionState(
     inscription: InscriptionDomainEntity,
   ): Promise<InscriptionDomainEntity> {
-    throw new Error('Method not implemented.');
+    return ChangeInscriptionStateHelper(
+      inscription,
+      this.inscription$,
+      this.events.get(Topic.ChangedInscriptionState),
+    );
   }
+
   commitInscription(
     inscription: InscriptionDomainEntity,
   ): Promise<InscriptionDomainEntity> {
-    throw new Error('Method not implemented.');
+    return CommitInscriptionHelper(
+      inscription,
+      this.inscription$,
+      this.events.get(Topic.CommittedInscription),
+    );
   }
+
   getSemester(semesterId: string): Promise<SemesterDomainEntity> {
-    throw new Error('Method not implemented.');
+    return GetSemesterHelper(
+      semesterId,
+      this.semester$,
+      this.events.get(Topic.GotSemesterInfo),
+    );
   }
+
   getStudent(studentId: string): Promise<StudentDomainEntity> {
-    throw new Error('Method not implemented.');
+    return GetStudentHelper(
+      studentId,
+      this.student$,
+      this.events.get(Topic.GotStudentInfo),
+    );
   }
 }
