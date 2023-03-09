@@ -12,14 +12,14 @@ import { AggregateRootException } from '@sofka/exceptions';
  * @param {GotInscriptionsEventPublisher} [event] Evento publicador de la acción realizado en el canal correspondiente
  * @return {Promise<InscriptionDomainEntity[]>} Retorna el objeto producto de la acción
  */
-export const GetAllInscriptionsHelper = async (
+export const GetAllInscriptionsByStudentHelper = async (
   studentId: string,
   service?: IInscriptionDomainService,
   event?: GotInscriptionsEventPublisher,
 ): Promise<InscriptionDomainEntity[]> => {
   if (service) {
     if (event) {
-      event.response = await service.getAllInscriptions(studentId);
+      event.response = await service.getAllInscriptionsByStudent(studentId);
       event.publish;
       return event.response;
     }

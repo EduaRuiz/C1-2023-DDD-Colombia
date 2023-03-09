@@ -4,6 +4,7 @@ import {
   GroupStateValueObject,
   ProfessorNameValueObject,
   QuotaAvailableValueObject,
+  SubjectIdValueObject,
   SubjectNameValueObject,
 } from '@contexts/student-inscription/domain/value-objects/group';
 
@@ -20,42 +21,49 @@ export interface IGroupDomainEntity {
    * @type {(string | GroupIdValueObject)} UUID v4
    * @memberof GroupDomainEntity
    */
-  groupId?: string | GroupIdValueObject;
+  groupId: string | GroupIdValueObject;
   /**
    * Dias de clase
    *
    * @type {ClassDayDomainEntity[]} Lista de objetos de días en el que se imparte la clase
    * @memberof GroupDomainEntity
    */
-  classDays?: IClassDayDomainEntity[];
+  classDays: IClassDayDomainEntity[];
   /**
    * Nombre de la materia que se imparte en el grupo
    *
    * @type {(string | SubjectNameValueObject)}
    * @memberof GroupDomainEntity
    */
-  subjectName?: string | SubjectNameValueObject;
+  subjectName: string | SubjectNameValueObject;
+  /**
+   * Id de la materia que se imparte en el grupo
+   *
+   * @type {(string | SubjectIdValueObject)}
+   * @memberof GroupDomainEntity
+   */
+  subjectId: string | SubjectIdValueObject;
   /**
    * Nombre del profesor que dicta la materia
    *
    * @type {(string | ProfessorNameValueObject)}
    * @memberof GroupDomainEntity
    */
-  professorName?: string | ProfessorNameValueObject;
+  professorName: string | ProfessorNameValueObject;
   /**
    * Disponibilidad del grupo
    *
    * @type {(number | QuotaAvailableValueObject)} Cupo de estudiantes que aun permite el grupo
    * @memberof GroupDomainEntity
    */
-  quoteAvailable?: number | QuotaAvailableValueObject;
+  quoteAvailable: number | QuotaAvailableValueObject;
   /**
    * Estado del grupo
    *
    * @type {(string | GroupStateValueObject)} Permite: open | closed | cancelled | finalized
    * @memberof GroupDomainEntity
    */
-  groupState?: string | GroupStateValueObject;
+  groupState: string | GroupStateValueObject;
   /**
    * Inscripción a la que se asocia el grupo
    *

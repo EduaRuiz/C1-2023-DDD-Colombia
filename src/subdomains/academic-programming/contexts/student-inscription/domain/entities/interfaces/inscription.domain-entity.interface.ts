@@ -28,28 +28,28 @@ export interface IInscriptionDomainEntity {
    * @type {StudentDomainEntity}
    * @memberof InscriptionDomainEntity
    */
-  student?: IStudentDomainEntity;
+  student: IStudentDomainEntity;
   /**
    * Semestre relacionado
    *
    * @type {SemesterDomainEntity}
    * @memberof InscriptionDomainEntity
    */
-  semester?: ISemesterDomainEntity;
+  semester: ISemesterDomainEntity;
   /**
    * Grupos asociados a la inscripción
    *
    * @type {GroupDomainEntity[]}
    * @memberof InscriptionDomainEntity
    */
-  groups?: IGroupDomainEntity[];
+  groups: IGroupDomainEntity[];
   /**
    * Estado de la inscripción
    *
    * @type {(string | InscriptionStateValueObject)} Permite: cancelled | completed | active
    * @memberof InscriptionDomainEntity
    */
-  inscriptionState?: string | InscriptionStateValueObject;
+  inscriptionState: string | InscriptionStateValueObject;
   /**
    * Fecha de creación de la inscripción
    *

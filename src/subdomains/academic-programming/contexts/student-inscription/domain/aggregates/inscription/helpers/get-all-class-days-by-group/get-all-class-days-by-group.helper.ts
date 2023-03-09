@@ -12,14 +12,14 @@ import { AggregateRootException } from '@sofka/exceptions';
  * @param {GotClassDaysEventPublisher} [event] Evento publicador de la acción realizado en el canal correspondiente
  * @return {Promise<ClassDayDomainEntity[]>} Retorna el objeto producto de la acción
  */
-export const GetAllClassDaysHelper = async (
+export const GetAllClassDaysByGroupHelper = async (
   groupId: string,
   service?: IClassDayDomainService,
   event?: GotClassDaysEventPublisher,
 ): Promise<ClassDayDomainEntity[]> => {
   if (service) {
     if (event) {
-      event.response = await service.getAllClassDays(groupId);
+      event.response = await service.getAllClassDaysByGroup(groupId);
       event.publish;
       return event.response;
     }

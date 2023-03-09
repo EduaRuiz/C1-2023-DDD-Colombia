@@ -5,25 +5,25 @@ import { EntityExistQueryBase } from '@contexts/student-inscription/domain/queri
  *
  * @export
  * @abstract
- * @class StudentIdExistQuery
+ * @class InscriptionIdExistQuery
  * @extends {EntityExistQueryBase<Response>}
  * @template Response Tipo de respuesta
  */
-export abstract class StudentIdExistQuery<
+export abstract class InscriptionIdExistQuery<
   Response = boolean,
 > extends EntityExistQueryBase<Response> {
   /**
    *
    *
    * @template Result
-   * @param {string} studentId Valor a consultar UUID v4
+   * @param {string} inscriptionId Valor a consultar UUID v4
    * @return {Promise<Result>} Retorno de la consulta, puede ser ana entidad del tipo enviado o un booleano
-   * @memberof StudentIdExistQuery
+   * @memberof InscriptionIdExistQuery
    */
-  query<Result = boolean>(studentId: string): Promise<Result> {
+  query<Result = boolean>(inscriptionId: string): Promise<Result> {
     return this.send(
-      'enrollment-student.student-id-exist',
-      JSON.stringify({ data: studentId }),
+      'academic-offer.inscription-id-exist',
+      JSON.stringify({ data: inscriptionId }),
     );
   }
 }

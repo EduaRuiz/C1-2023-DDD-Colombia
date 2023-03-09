@@ -23,10 +23,10 @@ export interface IInscriptionDomainService<
    * Método que deberá retornar un array de objetos del tipo InscriptionDomainEntity
    *
    * @param {string} studentId UUID v4 que contiene la información y estructura suficientes y necesarios para realizar la acción
-   * @return {Promise<Entity[]>} Lista de inscripciones
+   * @return {Promise<Entity[]>} Lista de inscripciones por estudiante
    * @memberof IInscriptionDomainService
    */
-  getAllInscriptions(studentId: string): Promise<Entity[]>;
+  getAllInscriptionsByStudent(studentId: string): Promise<Entity[]>;
 
   /**
    * Método que deberá retornar la confirmación al cambio del estado de una inscripción

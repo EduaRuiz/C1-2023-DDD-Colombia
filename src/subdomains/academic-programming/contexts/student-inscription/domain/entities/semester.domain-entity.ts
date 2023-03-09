@@ -20,21 +20,21 @@ export class SemesterDomainEntity implements ISemesterDomainEntity {
    * @type {(string | SemesterIdValueObject)}
    * @memberof SemesterDomainEntity
    */
-  semesterId?: string | SemesterIdValueObject;
+  semesterId: string | SemesterIdValueObject;
   /**
    * Año relacionado al semestre
    *
    * @type {(Date | YearValueObject)}
    * @memberof SemesterDomainEntity
    */
-  year?: Date | YearValueObject;
+  year: Date | YearValueObject;
   /**
    * Semestre del año asociado (primera parte o segunda)
    *
    * @type {(number | PartValueObject)} Permite: 1 | 2
    * @memberof SemesterDomainEntity
    */
-  part?: number | PartValueObject;
+  part: number | PartValueObject;
   /**
    * Inscripción a la que se asocia el semestre
    *

@@ -17,9 +17,10 @@ import {
 import {
   ChangeInscriptionStateHelper,
   CommitInscriptionHelper,
-  GetAllClassDaysHelper,
+  GetAllClassDaysByGroupHelper,
+  GetAllGroupsByInscriptionHelper,
   GetAllGroupsHelper,
-  GetAllInscriptionsHelper,
+  GetAllInscriptionsByStudentHelper,
   GetClassDayHelper,
   GetGroupHelper,
   GetInscriptionHelper,
@@ -167,8 +168,8 @@ export class InscriptionAggregateRoot
    * @return {Promise<ClassDayDomainEntity[]>} Retorna la lista de ClassDays del grupo correspondiente
    * @memberof InscriptionAggregateRoot
    */
-  getAllClassDays(groupId: string): Promise<ClassDayDomainEntity[]> {
-    return GetAllClassDaysHelper(
+  getAllClassDaysByGroup(groupId: string): Promise<ClassDayDomainEntity[]> {
+    return GetAllClassDaysByGroupHelper(
       groupId,
       this.classDay$,
       this.events.get(Topic.GotClassDays),
@@ -201,9 +202,28 @@ export class InscriptionAggregateRoot
    * @return {Promise<GroupDomainEntity[]>} Retorna la lista de Groups de la Inscription correspondiente
    * @memberof InscriptionAggregateRoot
    */
-  getAllGroups(inscriptionId: string): Promise<GroupDomainEntity[]> {
-    return GetAllGroupsHelper(
+  getAllGroupsByInscription(
+    inscriptionId: string,
+  ): Promise<GroupDomainEntity[]> {
+    return GetAllGroupsByInscriptionHelper(
       inscriptionId,
+      this.group$,
+      this.events.get(Topic.GotGroups),
+    );
+  }
+
+  /**
+   * Ejecuta el servicio de grupo
+   * para esto es necesario dicho servicio y un evento del tipo GotGroupsEventPublisher
+   * inyectados desde el constructor
+   *
+   * @param {string} studentId UUID v4 del estudiante para traer los grupos
+   * @return {Promise<GroupDomainEntity[]>} Retorna la lista de Groups de la Inscription correspondiente
+   * @memberof InscriptionAggregateRoot
+   */
+  getAllGroups(studentId: string): Promise<GroupDomainEntity[]> {
+    return GetAllGroupsHelper(
+      studentId,
       this.group$,
       this.events.get(Topic.GotGroups),
     );
@@ -218,8 +238,12 @@ export class InscriptionAggregateRoot
    * @return {Promise<GroupDomainEntity>} Retorna la misma instancia del objeto enviado
    * @memberof InscriptionAggregateRoot
    */
-  subscribeGroup(group: GroupDomainEntity): Promise<GroupDomainEntity> {
+  subscribeGroup(
+    inscriptionId: string,
+    group: GroupDomainEntity,
+  ): Promise<GroupDomainEntity> {
     return SubscribeGroupHelper(
+      inscriptionId,
       group,
       this.group$,
       this.events.get(Topic.SubscribedGroup),
@@ -235,8 +259,12 @@ export class InscriptionAggregateRoot
    * @return {Promise<GroupDomainEntity>} Retorna la instancia del grupo
    * @memberof InscriptionAggregateRoot
    */
-  unsubscribeGroup(groupId: string): Promise<GroupDomainEntity> {
+  unsubscribeGroup(
+    inscriptionId: string,
+    groupId: string,
+  ): Promise<GroupDomainEntity> {
     return UnsubscribeGroupHelper(
+      inscriptionId,
       groupId,
       this.group$,
       this.events.get(Topic.UnsubscribedGroup),
@@ -269,8 +297,10 @@ export class InscriptionAggregateRoot
    * @return {Promise<InscriptionDomainEntity[]>} Retorna la lista de inscripciones asociadas al estudiante
    * @memberof InscriptionAggregateRoot
    */
-  getAllInscriptions(studentId: string): Promise<InscriptionDomainEntity[]> {
-    return GetAllInscriptionsHelper(
+  getAllInscriptionsByStudent(
+    studentId: string,
+  ): Promise<InscriptionDomainEntity[]> {
+    return GetAllInscriptionsByStudentHelper(
       studentId,
       this.inscription$,
       this.events.get(Topic.GotInscriptions),

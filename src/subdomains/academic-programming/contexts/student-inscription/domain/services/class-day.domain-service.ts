@@ -23,8 +23,8 @@ export interface IClassDayDomainService<
    * Método que deberá retornar un array de objetos del tipo ClassDayDomainEntity
    *
    * @param {string} groupId UUID v4 que contiene la información y estructura suficientes y necesarios para realizar la acción
-   * @return {Promise<Entity[]>} Lista de días de clase
+   * @return {Promise<Entity[]>} Lista de días de clase del grupo
    * @memberof IClassDayDomainService
    */
-  getAllClassDays(groupId: string): Promise<Entity[]>;
+  getAllClassDaysByGroup(groupId: string): Promise<Entity[]>;
 }

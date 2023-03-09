@@ -31,28 +31,28 @@ export class InscriptionDomainEntity implements IInscriptionDomainEntity {
    * @type {StudentDomainEntity}
    * @memberof InscriptionDomainEntity
    */
-  student?: StudentDomainEntity;
+  student: StudentDomainEntity;
   /**
    * Semestre relacionado
    *
    * @type {SemesterDomainEntity}
    * @memberof InscriptionDomainEntity
    */
-  semester?: SemesterDomainEntity;
+  semester: SemesterDomainEntity;
   /**
    * Grupos asociados a la inscripción
    *
    * @type {GroupDomainEntity[]}
    * @memberof InscriptionDomainEntity
    */
-  groups?: GroupDomainEntity[];
+  groups: GroupDomainEntity[];
   /**
    * Estado de la inscripción
    *
    * @type {(string | InscriptionStateValueObject)} Permite: cancelled | completed | active
    * @memberof InscriptionDomainEntity
    */
-  inscriptionState?: string | InscriptionStateValueObject;
+  inscriptionState: string | InscriptionStateValueObject;
   /**
    * Fecha de creación de la inscripción
    *

@@ -23,26 +23,37 @@ export interface IGroupDomainService<
    * Método que deberá retornar un array de objetos del tipo GroupDomainEntity
    *
    * @param {string} inscriptionId UUID v4 de la inscripción que contiene los grupos
-   * @return {Promise<Entity[]>} Lista de grupos
+   * @return {Promise<Entity[]>} Lista de grupos asociados a la inscripción
    * @memberof IGroupDomainService
    */
-  getAllGroups(inscriptionId: string): Promise<Entity[]>;
+  getAllGroupsByInscription(inscriptionId: string): Promise<Entity[]>;
+
+  /**
+   * Método que deberá retornar un array de objetos del tipo GroupDomainEntity
+   *
+   * @param {string} studentId UUID v4 del estudiante para lista de grupos
+   * @return {Promise<Entity[]>} Lista de grupos para inscripción
+   * @memberof IGroupDomainService
+   */
+  getAllGroups(studentId: string): Promise<Entity[]>;
 
   /**
    * Método que deberá retornar una confirmación en la suscripción a un grupo
    *
+   * @param {string} inscriptionId UUID v4 de la inscripción que se agregará
    * @param {string} group Contiene la información y estructura suficientes y necesarios para realizar la acción
    * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IGroupDomainService
    */
-  subscribeGroup(group: Entity): Promise<Entity>;
+  subscribeGroup(inscriptionId: string, group: Entity): Promise<Entity>;
 
   /**
    * Método que deberá retornar una confirmación al darse de baja en un grupo
    *
+   * @param {string} inscriptionId UUID v4 de la inscripción que se sacará
    * @param {string} groupId Contiene la información y estructura suficientes y necesarios para realizar la acción
    * @return {Promise<boolean>} Confirmación del proceso
    * @memberof IGroupDomainService
    */
-  unsubscribeGroup(groupId: string): Promise<Entity>;
+  unsubscribeGroup(inscriptionId: string, groupId: string): Promise<Entity>;
 }
