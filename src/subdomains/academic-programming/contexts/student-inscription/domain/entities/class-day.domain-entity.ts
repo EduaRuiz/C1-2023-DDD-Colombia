@@ -56,13 +56,11 @@ export class ClassDayDomainEntity implements IClassDayDomainEntity {
    * @param {IClassDayDomainEntity} [data] Información relacionada a la entidad
    * @memberof ClassDayDomainEntity
    */
-  constructor(data?: IClassDayDomainEntity) {
-    if (data) {
-      if (data?.classDayId) this.classDayId = data.classDayId;
-      if (data?.weekDay) this.weekDay = data.weekDay;
-      if (data?.startTime) this.startTime = data.startTime;
-      if (data?.duration) this.duration = data.duration;
-      if (data?.group) this.group = data.group as GroupDomainEntity;
-    }
+  constructor(data: IClassDayDomainEntity) {
+    this.classDayId = data.classDayId;
+    this.weekDay = data.weekDay;
+    this.startTime = data.startTime;
+    this.duration = data.duration;
+    if (data?.group) this.group = data.group as GroupDomainEntity;
   }
 }

@@ -3,7 +3,7 @@ import { CurrentDateTime } from '@validations';
 import { IErrorValueObject } from '@sofka/interfaces';
 
 /**
- * Clase que se va a usar para establecer el tipo y validar la fecha de creaciónen la entidad Inscription
+ * Clase que se va a usar para establecer el tipo y validar la fecha de creación de la entidad Inscription
  *
  * @export
  * @class DateTimeValueObject
@@ -21,10 +21,10 @@ export class DateTimeValueObject extends ValueObjectBase<Date> {
 
   /**
    * Crea una instancia de DateTimeValueObject.
-   * Si no se envia el valor asigna uno por defecto
+   * Si no se envía el valor asigna uno por defecto
    * Adicionalmente inicializa una variable que le permite comparar value frente a la fecha en la que se instanció
    *
-   * @param {(number | Date)} [value]
+   * @param {(Date)} [value]
    * @memberof DateTimeValueObject
    */
   constructor(value?: Date) {

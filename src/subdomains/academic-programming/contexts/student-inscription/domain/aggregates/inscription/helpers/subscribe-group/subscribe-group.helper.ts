@@ -22,34 +22,10 @@ export const SubscribeGroupHelper = async (
   if (service) {
     if (event) {
       const groups = await service.getAllGroupsByInscription(inscriptionId);
-      canSuscribeGroup(groups);
-      const inscription = group.inscription;
-      if (inscription) {
-        const groups = inscription.groups;
-        if (groups) {
-          for (const g of groups) {
-            if (g.groupId) {
-              if (g.groupId === group.groupId) {
-                throw new AggregateRootException(
-                  'No se puede inscribir un grupo que ya existente',
-                );
-              }
-              if (g.classDays) {
-                const classDays = g.classDays;
-              }
-            }
-          }
-          event.response = await service.subscribeGroup(inscriptionId, group);
-          event.publish;
-          return event.response;
-        }
-        throw new AggregateRootException(
-          'La entidad inscripción debe contener grupos asociados',
-        );
-      }
-      throw new AggregateRootException(
-        'El grupo a registrar debe tener la inscripción a relacionar asociada en la entidad',
-      );
+      canSuscribeGroup(groups, group);
+      event.response = await service.subscribeGroup(inscriptionId, group);
+      event.publish;
+      return event.response;
     }
     throw new AggregateRootException(
       'Evento del tipo SubscribedGroupEventPublisher no recibido',
@@ -60,6 +36,64 @@ export const SubscribeGroupHelper = async (
   );
 };
 
-const canSuscribeGroup = (groups: GroupDomainEntity[]): boolean => {
+const canSuscribeGroup = (
+  currentGroups: GroupDomainEntity[],
+  newGroup: GroupDomainEntity,
+): void => {
+  if (newGroup.quoteAvailable.valueOf() !== 0) {
+    throw new AggregateRootException('No se puede inscribir grupos sin cupos');
+  }
+  if (newGroup.groupState.valueOf() !== 'Open') {
+    throw new AggregateRootException(
+      'No se puede inscribir grupos no abiertos',
+    );
+  }
+
+  currentGroups.map((currentGroup) => {
+    if (currentGroup.groupId === newGroup.groupId) {
+      throw new AggregateRootException(
+        'No se puede inscribir grupos ya inscritos',
+      );
+    }
+    if (currentGroup.subjectId === newGroup.subjectId) {
+      throw new AggregateRootException(
+        'No se pueden inscribir grupos con la misma materia ya inscritas en otros grupos',
+      );
+    }
+    if (!scheduleAvailable(newGroup, currentGroup)) {
+      throw new AggregateRootException(
+        'No se puede inscribir grupos que se cruzan en horarios con otros grupos ya inscritos',
+      );
+    }
+  });
+};
+
+const scheduleAvailable = (
+  newGroup: GroupDomainEntity,
+  currentGroup: GroupDomainEntity,
+): boolean => {
+  newGroup.classDays.map((newClassDay) => {
+    currentGroup.classDays.map((currentClassDay) => {
+      if (currentClassDay.weekDay.valueOf() === newClassDay.weekDay.valueOf()) {
+        if (
+          currentClassDay.startTime.valueOf() <= newClassDay.startTime.valueOf()
+        ) {
+          const finishTime =
+            currentClassDay.startTime.valueOf() +
+            currentClassDay.duration.valueOf() / 60;
+          if (finishTime > newClassDay.startTime.valueOf()) {
+            return false;
+          }
+        } else {
+          const finishTime =
+            newClassDay.startTime.valueOf() +
+            newClassDay.duration.valueOf() / 60;
+          if (finishTime > currentClassDay.startTime.valueOf()) {
+            return false;
+          }
+        }
+      }
+    });
+  });
   return true;
 };

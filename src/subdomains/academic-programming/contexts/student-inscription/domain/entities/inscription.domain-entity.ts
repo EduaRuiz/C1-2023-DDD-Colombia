@@ -66,14 +66,12 @@ export class InscriptionDomainEntity implements IInscriptionDomainEntity {
    * @param {IInscriptionDomainEntity} [data] Información relacionada a la entidad
    * @memberof InscriptionDomainEntity
    */
-  constructor(data?: IInscriptionDomainEntity) {
-    if (data) {
-      if (data.inscriptionId) this.inscriptionId = data.inscriptionId;
-      if (data.student) this.student = data.student as StudentDomainEntity;
-      if (data.semester) this.semester = data.semester as SemesterDomainEntity;
-      if (data.groups) this.groups = data.groups as GroupDomainEntity[];
-      if (data.inscriptionState) this.inscriptionState = data.inscriptionState;
-      if (data.dateTime) this.dateTime = data.dateTime;
-    }
+  constructor(data: IInscriptionDomainEntity) {
+    if (data?.inscriptionId) this.inscriptionId = data.inscriptionId;
+    this.student = data.student as StudentDomainEntity;
+    this.semester = data.semester as SemesterDomainEntity;
+    this.groups = data.groups as GroupDomainEntity[];
+    this.inscriptionState = data.inscriptionState;
+    if (data?.dateTime) this.dateTime = data.dateTime;
   }
 }

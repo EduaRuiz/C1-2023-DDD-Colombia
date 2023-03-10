@@ -19,6 +19,19 @@ export const ChangeInscriptionStateHelper = async (
 ): Promise<InscriptionDomainEntity> => {
   if (service) {
     if (event) {
+      if (inscription.inscriptionId) {
+        const currentInscription = await service.getInscription(
+          inscription.inscriptionId?.valueOf(),
+        );
+        if (
+          currentInscription.inscriptionState.valueOf() === 'cancelled' ||
+          currentInscription.inscriptionState.valueOf() === 'completed'
+        ) {
+          throw new AggregateRootException(
+            'No se puede actualizar el estado de una inscripción completada o cancelada',
+          );
+        }
+      }
       event.response = await service.changeInscriptionState(inscription);
       event.publish;
       return event.response;

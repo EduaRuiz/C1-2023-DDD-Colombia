@@ -48,14 +48,10 @@ export class StudentDomainEntity implements IStudentDomainEntity {
    * @param {IStudentDomainEntity} [data] Información relacionada a la entidad
    * @memberof StudentDomainEntity
    */
-  constructor(data?: IStudentDomainEntity) {
-    if (data) {
-      if (data?.studentId) this.studentId = data.studentId;
-      if (data?.fullName) this.fullName = data.fullName;
-      if (data?.institutionalMail) {
-        this.institutionalMail = data.institutionalMail;
-      }
-      if (data?.inscription) this.inscription = data.inscription;
-    }
+  constructor(data: IStudentDomainEntity) {
+    this.studentId = data.studentId;
+    this.fullName = data.fullName;
+    this.institutionalMail = data.institutionalMail;
+    if (data?.inscription) this.inscription = data.inscription;
   }
 }

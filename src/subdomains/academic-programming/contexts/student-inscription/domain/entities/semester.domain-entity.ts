@@ -48,12 +48,10 @@ export class SemesterDomainEntity implements ISemesterDomainEntity {
    * @param {ISemesterDomainEntity} [data] Información relacionada a la entidad
    * @memberof SemesterDomainEntity
    */
-  constructor(data?: ISemesterDomainEntity) {
-    if (data) {
-      if (data?.semesterId) this.semesterId = data.semesterId;
-      if (data?.year) this.year = data.year;
-      if (data?.part) this.part = data.part;
-      if (data?.inscription) this.inscription = data.inscription;
-    }
+  constructor(data: ISemesterDomainEntity) {
+    this.semesterId = data.semesterId;
+    this.year = data.year;
+    this.part = data.part;
+    if (data?.inscription) this.inscription = data.inscription;
   }
 }

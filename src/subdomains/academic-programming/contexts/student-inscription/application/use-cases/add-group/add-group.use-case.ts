@@ -5,21 +5,28 @@ import {
 import { ValueObjectErrorHandler } from '@sofka/bases';
 import { IUseCase } from '@sofka/interfaces';
 import { SubscribedGroupEventPublisher } from '@contexts/student-inscription/domain/events';
-import {
-  IGroupDomainService,
-  IInscriptionDomainService,
-} from '@contexts/student-inscription/domain/services';
+import { IGroupDomainService } from '@contexts/student-inscription/domain/services';
 import { InscriptionAggregateRoot } from '@contexts/student-inscription/domain/aggregates';
-import { Topic } from '../../../domain/events/publishers/enums/topic.enum';
-import { GotInscriptionInfoEventPublisher } from '../../../domain/events/publishers/got-inscription-info.event-publisher';
-import { GroupDomainEntity } from '../../../domain/entities/group.domain-entity';
+import { Topic } from '@contexts/student-inscription/domain/events/publishers/enums';
 import {
   GroupIdExistQuery,
+  InscriptionIdExistQuery,
+  SubjectIdExistQuery,
+} from '@contexts/student-inscription/domain/queries';
+import {
   GroupIdValueObject,
   GroupStateValueObject,
   ProfessorNameValueObject,
   QuotaAvailableValueObject,
-} from '@contexts/student-inscription/domain';
+  SubjectIdValueObject,
+  SubjectNameValueObject,
+} from '@contexts/student-inscription/domain/value-objects/group';
+import { InscriptionIdValueObject } from '@contexts/student-inscription/domain/value-objects/inscription';
+import { ValueObjectException } from '@sofka/exceptions';
+import {
+  GroupDomainEntity,
+  IGroupDomainEntity,
+} from '@contexts/student-inscription/domain/entities';
 
 /**
  * Encargado de agregar un nuevo grupo a una inscripción
@@ -34,44 +41,74 @@ export class AddGroupUseCase
 {
   private readonly inscriptionAggregateRoot: InscriptionAggregateRoot;
   private readonly groupIdExistQuery: GroupIdExistQuery;
+  private readonly inscriptionIdExistQuery: InscriptionIdExistQuery;
+  private readonly subjectIdExistQuery: SubjectIdExistQuery;
+
   constructor(
     private readonly subscribedGroupEventPublisher: SubscribedGroupEventPublisher,
-    private readonly gotInscriptionInfoEventPublisher: GotInscriptionInfoEventPublisher,
     private readonly group$: IGroupDomainService,
-    private readonly inscription$: IInscriptionDomainService,
     groupIdExistQuery: GroupIdExistQuery,
+    inscriptionIdExistQuery: InscriptionIdExistQuery,
+    subjectIdExistQuery: SubjectIdExistQuery,
   ) {
     super();
     this.groupIdExistQuery = groupIdExistQuery;
-    const events = new Map();
-    events.set(Topic.SubscribedGroup, subscribedGroupEventPublisher);
-    events.set(Topic.GotInscriptionInfo, gotInscriptionInfoEventPublisher);
+    this.inscriptionIdExistQuery = inscriptionIdExistQuery;
+    this.subjectIdExistQuery = subjectIdExistQuery;
     this.inscriptionAggregateRoot = new InscriptionAggregateRoot({
       group$,
-      events,
+      events: new Map([[Topic.SubscribedGroup, subscribedGroupEventPublisher]]),
     });
   }
-  execute(command: IAddGroupCommand): Promise<IAddedGroupResponse> {
-    const inscription = this.inscriptionAggregateRoot.getInscription(
+  async execute(command: IAddGroupCommand): Promise<IAddedGroupResponse> {
+    const inscriptionId = new InscriptionIdValueObject(
       command.inscriptionId,
+      this.inscriptionIdExistQuery,
     );
-    inscription.then((data) => data.groups);
-    const commandValidations = {
-      inscriptionId: command.inscriptionId,
-      groupId: new GroupIdValueObject(command.groupId, this.groupIdExistQuery),
-      classDays: command.classDays,
-      subjectName: new GroupStateValueObject(command.subjectName),
-      professorName: new ProfessorNameValueObject(command.professorName),
-      quoteAvailable: new QuotaAvailableValueObject(command.quoteAvailable),
-      groupState: new GroupStateValueObject(command.groupState),
-    };
+    const groupId = new GroupIdValueObject(
+      command.groupId,
+      this.groupIdExistQuery,
+    );
+    const classDays = command.classDays;
+    const subjectName = new SubjectNameValueObject(command.subjectName);
+    const subjectId = new SubjectIdValueObject(
+      command.subjectId,
+      this.subjectIdExistQuery,
+    );
+    const professorName = new ProfessorNameValueObject(command.professorName);
+    const quoteAvailable = new QuotaAvailableValueObject(
+      command.quoteAvailable,
+    );
+    const groupState = new GroupStateValueObject(command.groupState);
 
-    for (const atribute in commandValidations) {
+    if (groupId.hasErrors()) this.setErrors(groupId.getErrors());
+    if (subjectName.hasErrors()) this.setErrors(subjectName.getErrors());
+    if (subjectId.hasErrors()) this.setErrors(subjectId.getErrors());
+    if (professorName.hasErrors()) this.setErrors(professorName.getErrors());
+    if (quoteAvailable.hasErrors()) this.setErrors(quoteAvailable.getErrors());
+    if (groupState.hasErrors()) this.setErrors(groupState.getErrors());
+
+    if (this.hasErrors()) {
+      throw new ValueObjectException(
+        'Existen algunos errores en el comando',
+        this.getErrors(),
+      );
     }
-    this.inscriptionAggregateRoot.subscribeGroup();
-  }
 
-  private logic(): boolean{
+    const group = new GroupDomainEntity({
+      groupId,
+      classDays,
+      subjectName,
+      subjectId,
+      professorName,
+      quoteAvailable,
+      groupState,
+    } as IGroupDomainEntity);
 
+    const data = await this.inscriptionAggregateRoot.subscribeGroup(
+      inscriptionId.valueOf(),
+      group,
+    );
+    return { success: true, data };
   }
 }

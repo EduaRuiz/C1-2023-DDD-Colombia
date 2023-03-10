@@ -33,10 +33,7 @@ export class DurationValueObject extends ValueObjectBase<number> {
    * @memberof DurationValueObject
    */
   private validateRange(): void {
-    if (
-      this.value &&
-      !NumberRange(this.value, 60 * 60 * 1000, 60 * 60 * 1000 * 2)
-    ) {
+    if (this.value && !NumberRange(this.value, 60, 60 * 2)) {
       this.setError({
         field: 'duration',
         message:

@@ -1,6 +1,6 @@
 import { GroupDomainEntity } from '../../entities';
 
-export interface IAddedGroupResponse {
+export interface IGotGroupInfoResponse {
   success: boolean;
   data: GroupDomainEntity | null;
 }

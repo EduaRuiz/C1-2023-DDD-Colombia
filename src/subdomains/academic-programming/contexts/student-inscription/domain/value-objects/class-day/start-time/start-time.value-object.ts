@@ -35,11 +35,7 @@ export class StartTimeValueObject extends ValueObjectBase<number> {
    * @memberof StartTimeValueObject
    */
   private validateRange(): void {
-    if (
-      this.value &&
-      !NumberRange(this.value, 7, 20) &&
-      this.value !== 13
-    ) {
+    if (this.value && !NumberRange(this.value, 7, 20) && this.value !== 13) {
       this.setError({
         field: 'startTime',
         message:

@@ -6,7 +6,7 @@ import { IsEmpty } from '@validations';
  * Clase que se va a usar para establecer el tipo y validar el estado de la Inscription en la entidad Inscription
  *
  * @export
- * @class InscriprionStateValueObject
+ * @class InscriptionStateValueObject
  * @extends {ValueObjectBase<string>}
  */
 export class InscriptionStateValueObject extends ValueObjectBase<string> {

@@ -21,6 +21,20 @@ export const UnsubscribeGroupHelper = async (
 ): Promise<GroupDomainEntity> => {
   if (service) {
     if (event) {
+      const groups = await service.getAllGroupsByInscription(inscriptionId);
+      if (groups.length < 2) {
+        throw new AggregateRootException(
+          'no se puede remover el grupo siendo este el único dentro de la inscripción',
+        );
+      }
+      const group = groups.find(
+        (currentGroup) => currentGroup.groupId === groupId,
+      );
+      if (!group) {
+        throw new AggregateRootException(
+          'El grupo que se intenta dar de baja no existe en la inscripción',
+        );
+      }
       event.response = await service.unsubscribeGroup(inscriptionId, groupId);
       event.publish;
       return event.response;

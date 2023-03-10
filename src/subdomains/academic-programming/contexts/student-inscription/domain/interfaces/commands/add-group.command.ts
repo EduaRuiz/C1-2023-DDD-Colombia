@@ -5,6 +5,7 @@ export interface IAddGroupCommand {
   groupId: string;
   classDays: ClassDayDomainEntity[];
   subjectName: string;
+  subjectId: string;
   professorName: string;
   quoteAvailable: number;
   groupState: string;

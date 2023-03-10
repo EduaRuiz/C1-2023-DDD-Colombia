@@ -79,17 +79,14 @@ export class GroupDomainEntity implements IGroupDomainEntity {
    * @param {IGroupDomainEntity} [data] Información relacionada a la entidad
    * @memberof GroupDomainEntity
    */
-  constructor(data?: IGroupDomainEntity) {
-    if (data) {
-      if (data?.groupId) this.groupId = data.groupId;
-      if (data?.classDays)
-        this.classDays = data.classDays as ClassDayDomainEntity[];
-      if (data?.subjectName) this.subjectName = data.subjectName;
-      if (data?.professorName) this.professorName = data.professorName;
-      if (data?.quoteAvailable) this.quoteAvailable = data.quoteAvailable;
-      if (data?.groupState) this.groupState = data.groupState;
-      if (data?.inscription)
-        this.inscription = data.inscription as InscriptionDomainEntity;
-    }
+  constructor(data: IGroupDomainEntity) {
+    this.groupId = data.groupId;
+    this.classDays = data.classDays as ClassDayDomainEntity[];
+    this.subjectName = data.subjectName;
+    this.professorName = data.professorName;
+    this.quoteAvailable = data.quoteAvailable;
+    this.groupState = data.groupState;
+    if (data?.inscription)
+      this.inscription = data.inscription as InscriptionDomainEntity;
   }
 }
