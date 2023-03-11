@@ -32,11 +32,15 @@ export interface IInscriptionDomainService<
    * Método que deberá retornar la confirmación al cambio del estado de una inscripción
    * se usara en dado que caso de cancelar o completar una inscripción
    *
-   * @param {entity} inscription Contiene la información y estructura suficientes y necesarios para realizar la acción
-   * @return {Promise<Entity>} Confirmación del proceso
+   * @param {string} inscriptionId UUID de la inscripción
+   * @param {string} inscriptionState Nuevo estado
+   * @return {Promise<Entity>} inscripción actualizada
    * @memberof IInscriptionDomainService
    */
-  changeInscriptionState(inscription: Entity): Promise<Entity>;
+  changeInscriptionState(
+    inscriptionId: string,
+    inscriptionState: string,
+  ): Promise<Entity>;
 
   /**
    * Método que deberá retornar un objeto del tipo InscriptionDomainEntity

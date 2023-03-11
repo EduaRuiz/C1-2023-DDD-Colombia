@@ -36,6 +36,14 @@ export const SubscribeGroupHelper = async (
   );
 };
 
+/**
+ * Valida si se puede inscribir a un grupo según los grupos actuales
+ * por lo que comprueba que el estado permita la inscripción, si el grupo no se repite,
+ * si hay cupos disponibles, si la materia del grupo ya se ve en otro grupo
+ *
+ * @param {GroupDomainEntity[]} currentGroups Lista de grupos inscritos
+ * @param {GroupDomainEntity} newGroup Nuevo grupo a inscribir
+ */
 const canSuscribeGroup = (
   currentGroups: GroupDomainEntity[],
   newGroup: GroupDomainEntity,
@@ -68,6 +76,13 @@ const canSuscribeGroup = (
   });
 };
 
+/**
+ * Valida que el horario del nuevo grupo no se cruce con el horario del grupo existente
+ *
+ * @param {GroupDomainEntity} newGroup Nuevo grupo
+ * @param {GroupDomainEntity} currentGroup Grupo inscrito
+ * @return {boolean}
+ */
 const scheduleAvailable = (
   newGroup: GroupDomainEntity,
   currentGroup: GroupDomainEntity,

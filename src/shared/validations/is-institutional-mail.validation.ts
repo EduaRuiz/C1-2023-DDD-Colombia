@@ -6,6 +6,7 @@
  * @return {boolean} Indica si el mail contiene el dominio indicado
  */
 export const IsInstitutionalMail = (value: string, domain: string): boolean => {
+  if (domain[0] !== '@') domain = '@' + domain;
   const index = value.indexOf(domain);
   return index === -1
     ? false

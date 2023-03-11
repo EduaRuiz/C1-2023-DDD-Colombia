@@ -221,9 +221,13 @@ export class InscriptionAggregateRoot
    * @return {Promise<GroupDomainEntity[]>} Retorna la lista de Groups de la Inscription correspondiente
    * @memberof InscriptionAggregateRoot
    */
-  getAllGroups(studentId: string): Promise<GroupDomainEntity[]> {
+  getAllGroups(
+    subjectId: string,
+    semesterId: string,
+  ): Promise<GroupDomainEntity[]> {
     return GetAllGroupsHelper(
-      studentId,
+      subjectId,
+      semesterId,
       this.group$,
       this.events.get(Topic.GotGroups),
     );
@@ -312,15 +316,18 @@ export class InscriptionAggregateRoot
    * para esto es necesario dicho servicio y un evento del tipo ChangedInscriptionStateEventPublisher
    * inyectados desde el constructor
    *
-   * @param {InscriptionDomainEntity} inscription Instancia de la inscripción a cambiar estado
+   * @param {string} inscriptionId UUID a actualizar o cambiar
+   * @param {string} inscriptionState Nuevo estado
    * @return {Promise<InscriptionDomainEntity>} Retorna instancia de la inscripción actualizada
    * @memberof InscriptionAggregateRoot
    */
   changeInscriptionState(
-    inscription: InscriptionDomainEntity,
+    inscriptionId: string,
+    inscriptionState: string,
   ): Promise<InscriptionDomainEntity> {
     return ChangeInscriptionStateHelper(
-      inscription,
+      inscriptionId,
+      inscriptionState,
       this.inscription$,
       this.events.get(Topic.ChangedInscriptionState),
     );
@@ -341,7 +348,9 @@ export class InscriptionAggregateRoot
     return CommitInscriptionHelper(
       inscription,
       this.inscription$,
+      this.group$,
       this.events.get(Topic.CommittedInscription),
+      this.events.get(Topic.SubscribedGroup),
     );
   }
 
