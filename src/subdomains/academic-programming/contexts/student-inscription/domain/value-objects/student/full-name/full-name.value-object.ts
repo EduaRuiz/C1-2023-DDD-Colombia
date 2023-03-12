@@ -20,7 +20,7 @@ export class FullNameValueObject extends ValueObjectBase<string> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'fullName',
-        message: 'El "fullName" no puede ser vacío',
+        message: 'FullName no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateLength();
@@ -29,7 +29,7 @@ export class FullNameValueObject extends ValueObjectBase<string> {
 
   /**
    * Valida si la longitud de FullName se encuentra dentro del rango
-   * minimo 5 caracteres y maximo 255 caracteres
+   * mínimo 5 caracteres y máximo 255 caracteres
    *
    * @private
    * @memberof FullNameValueObject
@@ -39,7 +39,7 @@ export class FullNameValueObject extends ValueObjectBase<string> {
       this.setError({
         field: 'fullName',
         message:
-          'La longitud de "fullName" no se encuentra dentro del rango min: 10 y max: 255',
+          'La longitud de FullName no se encuentra dentro del rango min: 10 y max: 255',
       } as IErrorValueObject);
     }
   }

@@ -40,7 +40,7 @@ export class StudentIdValueObject extends ValueObjectBase<string> {
     if (this.value && !IsUUID4(this.value)) {
       this.setError({
         field: 'studentId',
-        message: 'El "studentId" no tine un formato de UUID válido',
+        message: 'El valor de StudentId no tine un formato de UUID válido',
       } as IErrorValueObject);
     }
   }

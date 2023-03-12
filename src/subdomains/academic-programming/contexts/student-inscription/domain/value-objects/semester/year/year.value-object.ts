@@ -21,8 +21,8 @@ export class YearValueObject extends ValueObjectBase<Date> {
   validateData(): void {
     if (IsEmpty(this.value)) {
       this.setError({
-        field: 'professorName',
-        message: 'ProfessorName no puede ser vacío',
+        field: 'year',
+        message: 'Year no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateCurrentYear();
@@ -38,7 +38,7 @@ export class YearValueObject extends ValueObjectBase<Date> {
     if (this.value && this.value.getFullYear() !== this.now) {
       this.setError({
         field: 'year',
-        message: '"year" no puede ser diferente al año actual',
+        message: 'El valor de Year no puede ser diferente al año actual',
       } as IErrorValueObject);
     }
   }

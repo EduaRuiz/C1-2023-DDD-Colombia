@@ -1,10 +1,6 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import {
-  IsEmpty,
-  IsInstitutionalMail,
-  IsMailStructure,
-} from 'src/shared/validations';
+import { IsEmpty, IsInstitutionalMail, IsMailStructure } from '@validations';
 
 /**
  * Clase que se va a usar para establecer el tipo y validar el InstitutionalMail en la entidad Student
@@ -24,7 +20,7 @@ export class InstitutionalMailValueObject extends ValueObjectBase<string> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'institutionalMail',
-        message: 'El "institutionalMail" no puede ser vacío',
+        message: 'InstitutionalMail no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateStructure();
@@ -43,7 +39,7 @@ export class InstitutionalMailValueObject extends ValueObjectBase<string> {
       this.setError({
         field: 'institutionalMail',
         message:
-          '"institutionalMail" no cumple con la estructura de un mail válido',
+          'El valor de InstitutionalMail no cumple con la estructura de un mail válido',
       } as IErrorValueObject);
     }
   }
@@ -58,7 +54,8 @@ export class InstitutionalMailValueObject extends ValueObjectBase<string> {
     if (this.value && !IsInstitutionalMail(this.value, 'sofka.edu.co')) {
       this.setError({
         field: 'institutionalMail',
-        message: '"institutionalMail" no es del dominio de "sofka.edu.co"',
+        message:
+          'El valor de InstitutionalMail no es del dominio de sofka.edu.co',
       } as IErrorValueObject);
     }
   }

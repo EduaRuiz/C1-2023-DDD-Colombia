@@ -5,10 +5,7 @@ import {
 import { ValueObjectErrorHandler } from '@sofka/bases';
 import { IUseCase } from '@sofka/interfaces';
 import { IInscriptionDomainService } from '@contexts/student-inscription/domain/services';
-import {
-  InscriptionIdExistQuery,
-  Topic,
-} from '@contexts/student-inscription/domain';
+import { Topic } from '@contexts/student-inscription/domain';
 import { InscriptionAggregateRoot } from '@contexts/student-inscription/domain/aggregates';
 import { ChangedInscriptionStateEventPublisher } from '@contexts/student-inscription/domain/events/publishers';
 import {
@@ -26,7 +23,6 @@ export class UpdateInscriptionState
   constructor(
     changedInscriptionStateEventPublisher: ChangedInscriptionStateEventPublisher,
     private readonly inscription$: IInscriptionDomainService,
-    private readonly inscriptionIdExistQuery: InscriptionIdExistQuery,
   ) {
     super();
     this.inscriptionAggregateRoot = new InscriptionAggregateRoot({
@@ -39,10 +35,7 @@ export class UpdateInscriptionState
   async execute(
     command: IUpdateInscriptionStateCommand,
   ): Promise<IUpdateInscriptionStateResponse> {
-    const inscriptionId = new InscriptionIdValueObject(
-      command.inscriptionId,
-      this.inscriptionIdExistQuery,
-    );
+    const inscriptionId = new InscriptionIdValueObject(command.inscriptionId);
     const inscriptionState = new InscriptionStateValueObject(
       command.inscriptionState,
     );
