@@ -34,7 +34,7 @@ export const ChangeInscriptionStateHelper = async (
         inscriptionId,
         inscriptionState,
       );
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(

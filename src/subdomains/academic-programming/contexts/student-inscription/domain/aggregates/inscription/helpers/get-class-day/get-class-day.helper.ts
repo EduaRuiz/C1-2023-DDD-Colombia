@@ -20,7 +20,7 @@ export const GetClassDayHelper = async (
   if (service) {
     if (event) {
       event.response = await service.getClassDay(classDayId);
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(

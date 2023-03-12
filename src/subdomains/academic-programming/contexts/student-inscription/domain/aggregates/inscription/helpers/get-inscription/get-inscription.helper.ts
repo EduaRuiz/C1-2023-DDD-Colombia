@@ -20,7 +20,7 @@ export const GetInscriptionHelper = async (
   if (service) {
     if (event) {
       event.response = await service.getInscription(inscriptionId);
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(

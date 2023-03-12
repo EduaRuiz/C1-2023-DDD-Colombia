@@ -61,7 +61,7 @@ const CommitInscriptionHelper = async (
           }
           const currentGroups = inscription.groups;
           inscription.groups = [];
-          if (inscription.groups.length === 0) {
+          if (currentGroups.length === 0) {
             throw new AggregateRootException(
               'Para registrar una inscripción la misma debe tener al menos un grupo',
             );
@@ -86,7 +86,7 @@ const CommitInscriptionHelper = async (
           });
           inscriptionSaved.groups = groupsUpdated;
           committedInscription.response = inscriptionSaved;
-          committedInscription.publish;
+          committedInscription.publish();
           return committedInscription.response;
         }
         throw new AggregateRootException(

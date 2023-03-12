@@ -20,7 +20,7 @@ export const GetAllClassDaysByGroupHelper = async (
   if (service) {
     if (event) {
       event.response = await service.getAllClassDaysByGroup(groupId);
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(

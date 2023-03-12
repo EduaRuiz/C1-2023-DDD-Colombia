@@ -31,7 +31,7 @@ const GetAllGroupsHelper = async (
   if (service) {
     if (event) {
       event.response = await service.getAllGroups(subjectId, semesterId);
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(

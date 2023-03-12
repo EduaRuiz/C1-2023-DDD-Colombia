@@ -20,7 +20,7 @@ export const GetAllGroupsByInscriptionHelper = async (
   if (service) {
     if (event) {
       event.response = await service.getAllGroupsByInscription(inscriptionId);
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(

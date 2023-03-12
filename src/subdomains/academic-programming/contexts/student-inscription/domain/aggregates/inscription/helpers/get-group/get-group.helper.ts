@@ -20,7 +20,7 @@ export const GetGroupHelper = async (
   if (service) {
     if (event) {
       event.response = await service.getGroup(groupId);
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(
