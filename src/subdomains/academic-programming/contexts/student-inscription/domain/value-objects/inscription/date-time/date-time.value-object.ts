@@ -53,7 +53,7 @@ export class DateTimeValueObject extends ValueObjectBase<Date> {
       this.setError({
         field: 'dateTime',
         message:
-          'El valor de "dateTime" difiere por mas de un segundo a la fecha actual',
+          'El valor de DateTime difiere por mas de un segundo a la fecha actual',
       } as IErrorValueObject);
     }
   }

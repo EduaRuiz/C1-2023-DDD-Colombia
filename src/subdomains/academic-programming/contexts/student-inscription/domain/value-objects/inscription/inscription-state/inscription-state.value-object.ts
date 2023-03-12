@@ -20,7 +20,7 @@ export class InscriptionStateValueObject extends ValueObjectBase<string> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'inscriptionState',
-        message: 'El "inscriptionState" no puede ser vacío',
+        message: 'InscriptionState no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateInscriptionStateEnum();
@@ -39,7 +39,8 @@ export class InscriptionStateValueObject extends ValueObjectBase<string> {
     if (this.value && states.indexOf(this.value) === -1) {
       this.setError({
         field: 'inscriptionState',
-        message: 'El "inscriptionState" no corresponde a un estado válido',
+        message:
+          'El valor de InscriptionState no corresponde a un estado válido',
       } as IErrorValueObject);
     }
   }

@@ -20,10 +20,26 @@ export class StartTimeValueObject extends ValueObjectBase<number> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'startTime',
-        message: 'El "startTime" no puede ser vacío',
+        message: 'StartTime no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateRange();
+      this.validateIsInteger();
+    }
+  }
+
+  /**
+   * Valida sie es entero
+   *
+   * @private
+   * @memberof StartTimeValueObject
+   */
+  private validateIsInteger(): void {
+    if (this.value && !Number.isInteger(this.value)) {
+      this.setError({
+        field: 'startTime',
+        message: 'Solo se admiten números enteros',
+      } as IErrorValueObject);
     }
   }
 
@@ -35,11 +51,11 @@ export class StartTimeValueObject extends ValueObjectBase<number> {
    * @memberof StartTimeValueObject
    */
   private validateRange(): void {
-    if (this.value && !NumberRange(this.value, 7, 20) && this.value !== 13) {
+    if (this.value && (!NumberRange(this.value, 7, 20) || this.value == 13)) {
       this.setError({
         field: 'startTime',
         message:
-          'La longitud de "startTime" no se encuentra dentro del rango 7:00 am y 8:00 pm; y no puede ser la 1:00 pm',
+          'La longitud de StartTime no se encuentra dentro del rango 7:00 am y 8:00 pm; y no puede ser la 1:00 pm',
       } as IErrorValueObject);
     }
   }

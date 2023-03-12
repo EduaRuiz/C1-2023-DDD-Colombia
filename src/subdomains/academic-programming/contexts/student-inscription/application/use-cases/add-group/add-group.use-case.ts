@@ -9,11 +9,6 @@ import { IGroupDomainService } from '@contexts/student-inscription/domain/servic
 import { InscriptionAggregateRoot } from '@contexts/student-inscription/domain/aggregates';
 import { Topic } from '@contexts/student-inscription/domain/events/publishers/enums';
 import {
-  GroupIdExistQuery,
-  InscriptionIdExistQuery,
-  SubjectIdExistQuery,
-} from '@contexts/student-inscription/domain/queries';
-import {
   GroupIdValueObject,
   GroupStateValueObject,
   ProfessorNameValueObject,
@@ -44,30 +39,6 @@ export class AddGroupUseCase
    * @memberof AddGroupUseCase
    */
   private readonly inscriptionAggregateRoot: InscriptionAggregateRoot;
-  /**
-   * Query que confirma la existencia del grupo a inscribir
-   *
-   * @private
-   * @type {GroupIdExistQuery}
-   * @memberof AddGroupUseCase
-   */
-  private readonly groupIdExistQuery: GroupIdExistQuery;
-  /**
-   * Query que valida la existencia de la inscripción a actualizar
-   *
-   * @private
-   * @type {InscriptionIdExistQuery}
-   * @memberof AddGroupUseCase
-   */
-  private readonly inscriptionIdExistQuery: InscriptionIdExistQuery;
-  /**
-   * Query que valida la existencia de la materia relacionada con el grupo
-   *
-   * @private
-   * @type {SubjectIdExistQuery}
-   * @memberof AddGroupUseCase
-   */
-  private readonly subjectIdExistQuery: SubjectIdExistQuery;
 
   /**
    * Crea una instancia de AddGroupUseCase.
@@ -82,14 +53,8 @@ export class AddGroupUseCase
   constructor(
     private readonly subscribedGroupEventPublisher: SubscribedGroupEventPublisher,
     private readonly group$: IGroupDomainService,
-    groupIdExistQuery: GroupIdExistQuery,
-    inscriptionIdExistQuery: InscriptionIdExistQuery,
-    subjectIdExistQuery: SubjectIdExistQuery,
   ) {
     super();
-    this.groupIdExistQuery = groupIdExistQuery;
-    this.inscriptionIdExistQuery = inscriptionIdExistQuery;
-    this.subjectIdExistQuery = subjectIdExistQuery;
     this.inscriptionAggregateRoot = new InscriptionAggregateRoot({
       group$,
       events: new Map([[Topic.SubscribedGroup, subscribedGroupEventPublisher]]),
@@ -142,20 +107,11 @@ export class AddGroupUseCase
     inscriptionId: InscriptionIdValueObject;
     group: GroupDomainEntity;
   } {
-    const inscriptionId = new InscriptionIdValueObject(
-      command.inscriptionId,
-      this.inscriptionIdExistQuery,
-    );
-    const groupId = new GroupIdValueObject(
-      command.groupId,
-      this.groupIdExistQuery,
-    );
+    const inscriptionId = new InscriptionIdValueObject(command.inscriptionId);
+    const groupId = new GroupIdValueObject(command.groupId);
     const classDays = command.classDays;
     const subjectName = new SubjectNameValueObject(command.subjectName);
-    const subjectId = new SubjectIdValueObject(
-      command.subjectId,
-      this.subjectIdExistQuery,
-    );
+    const subjectId = new SubjectIdValueObject(command.subjectId);
     const professorName = new ProfessorNameValueObject(command.professorName);
     const quoteAvailable = new QuotaAvailableValueObject(
       command.quoteAvailable,

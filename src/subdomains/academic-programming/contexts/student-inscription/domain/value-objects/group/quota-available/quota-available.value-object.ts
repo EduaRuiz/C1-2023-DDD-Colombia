@@ -1,6 +1,6 @@
 import { ValueObjectBase } from '@sofka/bases';
 import { IErrorValueObject } from '@sofka/interfaces';
-import { IsEmpty, NumberRange } from 'src/shared/validations';
+import { IsEmpty, NumberRange } from '@validations';
 
 /**
  * Clase que se va a usar para establecer el tipo y validar la cuota disponible en la entidad Group
@@ -19,8 +19,8 @@ export class QuotaAvailableValueObject extends ValueObjectBase<number> {
   validateData(): void {
     if (IsEmpty(this.value)) {
       this.setError({
-        field: 'professorName',
-        message: 'El "professorName" no puede ser vacío',
+        field: 'quotaAvailable',
+        message: 'QuotaAvailable no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateRange();
@@ -34,11 +34,11 @@ export class QuotaAvailableValueObject extends ValueObjectBase<number> {
    * @memberof QuotaAvailableValueObject
    */
   private validateRange(): void {
-    if (this.value && !NumberRange(this.value, 1, 30)) {
+    if (this.value && !NumberRange(this.value, 0, 30)) {
       this.setError({
         field: 'quotaAvailable',
         message:
-          'La "quotaAvailable" no se encuentra dentro del rango min:1 y max 30',
+          'El valor de QuotaAvailable no se encuentra dentro del rango min:0 y max 30',
       } as IErrorValueObject);
     }
   }

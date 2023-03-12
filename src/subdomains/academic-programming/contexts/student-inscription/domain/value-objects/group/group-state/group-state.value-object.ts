@@ -19,8 +19,8 @@ export class GroupStateValueObject extends ValueObjectBase<string> {
   validateData(): void {
     if (IsEmpty(this.value)) {
       this.setError({
-        field: 'GroupState',
-        message: 'El "GroupState" no puede ser vacío',
+        field: 'groupState',
+        message: 'GroupState no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateGroupStateEnum();
@@ -35,11 +35,11 @@ export class GroupStateValueObject extends ValueObjectBase<string> {
    * @memberof GroupStateValueObject
    */
   private validateGroupStateEnum(): void {
-    const states = ['open'];
+    const states = ['open', 'closed', 'cancelled', 'finalized'];
     if (states.indexOf(this.value) === -1) {
       this.setError({
         field: 'groupState',
-        message: 'El "groupState" no corresponde a un estado válido',
+        message: 'El valor de GroupState no corresponde a un estado válido',
       } as IErrorValueObject);
     }
   }

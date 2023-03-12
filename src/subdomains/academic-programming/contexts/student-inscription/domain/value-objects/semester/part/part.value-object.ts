@@ -19,8 +19,8 @@ export class PartValueObject extends ValueObjectBase<number> {
   validateData(): void {
     if (IsEmpty(this.value)) {
       this.setError({
-        field: 'professorName',
-        message: 'El "professorName" no puede ser vacío',
+        field: 'part',
+        message: 'Part no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validatePart();
@@ -37,7 +37,7 @@ export class PartValueObject extends ValueObjectBase<number> {
     if (this.value && !(this.value == 1 || this.value == 2)) {
       this.setError({
         field: 'part',
-        message: '"part" no puede ser distinto de 1 o 2',
+        message: 'El valor de Part no puede ser distinto de 1 o 2',
       } as IErrorValueObject);
     }
   }

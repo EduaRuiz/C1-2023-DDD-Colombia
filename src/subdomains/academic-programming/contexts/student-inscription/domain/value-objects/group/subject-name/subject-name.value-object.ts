@@ -20,7 +20,7 @@ export class SubjectNameValueObject extends ValueObjectBase<string> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'subjectName',
-        message: 'El "subjectName" no puede ser vacío',
+        message: 'SsubjectName no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateLength();
@@ -39,7 +39,7 @@ export class SubjectNameValueObject extends ValueObjectBase<string> {
       this.setError({
         field: 'subjectName',
         message:
-          'La longitud de "subjectName" no se encuentra dentro del rango min: 3 y max: 255',
+          'La longitud de SubjectName no se encuentra dentro del rango min: 3 y max: 255',
       } as IErrorValueObject);
     }
   }

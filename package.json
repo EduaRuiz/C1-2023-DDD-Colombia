@@ -66,6 +66,11 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@contexts\\/student-inscription\\/?(.*)$": "<rootDir>/subdomains/academic-programming/contexts/student-inscription/$1",
+      "^@sofka\\/?(.*)$": "<rootDir>/shared/sofka/$1",
+      "@validations": "<rootDir>/shared/validations"
+    }
   }
 }

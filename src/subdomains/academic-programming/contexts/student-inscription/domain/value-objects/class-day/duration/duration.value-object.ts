@@ -19,7 +19,7 @@ export class DurationValueObject extends ValueObjectBase<number> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'duration',
-        message: 'El "duration" no puede ser vacío',
+        message: 'Duration no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateRange();
@@ -37,7 +37,7 @@ export class DurationValueObject extends ValueObjectBase<number> {
       this.setError({
         field: 'duration',
         message:
-          '"duration" no se encuentra dentro del rango min: 1 hora y max: 2 horas',
+          'El valor de Duration no se encuentra dentro del rango min: 1 hora y max: 2 horas',
       } as IErrorValueObject);
     }
   }

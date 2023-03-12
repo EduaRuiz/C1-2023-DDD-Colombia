@@ -20,7 +20,7 @@ export class ProfessorNameValueObject extends ValueObjectBase<string> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'professorName',
-        message: 'El "professorName" no puede ser vacío',
+        message: 'ProfessorName no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateLength();
@@ -39,7 +39,7 @@ export class ProfessorNameValueObject extends ValueObjectBase<string> {
       this.setError({
         field: 'professorName',
         message:
-          'La longitud de "professorName" no se encuentra dentro del rango min: 5 y max: 255',
+          'La longitud de ProfessorName no se encuentra dentro del rango min: 5 y max: 255',
       } as IErrorValueObject);
     }
   }

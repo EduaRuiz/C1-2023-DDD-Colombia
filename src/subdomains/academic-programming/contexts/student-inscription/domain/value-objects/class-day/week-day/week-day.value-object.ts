@@ -20,7 +20,7 @@ export class WeekDayValueObject extends ValueObjectBase<string> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'weekDay',
-        message: 'El "weekDay" no puede ser vacío',
+        message: 'WeekDay no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateWeekDay();
@@ -40,7 +40,7 @@ export class WeekDayValueObject extends ValueObjectBase<string> {
       this.setError({
         field: 'weekDay',
         message:
-          '"weekDay" no comprende domingos o dias distintos a [L, M, MC, J, V, S]',
+          'El valor de WeekDay no comprende domingos o días distintos a [L, M, MC, J, V, S]',
       } as IErrorValueObject);
     }
   }

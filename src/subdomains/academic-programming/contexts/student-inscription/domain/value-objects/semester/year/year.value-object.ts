@@ -6,7 +6,7 @@ import { IsEmpty } from '@validations';
  * Clase que se va a usar para establecer el tipo y validar Year en la entidad Semester
  *
  * @export
- * @class YeartValueObject
+ * @class YearValueObject
  * @extends {ValueObjectBase}
  */
 export class YearValueObject extends ValueObjectBase<Date> {
@@ -22,7 +22,7 @@ export class YearValueObject extends ValueObjectBase<Date> {
     if (IsEmpty(this.value)) {
       this.setError({
         field: 'professorName',
-        message: 'El "professorName" no puede ser vacío',
+        message: 'ProfessorName no puede ser vacío',
       } as IErrorValueObject);
     } else {
       this.validateCurrentYear();
