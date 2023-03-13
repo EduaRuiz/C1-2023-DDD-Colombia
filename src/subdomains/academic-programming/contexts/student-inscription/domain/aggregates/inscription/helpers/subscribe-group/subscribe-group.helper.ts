@@ -24,7 +24,7 @@ export const SubscribeGroupHelper = async (
       const groups = await service.getAllGroupsByInscription(inscriptionId);
       canSuscribeGroup(groups, group);
       event.response = await service.subscribeGroup(inscriptionId, group);
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(
@@ -44,11 +44,11 @@ export const SubscribeGroupHelper = async (
  * @param {GroupDomainEntity[]} currentGroups Lista de grupos inscritos
  * @param {GroupDomainEntity} newGroup Nuevo grupo a inscribir
  */
-const canSuscribeGroup = (
+export const canSuscribeGroup = (
   currentGroups: GroupDomainEntity[],
   newGroup: GroupDomainEntity,
 ): void => {
-  if (newGroup.quoteAvailable.valueOf() !== 0) {
+  if (newGroup.quoteAvailable.valueOf() === 0) {
     throw new AggregateRootException('No se puede inscribir grupos sin cupos');
   }
   if (newGroup.groupState.valueOf() !== 'Open') {
@@ -83,32 +83,38 @@ const canSuscribeGroup = (
  * @param {GroupDomainEntity} currentGroup Grupo inscrito
  * @return {boolean}
  */
-const scheduleAvailable = (
+export const scheduleAvailable = (
   newGroup: GroupDomainEntity,
   currentGroup: GroupDomainEntity,
 ): boolean => {
+  let answer = true;
   newGroup.classDays.map((newClassDay) => {
     currentGroup.classDays.map((currentClassDay) => {
       if (currentClassDay.weekDay.valueOf() === newClassDay.weekDay.valueOf()) {
         if (
-          currentClassDay.startTime.valueOf() <= newClassDay.startTime.valueOf()
+          currentClassDay.startTime.valueOf() ===
+          newClassDay.startTime.valueOf()
+        ) {
+          answer = false;
+        } else if (
+          currentClassDay.startTime.valueOf() < newClassDay.startTime.valueOf()
         ) {
           const finishTime =
             currentClassDay.startTime.valueOf() +
             currentClassDay.duration.valueOf() / 60;
           if (finishTime > newClassDay.startTime.valueOf()) {
-            return false;
+            answer = false;
           }
         } else {
           const finishTime =
             newClassDay.startTime.valueOf() +
             newClassDay.duration.valueOf() / 60;
           if (finishTime > currentClassDay.startTime.valueOf()) {
-            return false;
+            answer = false;
           }
         }
       }
     });
   });
-  return true;
+  return answer;
 };

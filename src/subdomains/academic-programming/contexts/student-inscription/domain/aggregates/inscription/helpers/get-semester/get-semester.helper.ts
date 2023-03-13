@@ -20,7 +20,7 @@ export const GetSemesterHelper = async (
   if (service) {
     if (event) {
       event.response = await service.getSemester(semesterId);
-      event.publish;
+      event.publish();
       return event.response;
     }
     throw new AggregateRootException(

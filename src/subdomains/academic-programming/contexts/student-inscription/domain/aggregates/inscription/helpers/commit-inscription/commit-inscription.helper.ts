@@ -24,7 +24,7 @@ import { SubscribeGroupHelper } from '../subscribe-group/subscribe-group.helper'
  * @param {SubscribedGroupEventPublisher} [subscribedGroup] Evento publicador de la asignación por grupo
  * @return {Promise<InscriptionDomainEntity>} Retorna el objeto producto de la acción
  */
-export /**
+/**
  *
  *
  * @param {InscriptionDomainEntity} inscription
@@ -45,11 +45,11 @@ const CommitInscriptionHelper = async (
     if (groupService) {
       if (committedInscription) {
         if (subscribedGroup) {
-          const inscriptions =
+          const currentInscriptions =
             await inscriptionService.getAllInscriptionsByStudent(
               inscription.student.studentId.valueOf(),
             );
-          const semesterExist = inscriptions.find(
+          const semesterExist = currentInscriptions.find(
             (totalInscriptions) =>
               totalInscriptions.semester.semesterId.valueOf() ===
               inscription.semester.semesterId.valueOf(),
@@ -61,14 +61,10 @@ const CommitInscriptionHelper = async (
           }
           const currentGroups = inscription.groups;
           inscription.groups = [];
-          if (currentGroups.length === 0) {
-            throw new AggregateRootException(
-              'Para registrar una inscripción la misma debe tener al menos un grupo',
-            );
-          }
           const inscriptionSaved = await inscriptionService.commitInscription(
             inscription,
           );
+          console.log('===============', inscriptionSaved);
           const inscriptionId = inscriptionSaved.inscriptionId;
           if (!inscriptionId) {
             throw new AggregateRootException('Id inscripcion indefinido');
@@ -90,11 +86,11 @@ const CommitInscriptionHelper = async (
           return committedInscription.response;
         }
         throw new AggregateRootException(
-          'Evento del tipo CommittedInscriptionEventPublisher no recibido',
+          'Evento del tipo SubscribedGroupEventPublisher no recibido',
         );
       }
       throw new AggregateRootException(
-        'Evento del tipo SubscribedGroupEventPublisher no recibido',
+        'Evento del tipo CommittedInscriptionEventPublisher no recibido',
       );
     }
     throw new AggregateRootException(
@@ -105,3 +101,5 @@ const CommitInscriptionHelper = async (
     'Servicio del tipo IInscriptionDomainService no recibido',
   );
 };
+
+export default CommitInscriptionHelper;

@@ -110,12 +110,12 @@ export class InscriptionAggregateRoot
    *     student$?: IStudentDomainService;
    *     events?: Map<Topic, EventPublisherBase<any>>;
    *   }} {
-   *     Instancia del tipo servicio dia de clase,
-   *     Instancia del tipo servicio grupo,
-   *     Instancia del tipo servicio inscripción,
-   *     Instancia del tipo servicio semestre,
-   *     Instancia del tipo servicio estudiante,
-   *     Mapa de instancia del o los eventos relacionados a la acción del método invocado,
+   *     classDay$: Instancia del tipo servicio dia de clase,
+   *     group$: Instancia del tipo servicio grupo,
+   *     inscription$: Instancia del tipo servicio inscripción,
+   *     semester$: Instancia del tipo servicio semestre,
+   *     student$: Instancia del tipo servicio estudiante,
+   *     events: Mapa de instancia del o los eventos relacionados a la acción del método invocado,
    *   }
    * @memberof InscriptionAggregateRoot
    */

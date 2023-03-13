@@ -1,2 +1,2 @@
 
-export * from './commit-inscription.helper';
+export {default as CommitInscriptionHelper} from './commit-inscription.helper';
