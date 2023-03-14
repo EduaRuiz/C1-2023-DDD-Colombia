@@ -2,10 +2,7 @@ import { ValueObjectErrorHandler } from '@sofka/bases';
 import { IUseCase } from '@sofka/interfaces';
 import { InscriptionAggregateRoot } from '@contexts/student-inscription/domain/aggregates';
 import { ValueObjectException } from '@sofka/exceptions';
-import {
-  IGetGroupOutContextDomainService,
-  IGroupDomainService,
-} from '@contexts/student-inscription/domain/services';
+import { IGroupDomainService } from '@contexts/student-inscription/domain/services';
 import { GroupIdValueObject } from '@contexts/student-inscription/domain/value-objects/group';
 import {
   IGetGroupInfoCommand,
@@ -42,18 +39,16 @@ export class GetGroupInfoUseCase
    *
    * @param {GotGroupInfoEventPublisher} gotGroupInfoEventPublisher Evento publicador de la petición
    * @param {IGroupDomainService} group$ Servicio de la entidad Grupo
-   * @param {GroupIdExistQuery} groupIdExistQuery Query de consulta existencia del grupo
    * @memberof GetGroupInfoUseCase
    */
   constructor(
     private readonly gotGroupInfoEventPublisher: GotGroupInfoEventPublisher,
     private readonly group$: IGroupDomainService,
-    private readonly groupOutContext$: IGetGroupOutContextDomainService,
   ) {
     super();
     this.inscriptionAggregateRoot = new InscriptionAggregateRoot({
       group$,
-      events: new Map([[Topic.SubscribedGroup, gotGroupInfoEventPublisher]]),
+      events: new Map([[Topic.GotGroupInfo, this.gotGroupInfoEventPublisher]]),
     });
   }
   /**
@@ -64,9 +59,6 @@ export class GetGroupInfoUseCase
    * @memberof GetGroupInfoUseCase
    */
   async execute(command: IGetGroupInfoCommand): Promise<IGotGroupInfoResponse> {
-    const groupOutContext = await this.groupOutContext$.getDataForGroup(
-      command.groupId,
-    );
     const groupId = new GroupIdValueObject(command.groupId);
     if (groupId.hasErrors()) this.setErrors(groupId.getErrors());
     if (this.hasErrors()) {

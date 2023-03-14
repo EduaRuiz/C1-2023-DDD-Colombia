@@ -2,21 +2,21 @@
  * Comando para el proceso de agregar un grupo a una inscripción
  *
  * @export
- * @interface IAddGroupCommand
+ * @interface IRemoveGroupCommand
  */
-export interface IAddGroupCommand {
+export interface IRemoveGroupCommand {
   /**
    * Id de la inscripción
    *
    * @type {string}
-   * @memberof IAddGroupCommand
+   * @memberof IRemoveGroupCommand
    */
   inscriptionId: string;
   /**
-   * Id del grupo a agregar
+   * Id del grupo a quitar
    *
    * @type {string}
-   * @memberof IAddGroupCommand
+   * @memberof IRemoveGroupCommand
    */
   groupId: string;
 }

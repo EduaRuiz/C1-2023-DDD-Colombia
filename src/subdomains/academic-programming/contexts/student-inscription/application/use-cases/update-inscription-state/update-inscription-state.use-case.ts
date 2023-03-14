@@ -21,14 +21,17 @@ export class UpdateInscriptionState
 {
   private readonly inscriptionAggregateRoot: InscriptionAggregateRoot;
   constructor(
-    changedInscriptionStateEventPublisher: ChangedInscriptionStateEventPublisher,
+    private readonly changedInscriptionStateEventPublisher: ChangedInscriptionStateEventPublisher,
     private readonly inscription$: IInscriptionDomainService,
   ) {
     super();
     this.inscriptionAggregateRoot = new InscriptionAggregateRoot({
       inscription$,
       events: new Map([
-        [Topic.ChangedInscriptionState, changedInscriptionStateEventPublisher],
+        [
+          Topic.ChangedInscriptionState,
+          this.changedInscriptionStateEventPublisher,
+        ],
       ]),
     });
   }
