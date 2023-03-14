@@ -20,7 +20,10 @@
   },
   "peacock.color": "#13247d",
   "cSpell.words": [
-    "sofka"
+    "nestjs",
+    "postgres",
+    "sofka",
+    "typeorm"
   ],
   "jest.autoRun": "off"
 }
