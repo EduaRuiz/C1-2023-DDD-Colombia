@@ -1,9 +1,10 @@
-import { SemesterDomainEntity } from '../../entities';
+import { SemesterDomainEntity } from '../../../entities';
 import { EventPublisherBase } from '@sofka/bases';
+import { Topic } from '../enums/topic.enum';
 
 /**
- * Publisher encargado de informar la obtenciónde informaciónde un Semester
- * Clase absctracta que establece el canal de emision y publica el evento
+ * Publisher encargado de informar la obtención de información de un Semester
+ * Clase abstracta que establece el canal de emisión y publica el evento
  *
  * @export
  * @abstract
@@ -23,9 +24,6 @@ export abstract class GotSemesterInfoEventPublisher<
    * @memberof GotSemesterInfoEventPublisher
    */
   publish<Result = any>(): Promise<Result> {
-    return this.emit(
-      'student-inscription.got-semester-info',
-      JSON.stringify(this.response),
-    );
+    return this.emit(Topic.GotSemesterInfo, JSON.stringify(this.response));
   }
 }

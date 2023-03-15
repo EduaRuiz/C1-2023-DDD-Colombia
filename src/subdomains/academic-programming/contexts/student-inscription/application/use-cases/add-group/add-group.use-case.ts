@@ -33,7 +33,7 @@ export class AddGroupUseCase
   //  * @type {InscriptionAggregateRoot}
   //  * @memberof AddGroupUseCase
   //  */
-  private inscriptionAggregateRoot: InscriptionAggregateRoot;
+  private readonly inscriptionAggregateRoot: InscriptionAggregateRoot;
 
   /**
    * Crea una instancia de AddGroupUseCase.
@@ -72,6 +72,7 @@ export class AddGroupUseCase
     if (inscriptionId.hasErrors()) this.setErrors(inscriptionId.getErrors());
     if (groupId.hasErrors()) this.setErrors(groupId.getErrors());
     if (this.hasErrors()) {
+      console.log(this.getErrors());
       throw new ValueObjectException(
         'Existen algunos errores en el comando',
         this.getErrors(),
@@ -80,15 +81,10 @@ export class AddGroupUseCase
     const group = await this.inscriptionAggregateRoot.getGroup(
       command.groupId.valueOf(),
     );
-    console.log('cccccccccccccccc', group);
     const data = await this.inscriptionAggregateRoot.subscribeGroup(
       inscriptionId.valueOf(),
       group,
     );
     return { success: data ? true : false, data };
-  }
-
-  setAggregate(a: InscriptionAggregateRoot) {
-    this.inscriptionAggregateRoot = a;
   }
 }

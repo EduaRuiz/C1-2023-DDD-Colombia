@@ -190,29 +190,91 @@ describe('SubscribeGroupHelper function', () => {
 
   test('should throw an error if the group to subscribe conflicts with other groups', async () => {
     // Arrange
-    group.classDays = [
-      {
-        weekDay: 'L',
-        startTime: 11,
-        duration: 120,
-      },
-      {
-        weekDay: 'MC',
-        startTime: 11,
-        duration: 120,
-      },
-    ] as unknown as ClassDayDomainEntity[];
+    const group1 = {
+      groupId: 'group_123',
+      subjectId: 'subject_123',
+      classDays: [
+        {
+          weekDay: 'L',
+          startTime: 11,
+          duration: 120,
+        },
+        {
+          weekDay: 'MC',
+          startTime: 11,
+          duration: 120,
+        },
+      ],
+      groupState: 'Open',
+      quoteAvailable: 5,
+    } as unknown as GroupDomainEntity;
+    const group2 = {
+      groupId: 'group_123',
+      subjectId: 'subject_123',
+      classDays: [
+        {
+          weekDay: 'L',
+          startTime: 12,
+          duration: 120,
+        },
+        {
+          weekDay: 'MC',
+          startTime: 12,
+          duration: 120,
+        },
+      ],
+      groupState: 'Open',
+      quoteAvailable: 5,
+    } as unknown as GroupDomainEntity;
+    const group3 = {
+      groupId: 'group_123',
+      subjectId: 'subject_123',
+      classDays: [
+        {
+          weekDay: 'L',
+          startTime: 10,
+          duration: 120,
+        },
+        {
+          weekDay: 'MC',
+          startTime: 10,
+          duration: 120,
+        },
+      ],
+      groupState: 'Open',
+      quoteAvailable: 5,
+    } as unknown as GroupDomainEntity;
+    // group.classDays = [
+    //   {
+    //     weekDay: 'L',
+    //     startTime: 11,
+    //     duration: 120,
+    //   },
+    //   {
+    //     weekDay: 'MC',
+    //     startTime: 11,
+    //     duration: 120,
+    //   },
+    // ] as unknown as ClassDayDomainEntity[];
     const expectedMessage =
       'No se puede inscribir grupos que se cruzan en horarios con otros grupos ya inscritos';
     serviceMock.getAllGroupsByInscription = jest
       .fn()
       .mockResolvedValue(currentGroups);
     // Act
-    const result = () =>
-      SubscribeGroupHelper(inscriptionId, group, serviceMock, eventMock);
+    const result1 = () =>
+      SubscribeGroupHelper(inscriptionId, group1, serviceMock, eventMock);
+    const result2 = () =>
+      SubscribeGroupHelper(inscriptionId, group2, serviceMock, eventMock);
+    const result3 = () =>
+      SubscribeGroupHelper(inscriptionId, group3, serviceMock, eventMock);
     // Assert
-    await expect(result).rejects.toThrow(AggregateRootException);
-    await expect(result).rejects.toThrow(expectedMessage);
+    await expect(result1).rejects.toThrow(AggregateRootException);
+    await expect(result1).rejects.toThrow(expectedMessage);
+    await expect(result2).rejects.toThrow(AggregateRootException);
+    await expect(result2).rejects.toThrow(expectedMessage);
+    await expect(result3).rejects.toThrow(AggregateRootException);
+    await expect(result3).rejects.toThrow(expectedMessage);
   });
 
   test('should return a GroupDomainEntity object and publish the event', async () => {

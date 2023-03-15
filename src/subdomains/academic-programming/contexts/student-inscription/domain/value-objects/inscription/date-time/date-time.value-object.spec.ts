@@ -35,5 +35,16 @@ describe('DateTimeValueObject', () => {
       // Assert
       expect(date.hasErrors()).toBe(expected);
     });
+
+    test('should not set error if date is less than or equal to 1 second away from current date', () => {
+      // Arrange
+      const expected = false;
+      // Act
+      mockCurrentDateTime.mockReturnValue(true);
+      const date = new DateTimeValueObject();
+      date.validateData();
+      // Assert
+      expect(date.hasErrors()).toBe(expected);
+    });
   });
 });

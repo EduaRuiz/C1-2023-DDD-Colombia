@@ -26,6 +26,7 @@
     "@nestjs/microservices": "^9.3.9",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "kafkajs": "^2.2.4",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
@@ -74,6 +75,16 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/index\\.ts$",
+      "<rootDir>/shared/sofka/*",
+      "<rootDir>/node_modules/",
+      "<rootDir>/app.module.ts",
+      "<rootDir>/main.ts",
+      "<rootDir>/subdomains/admission/*",
+      "<rootDir>/subdomains/academic-programming/contexts/academic-offer/*",
+      "<rootDir>/subdomains/academic-programming/contexts/student-inscription/infrastructure/*"
+    ],
     "moduleNameMapper": {
       "^@contexts\\/student-inscription\\/?(.*)$": "<rootDir>/subdomains/academic-programming/contexts/student-inscription/$1",
       "^@sofka\\/?(.*)$": "<rootDir>/shared/sofka/$1",

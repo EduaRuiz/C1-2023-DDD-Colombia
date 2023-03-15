@@ -35,6 +35,21 @@ describe('InscriptionAggregateRoot', () => {
     events = new Map<Topic, EventPublisherBase<any>>();
   });
 
+  it('should be defined', () => {
+    const inscriptionAggregateRoot = new InscriptionAggregateRoot({
+      classDay$: classDayDomainService,
+      events,
+    });
+    expect(inscriptionAggregateRoot).toBeDefined();
+  });
+
+  it('should be defined if no events', () => {
+    const inscriptionAggregateRoot = new InscriptionAggregateRoot({
+      classDay$: classDayDomainService,
+    });
+    expect(inscriptionAggregateRoot).toBeDefined();
+  });
+
   describe('getClassDay', () => {
     it('should return a class day', async () => {
       // Arrange

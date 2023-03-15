@@ -38,20 +38,26 @@ export class StudentDomainEntity implements IStudentDomainEntity {
   /**
    * Inscripción a la que se asocia el estudiante
    *
-   * @type {InscriptionDomainEntity}
+   * @type {InscriptionDomainEntity[]}
    * @memberof StudentDomainEntity
    */
-  inscription?: InscriptionDomainEntity;
+  inscription?: InscriptionDomainEntity[];
 
   /**
    * Crea una instancia de StudentDomainEntity.
    * @param {IStudentDomainEntity} [data] Información relacionada a la entidad
    * @memberof StudentDomainEntity
    */
-  constructor(data: IStudentDomainEntity) {
-    this.studentId = data.studentId;
-    this.fullName = data.fullName;
-    this.institutionalMail = data.institutionalMail;
-    if (data?.inscription) this.inscription = data.inscription;
+  constructor(
+    studentId: string | StudentIdValueObject,
+    fullName: string | FullNameValueObject,
+    institutionalMail: string | InstitutionalMailValueObject,
+    inscription?: InscriptionDomainEntity[],
+  ) {
+    this.studentId = studentId;
+    this.fullName = fullName;
+    this.institutionalMail = institutionalMail;
+    if (inscription)
+      this.inscription = inscription as InscriptionDomainEntity[];
   }
 }

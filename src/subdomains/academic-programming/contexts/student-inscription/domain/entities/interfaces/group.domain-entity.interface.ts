@@ -67,8 +67,8 @@ export interface IGroupDomainEntity {
   /**
    * Inscripción a la que se asocia el grupo
    *
-   * @type {InscriptionDomainEntity}
+   * @type {IInscriptionDomainEntity[]}
    * @memberof GroupDomainEntity
    */
-  inscription?: IInscriptionDomainEntity;
+  inscription?: IInscriptionDomainEntity[];
 }

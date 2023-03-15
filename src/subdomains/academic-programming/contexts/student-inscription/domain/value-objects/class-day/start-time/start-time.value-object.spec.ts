@@ -16,7 +16,6 @@ describe('StartTimeValueObject', () => {
       mockCheckIsEmpty.mockReturnValue(true);
       const startTime = new StartTimeValueObject(value);
       startTime.validateData();
-      console.log(startTime.getErrors());
       // Assert
       expect(startTime.hasErrors()).toBe(expected);
       expect(startTime.getErrors()[0]?.field).toBe(expectedField);

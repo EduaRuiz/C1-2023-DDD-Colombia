@@ -69,24 +69,41 @@ export class GroupDomainEntity implements IGroupDomainEntity {
   /**
    * Inscripción a la que se asocia el grupo
    *
-   * @type {InscriptionDomainEntity}
+   * @type {InscriptionDomainEntity[]}
    * @memberof GroupDomainEntity
    */
-  inscription?: InscriptionDomainEntity;
+  inscription?: InscriptionDomainEntity[];
 
   /**
    * Crea una instancia de GroupDomainEntity.
-   * @param {IGroupDomainEntity} [data] Información relacionada a la entidad
+   * @param {(string | GroupIdValueObject)} groupId Id del grupo
+   * @param {ClassDayDomainEntity[]} classDays Array de días de clase
+   * @param {(string | SubjectNameValueObject)} subjectName Nombre de la
+   * @param {(string | SubjectIdValueObject)} subjectId
+   * @param {(string | ProfessorNameValueObject)} professorName
+   * @param {(number | QuotaAvailableValueObject)} quoteAvailable
+   * @param {(string | GroupStateValueObject)} groupState
+   * @param {InscriptionDomainEntity[]} [inscription]
    * @memberof GroupDomainEntity
    */
-  constructor(data: IGroupDomainEntity) {
-    this.groupId = data.groupId;
-    this.classDays = data.classDays as ClassDayDomainEntity[];
-    this.subjectName = data.subjectName;
-    this.professorName = data.professorName;
-    this.quoteAvailable = data.quoteAvailable;
-    this.groupState = data.groupState;
-    if (data?.inscription)
-      this.inscription = data.inscription as InscriptionDomainEntity;
+  constructor(
+    groupId: string | GroupIdValueObject,
+    classDays: ClassDayDomainEntity[],
+    subjectName: string | SubjectNameValueObject,
+    subjectId: string | SubjectIdValueObject,
+    professorName: string | ProfessorNameValueObject,
+    quoteAvailable: number | QuotaAvailableValueObject,
+    groupState: string | GroupStateValueObject,
+    inscription?: InscriptionDomainEntity[],
+  ) {
+    this.groupId = groupId;
+    this.classDays = classDays;
+    this.subjectName = subjectName;
+    this.subjectId = subjectId;
+    this.professorName = professorName;
+    this.quoteAvailable = quoteAvailable;
+    this.groupState = groupState;
+    if (inscription)
+      this.inscription = inscription as InscriptionDomainEntity[];
   }
 }

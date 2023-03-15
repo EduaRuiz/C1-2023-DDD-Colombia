@@ -4,11 +4,13 @@ import { InscriptionAggregateRoot } from '@contexts/student-inscription/domain/a
 import { ValueObjectException } from '@sofka/exceptions';
 import { IGroupDomainService } from '@contexts/student-inscription/domain/services';
 import { GroupIdValueObject } from '@contexts/student-inscription/domain/value-objects/group';
-import { GotGroupsEventPublisher } from '../../../domain/events/publishers/got-groups.event-publisher';
 import { IGetGroupsForInscriptionCommand } from '../../../domain/interfaces/commands/get-groups-for-inscription.command';
 import { IGotGroupsForInscriptionResponse } from '../../../domain/interfaces/responses/got-groups-for-inscription.response';
 
-import { Topic } from '@contexts/student-inscription/domain/events';
+import {
+  GotGroupsEventPublisher,
+  Topic,
+} from '@contexts/student-inscription/domain/events';
 
 export class GetGroupsForInscriptionUseCase
   extends ValueObjectErrorHandler

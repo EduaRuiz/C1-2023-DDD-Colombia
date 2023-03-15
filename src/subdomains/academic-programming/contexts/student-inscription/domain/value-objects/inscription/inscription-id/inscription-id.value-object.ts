@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
 import { ValueObjectBase } from '@sofka/bases';
-import { IsUUID4 } from '@validations';
+import { IsEmpty, IsUUID4 } from '@validations';
 import { IErrorValueObject } from '@sofka/interfaces';
 
 /**
@@ -22,6 +22,14 @@ export class InscriptionIdValueObject extends ValueObjectBase<string> {
    */
   constructor(value?: string) {
     super(value ?? uuid());
+    if (IsEmpty(value)) {
+      this.setError({
+        field: 'inscriptionId',
+        message: 'InscriptionId no puede ser vacío',
+      } as IErrorValueObject);
+    } else {
+      this.validateData();
+    }
   }
 
   /**

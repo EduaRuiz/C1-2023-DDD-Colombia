@@ -53,14 +53,25 @@ export class ClassDayDomainEntity implements IClassDayDomainEntity {
 
   /**
    * Crea una instancia de ClassDayDomainEntity.
-   * @param {IClassDayDomainEntity} [data] Información relacionada a la entidad
+   *
+   * @param {(string | ClassDayIdValueObject)} classDayId Id del dia de clase
+   * @param {(string | WeekDayValueObject)} weekDay Dia de la semana
+   * @param {(number | StartTimeValueObject)} startTime Hora de inicio
+   * @param {(number | DurationValueObject)} duration Duración de la clase
+   * @param {GroupDomainEntity} [group] Grupo que relaciona el dia de clase
    * @memberof ClassDayDomainEntity
    */
-  constructor(data: IClassDayDomainEntity) {
-    this.classDayId = data.classDayId;
-    this.weekDay = data.weekDay;
-    this.startTime = data.startTime;
-    this.duration = data.duration;
-    if (data?.group) this.group = data.group as GroupDomainEntity;
+  constructor(
+    classDayId: string | ClassDayIdValueObject,
+    weekDay: string | WeekDayValueObject,
+    startTime: number | StartTimeValueObject,
+    duration: number | DurationValueObject,
+    group?: GroupDomainEntity,
+  ) {
+    this.classDayId = classDayId;
+    this.weekDay = weekDay;
+    this.startTime = startTime;
+    this.duration = duration;
+    if (group) this.group = group;
   }
 }

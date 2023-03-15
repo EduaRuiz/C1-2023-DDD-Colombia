@@ -1,18 +1,19 @@
-import { GroupDomainEntity } from '../../entities';
 import { EventPublisherBase } from '@sofka/bases';
+import { InscriptionDomainEntity } from '../../../entities';
+import { Topic } from '../enums/topic.enum';
 
 /**
- * Publisher encargado de informar la inscripción a un Group
+ * Publisher encargado de informar la generación de una nueva Inscription
  * Clase abstracta que establece el canal de emisión y publica el evento
  *
  * @export
  * @abstract
- * @class SubscribedGroupEventPublisher
+ * @class CommittedInscriptionEventPublisher
  * @extends {EventPublisherBase<Response>}
  * @template Response
  */
-export abstract class SubscribedGroupEventPublisher<
-  Response = GroupDomainEntity,
+export abstract class CommittedInscriptionEventPublisher<
+  Response = InscriptionDomainEntity,
 > extends EventPublisherBase<Response> {
   /**
    * Método de publicación del evento
@@ -20,12 +21,9 @@ export abstract class SubscribedGroupEventPublisher<
    *
    * @template Result
    * @return {Promise<Result>} Respuesta del Broker luego de la publicación
-   * @memberof SubscribedGroupEventPublisher
+   * @memberof CommittedInscriptionEventPublisher
    */
   publish<Result = any>(): Promise<Result> {
-    return this.emit(
-      'student-inscription.subscribed-group',
-      JSON.stringify(this.response),
-    );
+    return this.emit(Topic.CommittedInscription, JSON.stringify(this.response));
   }
 }

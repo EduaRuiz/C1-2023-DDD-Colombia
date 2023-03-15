@@ -38,20 +38,26 @@ export class SemesterDomainEntity implements ISemesterDomainEntity {
   /**
    * Inscripción a la que se asocia el semestre
    *
-   * @type {InscriptionDomainEntity}
+   * @type {InscriptionDomainEntity[]}
    * @memberof SemesterDomainEntity
    */
-  inscription?: InscriptionDomainEntity;
+  inscription?: InscriptionDomainEntity[];
 
   /**
    * Crea una instancia de SemesterDomainEntity.
    * @param {ISemesterDomainEntity} [data] Información relacionada a la entidad
    * @memberof SemesterDomainEntity
    */
-  constructor(data: ISemesterDomainEntity) {
-    this.semesterId = data.semesterId;
-    this.year = data.year;
-    this.part = data.part;
-    if (data?.inscription) this.inscription = data.inscription;
+  constructor(
+    semesterId: string | SemesterIdValueObject,
+    year: Date | YearValueObject,
+    part: number | PartValueObject,
+    inscription?: InscriptionDomainEntity[],
+  ) {
+    this.semesterId = semesterId;
+    this.year = year;
+    this.part = part;
+    if (inscription)
+      this.inscription = inscription as InscriptionDomainEntity[];
   }
 }

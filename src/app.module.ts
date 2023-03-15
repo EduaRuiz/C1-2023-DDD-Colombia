@@ -1,3 +1,4 @@
+import { StudentInscriptionModule } from '@contexts/student-inscription/infrastructure';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'node:path';
@@ -12,6 +13,7 @@ import { join } from 'node:path';
         `.env.${process.env.SCOPE?.trimEnd()}`,
       ),
     }),
+    StudentInscriptionModule,
   ],
   controllers: [],
   providers: [],

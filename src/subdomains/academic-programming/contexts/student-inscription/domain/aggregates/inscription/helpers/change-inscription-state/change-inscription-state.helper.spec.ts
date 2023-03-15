@@ -68,10 +68,10 @@ describe('ChangeInscriptionStateHelper', () => {
   describe('when the current inscription is cancelled', () => {
     it('should throw an AggregateRootException', async () => {
       // Arrange
-      const cancelledInscription = new InscriptionDomainEntity({
+      const cancelledInscription = {
         ...currentInscription,
         inscriptionState: 'cancelled',
-      });
+      } as InscriptionDomainEntity;
       const expectedMessage =
         'No se puede actualizar el estado de una inscripción completada o cancelada';
       mockService.getInscription = jest
@@ -89,10 +89,10 @@ describe('ChangeInscriptionStateHelper', () => {
   describe('when the current inscription is completed', () => {
     it('should throw an AggregateRootException', async () => {
       // Arrange
-      const completedInscription = new InscriptionDomainEntity({
+      const completedInscription = {
         ...currentInscription,
         inscriptionState: 'completed',
-      });
+      } as InscriptionDomainEntity;
       const expectedMessage =
         'No se puede actualizar el estado de una inscripción completada o cancelada';
       mockService.getInscription = jest

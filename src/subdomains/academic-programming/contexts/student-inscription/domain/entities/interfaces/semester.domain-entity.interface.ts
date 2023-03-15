@@ -36,8 +36,8 @@ export interface ISemesterDomainEntity {
   /**
    * Inscripción a la que se asocia el semestre
    *
-   * @type {InscriptionDomainEntity}
+   * @type {InscriptionDomainEntity[]}
    * @memberof SemesterDomainEntity
    */
-  inscription?: IInscriptionDomainEntity;
+  inscription?: IInscriptionDomainEntity[];
 }

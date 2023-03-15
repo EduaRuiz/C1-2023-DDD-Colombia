@@ -36,8 +36,8 @@ export class IStudentDomainEntity {
   /**
    * Inscripción a la que se asocia el estudiante
    *
-   * @type {InscriptionDomainEntity}
+   * @type {InscriptionDomainEntity[]}
    * @memberof StudentDomainEntity
    */
-  inscription?: IInscriptionDomainEntity;
+  inscription?: IInscriptionDomainEntity[];
 }

@@ -1,9 +1,10 @@
-import { InscriptionDomainEntity } from '../../entities';
+import { InscriptionDomainEntity } from '../../../entities';
 import { EventPublisherBase } from '@sofka/bases/event-publisher.base';
+import { Topic } from '../enums/topic.enum';
 
 /**
- * Publisher encargado de informar la obtenciónde informaciónde un Inscription
- * Clase absctracta que establece el canal de emision y publica el evento
+ * Publisher encargado de informar la obtención de información de un Inscription
+ * Clase abstracta que establece el canal de emisión y publica el evento
  *
  * @export
  * @abstract
@@ -23,9 +24,6 @@ export abstract class GotInscriptionInfoEventPublisher<
    * @memberof GotInscriptionInfoEventPublisher
    */
   publish<Result = any>(): Promise<Result> {
-    return this.emit(
-      'student-inscription.got-inscription-info',
-      JSON.stringify(this.response),
-    );
+    return this.emit(Topic.GotInscriptionInfo, JSON.stringify(this.response));
   }
 }

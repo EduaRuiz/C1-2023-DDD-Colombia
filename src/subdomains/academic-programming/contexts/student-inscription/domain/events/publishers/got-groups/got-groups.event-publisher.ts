@@ -1,9 +1,10 @@
-import { GroupDomainEntity } from '../../entities';
+import { GroupDomainEntity } from '../../../entities';
 import { EventPublisherBase } from '@sofka/bases/event-publisher.base';
+import { Topic } from '../enums/topic.enum';
 
 /**
- * Publisher encargado de informar la obtenciónde informaciónde una lista de Groups
- * Clase absctracta que establece el canal de emision y publica el evento
+ * Publisher encargado de informar la obtención de información de una lista de Groups
+ * Clase abstracta que establece el canal de emisión y publica el evento
  *
  * @export
  * @abstract
@@ -23,9 +24,6 @@ export abstract class GotGroupsEventPublisher<
    * @memberof GotGroupsEventPublisher
    */
   publish<Result = any>(): Promise<Result> {
-    return this.emit(
-      'student-inscription.got-groups',
-      JSON.stringify(this.response),
-    );
+    return this.emit(Topic.GotGroups, JSON.stringify(this.response));
   }
 }

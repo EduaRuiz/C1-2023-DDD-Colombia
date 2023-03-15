@@ -15,4 +15,4 @@ import { ObjectValueExceptionFilter } from './utils/exception-filters/object-val
   ],
   exports: [],
 })
-export class UsuariosModule {}
+export class StudentInscriptionModule {}

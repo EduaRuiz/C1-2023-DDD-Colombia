@@ -64,7 +64,6 @@ const CommitInscriptionHelper = async (
           const inscriptionSaved = await inscriptionService.commitInscription(
             inscription,
           );
-          console.log('===============', inscriptionSaved);
           const inscriptionId = inscriptionSaved.inscriptionId;
           if (!inscriptionId) {
             throw new AggregateRootException('Id inscripcion indefinido');
