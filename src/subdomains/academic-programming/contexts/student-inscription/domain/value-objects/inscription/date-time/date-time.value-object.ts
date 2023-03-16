@@ -7,18 +7,9 @@ import { IErrorValueObject } from '@sofka/interfaces';
  *
  * @export
  * @class DateTimeValueObject
- * @implements {(ValueObjectBase<number | Date>)}
+ * @implements {(ValueObjectBase<Date>)}
  */
 export class DateTimeValueObject extends ValueObjectBase<Date> {
-  /**
-   *Variable usada para evaluar DateTimeValueObject
-   *
-   * @private
-   * @type {Date}
-   * @memberof DateTimeValueObject
-   */
-  private now: Date;
-
   /**
    * Crea una instancia de DateTimeValueObject.
    * Si no se envía el valor asigna uno por defecto
@@ -29,7 +20,6 @@ export class DateTimeValueObject extends ValueObjectBase<Date> {
    */
   constructor(value?: Date) {
     super(value ?? new Date());
-    this.now = new Date();
   }
 
   /**
@@ -49,7 +39,7 @@ export class DateTimeValueObject extends ValueObjectBase<Date> {
    * @memberof DateTimeValueObject
    */
   private validateCurrentDate(): void {
-    if (this.value && !CurrentDateTime(this.value, this.now, 1)) {
+    if (this.value && !CurrentDateTime(this.value, new Date(), 1)) {
       this.setError({
         field: 'dateTime',
         message:

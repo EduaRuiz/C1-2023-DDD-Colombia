@@ -1,6 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import {
+  ClassDayPostgresEntity,
+  GroupPostgresEntity,
+  InscriptionPostgresEntity,
+  SemesterPostgresEntity,
+  StudentPostgresEntity,
+} from '../entities';
 
 @Injectable()
 export class TypeOrmPostgresConfigService implements TypeOrmOptionsFactory {
@@ -14,7 +21,13 @@ export class TypeOrmPostgresConfigService implements TypeOrmOptionsFactory {
       username: this.configService.get<string>('DB_USER'),
       password: this.configService.get<string>('DB_PASSWORD'),
       database: this.configService.get<string>('DB_NAME'),
-      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+      entities: [
+        InscriptionPostgresEntity,
+        GroupPostgresEntity,
+        StudentPostgresEntity,
+        SemesterPostgresEntity,
+        ClassDayPostgresEntity,
+      ],
       synchronize: true,
       logging: true,
     };

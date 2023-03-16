@@ -72,7 +72,6 @@ export class AddGroupUseCase
     if (inscriptionId.hasErrors()) this.setErrors(inscriptionId.getErrors());
     if (groupId.hasErrors()) this.setErrors(groupId.getErrors());
     if (this.hasErrors()) {
-      console.log(this.getErrors());
       throw new ValueObjectException(
         'Existen algunos errores en el comando',
         this.getErrors(),

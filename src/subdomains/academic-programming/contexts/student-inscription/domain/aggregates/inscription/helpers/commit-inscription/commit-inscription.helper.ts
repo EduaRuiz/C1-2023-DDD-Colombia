@@ -49,12 +49,14 @@ const CommitInscriptionHelper = async (
             await inscriptionService.getAllInscriptionsByStudent(
               inscription.student.studentId.valueOf(),
             );
+          console.log('*******************************', inscription.groups);
+
           const semesterExist = currentInscriptions.find(
             (totalInscriptions) =>
               totalInscriptions.semester.semesterId.valueOf() ===
               inscription.semester.semesterId.valueOf(),
           );
-          if (semesterExist && semesterExist.inscriptionState !== 'cancelled') {
+          if (semesterExist && semesterExist.inscriptionState != 'cancelled') {
             throw new AggregateRootException(
               'El estudiante ya cuenta con una inscripción activa para el semestre informado',
             );

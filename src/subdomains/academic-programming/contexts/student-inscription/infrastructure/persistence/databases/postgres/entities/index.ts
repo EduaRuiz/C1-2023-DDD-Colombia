@@ -1,3 +1,4 @@
+export * from './class-day-postgres.entity';
 export * from './group-postgres.entity';
 export * from './inscription-postgres.entity';
 export * from './semester-postgres.entity';

@@ -51,29 +51,30 @@ export const canSuscribeGroup = (
   if (newGroup.quoteAvailable.valueOf() === 0) {
     throw new AggregateRootException('No se puede inscribir grupos sin cupos');
   }
-  if (newGroup.groupState.valueOf() !== 'Open') {
+  if (newGroup.groupState.valueOf() !== 'open') {
     throw new AggregateRootException(
       'No se puede inscribir grupos no abiertos',
     );
   }
-
-  currentGroups.map((currentGroup) => {
-    if (currentGroup.groupId === newGroup.groupId) {
-      throw new AggregateRootException(
-        'No se puede inscribir grupos ya inscritos',
-      );
-    }
-    if (currentGroup.subjectId === newGroup.subjectId) {
-      throw new AggregateRootException(
-        'No se pueden inscribir grupos con la misma materia ya inscritas en otros grupos',
-      );
-    }
-    if (!scheduleAvailable(newGroup, currentGroup)) {
-      throw new AggregateRootException(
-        'No se puede inscribir grupos que se cruzan en horarios con otros grupos ya inscritos',
-      );
-    }
-  });
+  if (currentGroups.length != 0) {
+    currentGroups.map((currentGroup) => {
+      if (currentGroup.groupId === newGroup.groupId) {
+        throw new AggregateRootException(
+          'No se puede inscribir grupos ya inscritos',
+        );
+      }
+      if (currentGroup.subjectId === newGroup.subjectId) {
+        throw new AggregateRootException(
+          'No se pueden inscribir grupos con la misma materia ya inscritas en otros grupos',
+        );
+      }
+      if (!scheduleAvailable(newGroup, currentGroup)) {
+        throw new AggregateRootException(
+          'No se puede inscribir grupos que se cruzan en horarios con otros grupos ya inscritos',
+        );
+      }
+    });
+  }
 };
 
 /**
