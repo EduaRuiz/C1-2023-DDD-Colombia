@@ -5,6 +5,13 @@ import { lastValueFrom } from 'rxjs';
 import { GroupEntity } from '../../persistence';
 import { GotGroupsEventPublisher } from '@contexts/student-inscription/domain/events/publishers';
 
+/**
+ * Publica la obtención de un listado de grupos
+ *
+ * @export
+ * @class GotGroupsPublisher
+ * @extends {GotGroupsEventPublisher<GroupEntity[]>}
+ */
 @Injectable()
 export class GotGroupsPublisher extends GotGroupsEventPublisher<GroupEntity[]> {
   constructor(
@@ -12,6 +19,16 @@ export class GotGroupsPublisher extends GotGroupsEventPublisher<GroupEntity[]> {
   ) {
     super(proxy as unknown as IEventPublisher);
   }
+  /**
+   * Emite el mensaje en el broker
+   *
+   * @template Result Resultado
+   * @template Input Entrada
+   * @param {*} pattern Patron
+   * @param {Input} data Información publicada
+   * @return {Promise<Result>} Resultado
+   * @memberof ChangedInscriptionStatePublisher
+   */
   emit<Result = any, Input = GroupEntity[]>(
     pattern: any,
     data: Input,

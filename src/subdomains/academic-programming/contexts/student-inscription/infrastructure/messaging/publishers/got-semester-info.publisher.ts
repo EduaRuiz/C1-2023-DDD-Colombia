@@ -5,6 +5,13 @@ import { IEventPublisher } from '@sofka/interfaces';
 import { lastValueFrom } from 'rxjs';
 import { SemesterEntity } from '../../persistence/entities';
 
+/**
+ * Publica la obtención de un semestre
+ *
+ * @export
+ * @class GotSemesterInfoPublisher
+ * @extends {GotSemesterInfoEventPublisher<SemesterEntity>}
+ */
 @Injectable()
 export class GotSemesterInfoPublisher extends GotSemesterInfoEventPublisher<SemesterEntity> {
   constructor(
@@ -12,6 +19,16 @@ export class GotSemesterInfoPublisher extends GotSemesterInfoEventPublisher<Seme
   ) {
     super(proxy as unknown as IEventPublisher);
   }
+  /**
+   * Emite el mensaje en el broker
+   *
+   * @template Result Resultado
+   * @template Input Entrada
+   * @param {*} pattern Patron
+   * @param {Input} data Información publicada
+   * @return {Promise<Result>} Resultado
+   * @memberof ChangedInscriptionStatePublisher
+   */
   emit<Result = any, Input = SemesterEntity>(
     pattern: any,
     data: Input,

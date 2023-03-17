@@ -2,18 +2,20 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { IEventPublisher } from '@sofka/interfaces';
 import { lastValueFrom } from 'rxjs';
-import { InscriptionEntity } from '../../persistence/entities';
-import { GotInscriptionInfoEventPublisher } from '../../../domain/events/publishers/got-inscription-info/got-inscription-info.event-publisher';
+import { InscriptionEntity } from '../../persistence';
+import { GotInscriptionsEventPublisher } from '@contexts/student-inscription/domain/events/publishers';
 
 /**
- * Publica la obtención de la información de una inscripcion
+ * Publicador de la obtención de un listado de inscripciones
  *
  * @export
- * @class GotInscriptionInfoPublisher
- * @extends {GotInscriptionInfoEventPublisher<InscriptionEntity>}
+ * @class GotInscriptionsPublisher
+ * @extends {GotInscriptionsEventPublisher<InscriptionEntity[]>}
  */
 @Injectable()
-export class GotInscriptionInfoPublisher extends GotInscriptionInfoEventPublisher<InscriptionEntity> {
+export class GotInscriptionsPublisher extends GotInscriptionsEventPublisher<
+  InscriptionEntity[]
+> {
   constructor(
     @Inject('INSCRIPTION_CONTEXT') private readonly proxy: ClientProxy,
   ) {
@@ -29,7 +31,7 @@ export class GotInscriptionInfoPublisher extends GotInscriptionInfoEventPublishe
    * @return {Promise<Result>} Resultado
    * @memberof ChangedInscriptionStatePublisher
    */
-  emit<Result = any, Input = InscriptionEntity>(
+  emit<Result = any, Input = InscriptionEntity[]>(
     pattern: any,
     data: Input,
   ): Promise<Result> {

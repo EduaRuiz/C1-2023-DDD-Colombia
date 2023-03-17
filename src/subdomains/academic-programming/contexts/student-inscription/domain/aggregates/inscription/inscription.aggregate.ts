@@ -352,6 +352,7 @@ export class InscriptionAggregateRoot
       this.group$,
       this.events.get(Topic.CommittedInscription),
       this.events.get(Topic.SubscribedGroup),
+      this.events.get(Topic.GotInscriptions),
     );
   }
 

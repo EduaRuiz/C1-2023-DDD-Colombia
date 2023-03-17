@@ -6,14 +6,36 @@ import {
 import { GroupPostgresEntity } from '../entities';
 import { IGroupDomainService } from '@contexts/student-inscription/domain/services';
 
+/**
+ * Servicio de grupos
+ *
+ * @export
+ * @class GroupPostgresService
+ * @implements {IGroupDomainService<GroupPostgresEntity>}
+ */
 @Injectable()
 export class GroupPostgresService
   implements IGroupDomainService<GroupPostgresEntity>
 {
+  /**
+   * Crea una instancia de GroupPostgresService.
+   *
+   * @param {GroupPostgresRepository} groupPostgresRepository Repositorio de grupos
+   * @param {InscriptionPostgresRepository} inscriptionPostgresRepository Repositorio de inscripciones
+   * @memberof GroupPostgresService
+   */
   constructor(
     private readonly groupPostgresRepository: GroupPostgresRepository,
     private readonly inscriptionPostgresRepository: InscriptionPostgresRepository,
   ) {}
+
+  /**
+   * Retorna grupo
+   *
+   * @param {string} groupId Id grupo
+   * @return {Promise<GroupPostgresEntity>} Grupo
+   * @memberof GroupPostgresService
+   */
   getGroup(groupId: string): Promise<GroupPostgresEntity> {
     return this.groupPostgresRepository.findOneById(groupId);
   }
@@ -26,6 +48,14 @@ export class GroupPostgresService
     return inscription.groups;
   }
 
+  /**
+   * Retorna todos los grupos según filtro
+   *
+   * @param {string} subjectId Id materia
+   * @param {string} groupState Estado del grupo
+   * @return {Promise<GroupPostgresEntity[]>} Lista de grupos
+   * @memberof GroupPostgresService
+   */
   async getAllGroups(
     subjectId: string,
     groupState: string,
@@ -40,6 +70,14 @@ export class GroupPostgresService
     return response;
   }
 
+  /**
+   * Registra grupo a inscripcion
+   *
+   * @param {string} inscriptionId Id inscripcion
+   * @param {GroupPostgresEntity} group Grupo
+   * @return {Promise<GroupPostgresEntity>} Grupo
+   * @memberof GroupPostgresService
+   */
   async subscribeGroup(
     inscriptionId: string,
     group: GroupPostgresEntity,
@@ -52,6 +90,14 @@ export class GroupPostgresService
     return group;
   }
 
+  /**
+   * Dada de baja de un grupo en una inscripcion
+   *
+   * @param {string} inscriptionId Id inscripcion
+   * @param {string} groupId Id grupo
+   * @return {Promise<GroupPostgresEntity>} Grupo
+   * @memberof GroupPostgresService
+   */
   async unsubscribeGroup(
     inscriptionId: string,
     groupId: string,
@@ -67,7 +113,14 @@ export class GroupPostgresService
     return this.groupPostgresRepository.findOneById(groupId);
   }
 
-  createGroup(group: GroupPostgresEntity) {
+  /**
+   * Crea grupo
+   *
+   * @param {GroupPostgresEntity} group Grupo
+   * @return {Promise<GroupPostgresEntity>} Grupo creado
+   * @memberof GroupPostgresService
+   */
+  createGroup(group: GroupPostgresEntity): Promise<GroupPostgresEntity> {
     return this.groupPostgresRepository.create(group);
   }
 }

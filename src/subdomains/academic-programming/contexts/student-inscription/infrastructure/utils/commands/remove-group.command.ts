@@ -1,19 +1,19 @@
-import { IAddGroupCommand } from '@contexts/student-inscription/domain/interfaces';
+import { IRemoveGroupCommand } from '@contexts/student-inscription/domain/interfaces';
 import { IsDefined, IsString } from 'class-validator';
 
 /**
  * Comando para agregar grupos
  *
  * @export
- * @class AddGroupCommand
- * @implements {IAddGroupCommand}
+ * @class RemoveGroupCommand
+ * @implements {IRemoveGroupCommand}
  */
-export class AddGroupCommand implements IAddGroupCommand {
+export class RemoveGroupCommand implements IRemoveGroupCommand {
   /**
    *Id inscripcion
    *
    * @type {string}
-   * @memberof AddGroupCommand
+   * @memberof RemoveGroupCommand
    */
   @IsDefined()
   @IsString({ message: 'Id de inscripcion obligatorio' })
@@ -22,7 +22,7 @@ export class AddGroupCommand implements IAddGroupCommand {
    *Id grupo
    *
    * @type {string}
-   * @memberof AddGroupCommand
+   * @memberof RemoveGroupCommand
    */
   @IsDefined()
   @IsString({ message: 'Id de grupo obligatorio' })

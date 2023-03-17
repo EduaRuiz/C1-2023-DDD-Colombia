@@ -395,6 +395,10 @@ describe('InscriptionAggregateRoot', () => {
         Topic.SubscribedGroup,
         {} as EventPublisherBase<GroupDomainEntity>,
       );
+      events.set(
+        Topic.GotInscriptions,
+        {} as EventPublisherBase<GroupDomainEntity>,
+      );
       jest.spyOn(helpers, 'CommitInscriptionHelper').mockResolvedValue(entity);
       // Act
       const inscriptionAggregateRoot = new InscriptionAggregateRoot({
@@ -411,6 +415,7 @@ describe('InscriptionAggregateRoot', () => {
         groupDomainService,
         events.get(Topic.CommittedInscription),
         events.get(Topic.SubscribedGroup),
+        events.get(Topic.GotInscriptions),
       );
     });
   });

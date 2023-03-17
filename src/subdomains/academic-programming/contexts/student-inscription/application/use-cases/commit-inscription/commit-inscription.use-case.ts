@@ -24,6 +24,7 @@ import {
 import {
   CommittedInscriptionEventPublisher,
   GotGroupInfoEventPublisher,
+  GotInscriptionsEventPublisher,
   GotSemesterInfoEventPublisher,
   GotStudentInfoEventPublisher,
   SubscribedGroupEventPublisher,
@@ -70,6 +71,7 @@ export class CommitInscriptionUseCase
     gotStudentInfoEventPublisher: GotStudentInfoEventPublisher,
     gotSemesterInfoEventPublisher: GotSemesterInfoEventPublisher,
     subscribedGroupEventPublisher: SubscribedGroupEventPublisher,
+    gotInscriptionsEventPublisher: GotInscriptionsEventPublisher,
   ) {
     super();
     const events = new Map();
@@ -78,6 +80,7 @@ export class CommitInscriptionUseCase
     events.set(Topic.GotStudentInfo, gotStudentInfoEventPublisher);
     events.set(Topic.GotSemesterInfo, gotSemesterInfoEventPublisher);
     events.set(Topic.SubscribedGroup, subscribedGroupEventPublisher);
+    events.set(Topic.GotInscriptions, gotInscriptionsEventPublisher);
     this.inscriptionAggregateRoot = new InscriptionAggregateRoot({
       inscription$,
       group$,

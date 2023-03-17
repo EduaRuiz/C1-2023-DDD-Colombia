@@ -6,6 +6,12 @@ import {
   Payload,
 } from '@nestjs/microservices';
 
+/**
+ * Suscriptor para el contexto de inscripciones
+ *
+ * @export
+ * @class AcademicOfferController
+ */
 @Controller()
 export class AcademicOfferController {
   @EventPattern('student-inscription.committed-inscription')
@@ -13,16 +19,37 @@ export class AcademicOfferController {
     console.log(data, context);
   }
 
+  /**
+   * Imprime en consola la cola del tópico indicado
+   *
+   * @param {*} data Información
+   * @param {KafkaContext} context Contexto vigilado
+   * @memberof AcademicOfferController
+   */
   @EventPattern('student-inscription.unsubscribed-group')
   unsubscribedGroup(@Payload() data: any, @Ctx() context: KafkaContext) {
     console.log(data, context);
   }
 
+  /**
+   * Imprime en consola la cola del tópico indicado
+   *
+   * @param {*} data Información
+   * @param {KafkaContext} context Contexto vigilado
+   * @memberof AcademicOfferController
+   */
   @EventPattern('student-inscription.subscribed-group')
   subscribedGroup(@Payload() data: any, @Ctx() context: KafkaContext) {
     console.log(data, context);
   }
 
+  /**
+   * Valida si la solicitud se encuentre en la lista
+   *
+   * @param {string} subjectId Id materia
+   * @return {boolean} Existe?
+   * @memberof AcademicOfferController
+   */
   @Get('subject-id-exist/:id')
   subjectIdExist(@Param('id') subjectId: string): boolean {
     const subjectIds = [

@@ -7,13 +7,38 @@ import {
   IsString,
 } from 'class-validator';
 
+/**
+ * Comando para crear inscripcion
+ *
+ * @export
+ * @class CommitInscriptionCommand
+ * @implements {ICommitInscriptionCommand}
+ */
 export class CommitInscriptionCommand implements ICommitInscriptionCommand {
+  /**
+   * Id estudiante
+   *
+   * @type {string}
+   * @memberof CommitInscriptionCommand
+   */
   @IsDefined()
   @IsString({ message: 'Id de estudiante obligatorio' })
   studentId: string;
+  /**
+   * Id semestre
+   *
+   * @type {string}
+   * @memberof CommitInscriptionCommand
+   */
   @IsDefined()
   @IsString({ message: 'Id de semestre obligatorio' })
   semesterId: string;
+  /**
+   * Listado de ids de grupos
+   *
+   * @type {string[]}
+   * @memberof CommitInscriptionCommand
+   */
   @IsDefined()
   @IsArray({ message: 'groupsId necesario' })
   @ArrayMinSize(1)

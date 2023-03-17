@@ -6,6 +6,7 @@ import {
   GotGroupInfoPublisher,
   GotGroupsPublisher,
   GotInscriptionInfoPublisher,
+  GotInscriptionsPublisher,
   GotSemesterInfoPublisher,
   GotStudentInfoPublisher,
   SubscribedGroupPublisher,
@@ -45,6 +46,7 @@ import {
     GotGroupsPublisher,
     UnsubscribedGroupPublisher,
     ChangedInscriptionStatePublisher,
+    GotInscriptionsPublisher,
   ],
   exports: [
     CommittedInscriptionPublisher,
@@ -56,6 +58,7 @@ import {
     GotGroupsPublisher,
     UnsubscribedGroupPublisher,
     ChangedInscriptionStatePublisher,
+    GotInscriptionsPublisher,
   ],
 })
 export class MessagingModule {}

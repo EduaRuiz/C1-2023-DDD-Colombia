@@ -60,6 +60,7 @@ export class AddGroupUseCase
       events,
     });
   }
+
   /**
    * Método que ejecuta el proceso del caso de uso
    *

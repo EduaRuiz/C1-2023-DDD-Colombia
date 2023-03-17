@@ -15,6 +15,7 @@ import {
   GotGroupInfoEventPublisher,
   GotStudentInfoEventPublisher,
   GotSemesterInfoEventPublisher,
+  GotInscriptionsEventPublisher,
 } from '@contexts/student-inscription/domain/events';
 import { InscriptionAggregateRoot } from '@contexts/student-inscription/domain/aggregates';
 import { ValueObjectException } from '@sofka/exceptions';
@@ -33,6 +34,7 @@ describe('CommitInscriptionUseCase', () => {
   let gotStudentInfoEventPublisher: GotStudentInfoEventPublisher;
   let gotSemesterInfoEventPublisher: GotSemesterInfoEventPublisher;
   let subscribedGroupEventPublisher: SubscribedGroupEventPublisher;
+  let gotInscriptionsEventPublisher: GotInscriptionsEventPublisher;
   let inscriptionAggregateRootMock: InscriptionAggregateRoot;
   beforeEach(() => {
     groupService = {
@@ -62,6 +64,9 @@ describe('CommitInscriptionUseCase', () => {
     subscribedGroupEventPublisher = {
       publish: jest.fn(),
     } as unknown as SubscribedGroupEventPublisher;
+    gotInscriptionsEventPublisher = {
+      publish: jest.fn(),
+    } as unknown as GotInscriptionsEventPublisher;
     const studentId = 'ee896699-6ab1-4fb7-bfce-9c4715ed7488';
     const semesterId = 'ee896699-6ab1-4fb7-bfce-9c4715ed7488';
     inscriptionAggregateRootMock = {
@@ -81,6 +86,7 @@ describe('CommitInscriptionUseCase', () => {
       gotStudentInfoEventPublisher,
       gotSemesterInfoEventPublisher,
       subscribedGroupEventPublisher,
+      gotInscriptionsEventPublisher,
     );
   });
 

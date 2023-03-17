@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import * as fs from 'fs';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import {
   AddGroupCommand,
   CommitInscriptionCommand,
   GetGroupInfoCommand,
   GetGroupsForInscriptionCommand,
   GetInscriptionInfoCommand,
+  RemoveGroupCommand,
   UpdateInscriptionStateCommand,
 } from '../utils/commands';
 import {
@@ -29,22 +29,47 @@ import {
   GotGroupInfoPublisher,
   GotGroupsPublisher,
   GotInscriptionInfoPublisher,
+  GotInscriptionsPublisher,
   GotSemesterInfoPublisher,
   GotStudentInfoPublisher,
   SubscribedGroupPublisher,
   UnsubscribedGroupPublisher,
 } from '../messaging/publishers';
-import {
-  GroupPostgresEntity,
-  InscriptionPostgresEntity,
-  SemesterPostgresEntity,
-  StudentPostgresEntity,
-} from '../persistence/databases/postgres/entities';
+import { GroupPostgresEntity } from '../persistence/databases/postgres/entities';
 import { SubjectIdExistService } from '../utils/services';
+import { JwtService } from '@nestjs/jwt';
+import { AuthGuard } from '@nestjs/passport';
 
+/**
+ * Controlador principal del contexto
+ *
+ * @export
+ * @class StudentInscriptionController
+ */
 @Controller('student-inscription')
 export class StudentInscriptionController {
+  /**
+   * Crea una instancia de StudentInscriptionController.
+   * @param {JwtService} jwtService Servicio para el TWT
+   * @param {SubjectIdExistService} subjectIdExistService Servicio de materias
+   * @param {InscriptionService} inscriptionService Servicio inscripciones
+   * @param {GroupService} groupService Servicio grupos
+   * @param {StudentService} studentService Servicio estudiantes
+   * @param {SemesterService} semesterService Servicio semestres
+   * @param {CommittedInscriptionPublisher} committedInscriptionPublisher Publicador de creación de inscripcion
+   * @param {GotInscriptionInfoPublisher} gotInscriptionInfoPublisher Publicador al traer inscripcion
+   * @param {GotGroupInfoPublisher} gotGroupInfoPublisher Publicador al traer grupo
+   * @param {GotStudentInfoPublisher} gotStudentInfoPublisher Publicador al traer estudiante
+   * @param {GotSemesterInfoPublisher} gotSemesterInfoPublisher Publicador al traer semestre
+   * @param {SubscribedGroupPublisher} subscribedGroupPublisher Publicador al agregar grupo
+   * @param {UnsubscribedGroupPublisher} unsubscribedGroupPublisher Publicador al quitar grupo
+   * @param {ChangedInscriptionStatePublisher} changedInscriptionStatePublisher Publicador al cambiar estado de inscripcion
+   * @param {GotGroupsPublisher} gotGroupsPublisher Publicador al traer grupos
+   * @param {GotInscriptionsPublisher} gotInscriptionsPublisher Publicador al traer inscripciones
+   * @memberof StudentInscriptionController
+   */
   constructor(
+    private readonly jwtService: JwtService,
     private readonly subjectIdExistService: SubjectIdExistService,
     private readonly inscriptionService: InscriptionService,
     private readonly groupService: GroupService,
@@ -59,9 +84,18 @@ export class StudentInscriptionController {
     private readonly unsubscribedGroupPublisher: UnsubscribedGroupPublisher,
     private readonly changedInscriptionStatePublisher: ChangedInscriptionStatePublisher,
     private readonly gotGroupsPublisher: GotGroupsPublisher,
+    private readonly gotInscriptionsPublisher: GotInscriptionsPublisher,
   ) {}
 
+  /**
+   * Crea una inscripcion
+   *
+   * @param {CommitInscriptionCommand} command Datos para el registro
+   * @return {Promise<JSON>} Respuesta
+   * @memberof StudentInscriptionController
+   */
   @Post('inscription/commit')
+  @UseGuards(AuthGuard())
   async commitInscription(
     @Body() command: CommitInscriptionCommand,
   ): Promise<JSON> {
@@ -75,11 +109,20 @@ export class StudentInscriptionController {
       this.gotStudentInfoPublisher,
       this.gotSemesterInfoPublisher,
       this.subscribedGroupPublisher,
+      this.gotInscriptionsPublisher,
     );
     return JSON.parse(JSON.stringify(await useCase.execute(command)));
   }
 
+  /**
+   * Trae información de una inscripcion
+   *
+   * @param {string} inscriptionId Id de la inscripcion
+   * @return {Promise<JSON>} Respuesta
+   * @memberof StudentInscriptionController
+   */
   @Get('inscription/info/:id')
+  @UseGuards(AuthGuard())
   async getInscriptionInfo(@Param('id') inscriptionId: string): Promise<JSON> {
     const command: GetInscriptionInfoCommand = { inscriptionId };
     const useCase = new GetInscriptionInfoUseCase(
@@ -89,7 +132,15 @@ export class StudentInscriptionController {
     return JSON.parse(JSON.stringify(await useCase.execute(command)));
   }
 
+  /**
+   * Agrega grupo a inscripcion
+   *
+   * @param {AddGroupCommand} command Datos necesarios para inscripcion id grupo y id inscripcion
+   * @return {Promise<JSON>} Respuesta de grupo agregado
+   * @memberof StudentInscriptionController
+   */
   @Post('inscription/add-group')
+  @UseGuards(AuthGuard())
   async addGroup(@Body() command: AddGroupCommand): Promise<JSON> {
     const useCase = new AddGroupUseCase(
       this.groupService,
@@ -99,7 +150,15 @@ export class StudentInscriptionController {
     return JSON.parse(JSON.stringify(await useCase.execute(command)));
   }
 
+  /**
+   * Trae información de grupo
+   *
+   * @param {string} groupId Id de grupo
+   * @return {Promise<JSON>} Respuesta de grupo
+   * @memberof StudentInscriptionController
+   */
   @Get('group/info/:id')
+  @UseGuards(AuthGuard())
   async getGroupInfo(@Param('id') groupId: string): Promise<JSON> {
     const command: GetGroupInfoCommand = { groupId };
     const useCase = new GetGroupInfoUseCase(
@@ -109,7 +168,15 @@ export class StudentInscriptionController {
     return JSON.parse(JSON.stringify(await useCase.execute(command)));
   }
 
+  /**
+   * Retorna listado de grupos para inscripcion
+   *
+   * @param {GetGroupsForInscriptionCommand} command Id de materia y estado del grupo
+   * @return {Promise<JSON>} Lista de grupos
+   * @memberof StudentInscriptionController
+   */
   @Post('group/for-inscription')
+  @UseGuards(AuthGuard())
   async getGroupsForInscription(
     @Body() command: GetGroupsForInscriptionCommand,
   ): Promise<JSON> {
@@ -121,8 +188,16 @@ export class StudentInscriptionController {
     return JSON.parse(JSON.stringify(await useCase.execute(command)));
   }
 
+  /**
+   * Retira grupo de inscripcion
+   *
+   * @param {RemoveGroupCommand} command Id de inscripcion y de grupo
+   * @return {Promise<JSON>} Grupo retirado
+   * @memberof StudentInscriptionController
+   */
   @Post('inscription/remove-group')
-  async removeGroup(@Body() command: AddGroupCommand): Promise<JSON> {
+  @UseGuards(AuthGuard())
+  async removeGroup(@Body() command: RemoveGroupCommand): Promise<JSON> {
     const useCase = new RemoveGroupUseCase(
       this.groupService,
       this.unsubscribedGroupPublisher,
@@ -130,7 +205,15 @@ export class StudentInscriptionController {
     return JSON.parse(JSON.stringify(await useCase.execute(command)));
   }
 
+  /**
+   * Actualiza el estado de una inscripcion
+   *
+   * @param {UpdateInscriptionStateCommand} command Id de inscripcion y estado de inscripcion
+   * @return {Promise<JSON>} Retorna inscripcion actualizada
+   * @memberof StudentInscriptionController
+   */
   @Post('inscription/update-state')
+  @UseGuards(AuthGuard())
   async updateInscriptionState(
     @Body() command: UpdateInscriptionStateCommand,
   ): Promise<JSON> {
@@ -142,8 +225,21 @@ export class StudentInscriptionController {
     return JSON.parse(JSON.stringify(await useCase.execute(command)));
   }
 
+  /**
+   * Para uso interno
+   *
+   * @param {{
+   *       professorName: string;
+   *       subjectName: string;
+   *       subjectId: string;
+   *       quotaAvailable: number;
+   *       classDays: [{ weekday: string; startTime: number; duration: number }];
+   *     }} command info para crear
+   * @return {*} grupo creado
+   * @memberof StudentInscriptionController
+   */
   @Post('group/add')
-  createGroup(
+  async createGroup(
     @Body()
     command: {
       professorName: string;
@@ -152,18 +248,36 @@ export class StudentInscriptionController {
       quotaAvailable: number;
       classDays: [{ weekday: string; startTime: number; duration: number }];
     },
-  ) {
+  ): Promise<JSON> {
     const entity = command as unknown as GroupPostgresEntity;
-    return this.groupService.createGroup(entity);
+    return JSON.parse(
+      JSON.stringify(await this.groupService.createGroup(entity)),
+    );
     // const repo = new GroupPostgresRepository(entity);
   }
 
-  @Post('group/random')
-  createGroupRandom() {
-    const jsonData = fs.readFileSync('database.json', 'utf8');
-    const data = JSON.parse(jsonData);
-    // const entity = command as unknown as GroupPostgresEntity;
-    // return this.groupService.createGroup(entity);
-    // const repo = new GroupPostgresRepository(entity);
+  /**
+   * Para generar token si existe id
+   *
+   * @param {string} id
+   * @return {string} Token
+   * @memberof StudentInscriptionController
+   */
+  @Get('token/:id')
+  createGroupRandom(@Param('id') id: string): string {
+    return this.getJwtPayload({ id });
+  }
+
+  /**
+   * Privado para generar token
+   *
+   * @private
+   * @param {{ id: string }} payload
+   * @return {string} Token
+   * @memberof StudentInscriptionController
+   */
+  private getJwtPayload(payload: { id: string }): string {
+    const token = this.jwtService.sign(payload, { privateKey: 'llave' });
+    return token;
   }
 }

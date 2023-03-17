@@ -1,5 +1,11 @@
 import { Module } from '@nestjs/common';
 
+/**
+ * Modulo de Mongo
+ *
+ * @export
+ * @class MongoModule
+ */
 @Module({
   imports: [],
   controllers: [],

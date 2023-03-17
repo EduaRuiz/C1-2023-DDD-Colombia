@@ -14,8 +14,21 @@ import {
   StudentPostgresEntity,
 } from '.';
 
+/**
+ * Entidad que representa una inscripcion en la base de datos
+ *
+ * @export
+ * @class InscriptionPostgresEntity
+ * @extends {InscriptionDomainEntity}
+ */
 @Entity('inscription')
 export class InscriptionPostgresEntity extends InscriptionDomainEntity {
+  /**
+   * Id de la inscripcion
+   *
+   * @type {string}
+   * @memberof InscriptionPostgresEntity
+   */
   @Index('inscription_primary_key', ['inscriptionId'], { unique: true })
   @Column('uuid', {
     primary: true,
@@ -25,6 +38,12 @@ export class InscriptionPostgresEntity extends InscriptionDomainEntity {
   })
   inscriptionId?: string;
 
+  /**
+   * Estado de la inscripcion
+   *
+   * @type {string}
+   * @memberof InscriptionPostgresEntity
+   */
   @Column('character varying', {
     name: 'inscription_state',
     length: 20,
@@ -32,6 +51,12 @@ export class InscriptionPostgresEntity extends InscriptionDomainEntity {
   })
   inscriptionState: string;
 
+  /**
+   * Fecha creación de la inscripcion
+   *
+   * @type {Date}
+   * @memberof InscriptionPostgresEntity
+   */
   @Column({
     name: 'date_time',
     type: 'timestamp',
@@ -40,14 +65,32 @@ export class InscriptionPostgresEntity extends InscriptionDomainEntity {
   })
   dateTime?: Date;
 
+  /**
+   * EStudiante relacionado a la inscripcion
+   *
+   * @type {StudentPostgresEntity}
+   * @memberof InscriptionPostgresEntity
+   */
   @ManyToOne(() => StudentPostgresEntity, (student) => student.inscription)
   @JoinColumn({ name: 'student_id' })
   student: StudentPostgresEntity;
 
+  /**
+   * Semestre relacionado a la inscripcion
+   *
+   * @type {SemesterPostgresEntity}
+   * @memberof InscriptionPostgresEntity
+   */
   @ManyToOne(() => SemesterPostgresEntity, (semester) => semester.inscription)
   @JoinColumn({ name: 'semester_id' })
   semester: SemesterPostgresEntity;
 
+  /**
+   * Grupos relacionados a la inscripcion
+   *
+   * @type {GroupPostgresEntity[]}
+   * @memberof InscriptionPostgresEntity
+   */
   @ManyToMany(() => GroupPostgresEntity, (group) => group.inscription)
   @JoinTable({
     name: 'group_inscription',
