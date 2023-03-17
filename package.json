@@ -17,7 +17,8 @@
     "test:watch": "set SCOPE=test & jest --watch",
     "test:cov": "set SCOPE=test & jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "set SCOPE=test & jest --config ./test/jest-e2e.json"
+    "test:e2e": "set SCOPE=test & jest --config ./test/jest-e2e.json",
+    "docs": "typedoc --entryPointStrategy expand ./src --out docs"
   },
   "dependencies": {
     "@nestjs/axios": "^2.0.0",
@@ -41,6 +42,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.6.2",
+    "typedoc": "^0.23.27",
     "typeorm": "^0.3.12",
     "uuid": "^9.0.0"
   },

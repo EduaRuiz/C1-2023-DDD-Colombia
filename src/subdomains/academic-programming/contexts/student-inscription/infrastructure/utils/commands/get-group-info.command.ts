@@ -1,4 +1,5 @@
 import { IGetGroupInfoCommand } from '@contexts/student-inscription/domain/interfaces';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 /**
@@ -15,6 +16,7 @@ export class GetGroupInfoCommand implements IGetGroupInfoCommand {
    * @type {string}
    * @memberof GetGroupInfoCommand
    */
+  @ApiProperty()
   @IsString({ message: 'Id del grupo obligatorio' })
   groupId: string;
 }

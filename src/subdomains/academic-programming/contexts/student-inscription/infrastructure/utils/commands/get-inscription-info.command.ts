@@ -1,4 +1,5 @@
 import { IGetInscriptionInfoCommand } from '@contexts/student-inscription/domain/interfaces';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 /**
@@ -15,6 +16,7 @@ export class GetInscriptionInfoCommand implements IGetInscriptionInfoCommand {
    * @type {string}
    * @memberof GetInscriptionInfoCommand
    */
+  @ApiProperty()
   @IsString({ message: 'Id de la inscripcion obligatorio' })
   inscriptionId: string;
 }

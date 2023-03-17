@@ -7,6 +7,12 @@ import {
   StudentService,
 } from './services';
 
+/**
+ * Modulo de persistencia
+ *
+ * @export
+ * @class PersistenceModule
+ */
 @Module({
   imports: [PostgresModule],
   controllers: [],

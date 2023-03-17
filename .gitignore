@@ -4,6 +4,7 @@
 
 # docker images data
 /data-docker
+/docs
 
 # Logs
 logs

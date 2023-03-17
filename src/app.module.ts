@@ -6,6 +6,12 @@ import { AcademicOfferModule } from './subdomains/academic-programming/contexts/
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 
+/**
+ * Modulo principal
+ *
+ * @export
+ * @class AppModule
+ */
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),

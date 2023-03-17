@@ -13,6 +13,12 @@ import {
   UnsubscribedGroupPublisher,
 } from './publishers';
 
+/**
+ * Modulo de mensajería
+ *
+ * @export
+ * @class MessagingModule
+ */
 @Module({
   imports: [
     ClientsModule.register([

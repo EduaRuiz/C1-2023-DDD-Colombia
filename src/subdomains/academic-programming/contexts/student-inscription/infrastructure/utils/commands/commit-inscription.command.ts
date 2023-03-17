@@ -1,4 +1,5 @@
 import { ICommitInscriptionCommand } from '@contexts/student-inscription/domain/interfaces';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   ArrayMinSize,
   ArrayNotEmpty,
@@ -21,6 +22,7 @@ export class CommitInscriptionCommand implements ICommitInscriptionCommand {
    * @type {string}
    * @memberof CommitInscriptionCommand
    */
+  @ApiProperty()
   @IsDefined()
   @IsString({ message: 'Id de estudiante obligatorio' })
   studentId: string;
@@ -30,6 +32,7 @@ export class CommitInscriptionCommand implements ICommitInscriptionCommand {
    * @type {string}
    * @memberof CommitInscriptionCommand
    */
+  @ApiProperty()
   @IsDefined()
   @IsString({ message: 'Id de semestre obligatorio' })
   semesterId: string;
@@ -39,6 +42,7 @@ export class CommitInscriptionCommand implements ICommitInscriptionCommand {
    * @type {string[]}
    * @memberof CommitInscriptionCommand
    */
+  @ApiProperty()
   @IsDefined()
   @IsArray({ message: 'groupsId necesario' })
   @ArrayMinSize(1)

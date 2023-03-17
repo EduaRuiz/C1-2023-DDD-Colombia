@@ -5,6 +5,7 @@ import {
   KafkaContext,
   Payload,
 } from '@nestjs/microservices';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 /**
  * Suscriptor para el contexto de inscripciones
@@ -13,6 +14,7 @@ import {
  * @class AcademicOfferController
  */
 @Controller()
+@ApiTags('academic-offer-controller')
 export class AcademicOfferController {
   @EventPattern('student-inscription.committed-inscription')
   inscriptionCommitted(@Payload() data: any, @Ctx() context: KafkaContext) {
@@ -51,6 +53,13 @@ export class AcademicOfferController {
    * @memberof AcademicOfferController
    */
   @Get('subject-id-exist/:id')
+  @ApiOperation({
+    summary: 'Valida si existe la materia',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Retorna un boleando',
+  })
   subjectIdExist(@Param('id') subjectId: string): boolean {
     const subjectIds = [
       '07b793ce-52d3-4344-b9f1-5fa5e415e3d4',

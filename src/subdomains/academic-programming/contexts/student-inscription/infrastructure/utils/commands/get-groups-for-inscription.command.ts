@@ -1,4 +1,5 @@
 import { IGetGroupsForInscriptionCommand } from '@contexts/student-inscription/domain/interfaces';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 /**
@@ -17,6 +18,7 @@ export class GetGroupsForInscriptionCommand
    * @type {string}
    * @memberof GetGroupsForInscriptionCommand
    */
+  @ApiProperty()
   @IsString({ message: 'Id de la materia obligatorio' })
   subjectId: string;
   /**
@@ -25,6 +27,7 @@ export class GetGroupsForInscriptionCommand
    * @type {string}
    * @memberof GetGroupsForInscriptionCommand
    */
+  @ApiProperty()
   @IsString({ message: 'Estado del grupo obligatorio' })
   groupState: string;
 }

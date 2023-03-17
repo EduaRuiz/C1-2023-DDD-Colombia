@@ -11,7 +11,6 @@ async function bootstrap() {
     .setTitle('student-inscription')
     .setDescription('Api del contexto')
     .setVersion('0.0.1')
-    .addTag('inscription')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

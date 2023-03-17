@@ -14,6 +14,12 @@ import { JwtStrategy } from './utils/strategies';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
+/**
+ * Modulo de inscripcion de estudiantes
+ *
+ * @export
+ * @class StudentInscriptionModule
+ */
 @Module({
   imports: [
     HttpModule,

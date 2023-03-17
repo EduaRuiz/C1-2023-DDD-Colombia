@@ -39,6 +39,14 @@ import { GroupPostgresEntity } from '../persistence/databases/postgres/entities'
 import { SubjectIdExistService } from '../utils/services';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  BadRequestSwagger,
+  GroupSwaggerEntity,
+  InscriptionSwaggerEntity,
+  NotFoundSwagger,
+  UnauthorizedSwagger,
+} from '../utils/swagger-types';
 
 /**
  * Controlador principal del contexto
@@ -47,6 +55,7 @@ import { AuthGuard } from '@nestjs/passport';
  * @class StudentInscriptionController
  */
 @Controller('student-inscription')
+@ApiTags('student-inscription-controller')
 export class StudentInscriptionController {
   /**
    * Crea una instancia de StudentInscriptionController.
@@ -96,6 +105,24 @@ export class StudentInscriptionController {
    */
   @Post('inscription/commit')
   @UseGuards(AuthGuard())
+  @ApiOperation({
+    summary: 'Crea una inscripcion usando la información suministrada',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Inscripcion creada',
+    type: InscriptionSwaggerEntity,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
   async commitInscription(
     @Body() command: CommitInscriptionCommand,
   ): Promise<JSON> {
@@ -123,6 +150,29 @@ export class StudentInscriptionController {
    */
   @Get('inscription/info/:id')
   @UseGuards(AuthGuard())
+  @ApiOperation({
+    summary: 'Retorna un grupo',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Inscripcion solicitada',
+    type: InscriptionSwaggerEntity,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontrado',
+    type: NotFoundSwagger,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
   async getInscriptionInfo(@Param('id') inscriptionId: string): Promise<JSON> {
     const command: GetInscriptionInfoCommand = { inscriptionId };
     const useCase = new GetInscriptionInfoUseCase(
@@ -141,6 +191,29 @@ export class StudentInscriptionController {
    */
   @Post('inscription/add-group')
   @UseGuards(AuthGuard())
+  @ApiOperation({
+    summary: 'Agrega grupo a inscripcion',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Grupo agregado',
+    type: GroupSwaggerEntity,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontrado',
+    type: NotFoundSwagger,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
   async addGroup(@Body() command: AddGroupCommand): Promise<JSON> {
     const useCase = new AddGroupUseCase(
       this.groupService,
@@ -159,6 +232,29 @@ export class StudentInscriptionController {
    */
   @Get('group/info/:id')
   @UseGuards(AuthGuard())
+  @ApiOperation({
+    summary: 'Retorna un grupo',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Grupo solicitado',
+    type: GroupSwaggerEntity,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontrado',
+    type: NotFoundSwagger,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
   async getGroupInfo(@Param('id') groupId: string): Promise<JSON> {
     const command: GetGroupInfoCommand = { groupId };
     const useCase = new GetGroupInfoUseCase(
@@ -177,6 +273,29 @@ export class StudentInscriptionController {
    */
   @Post('group/for-inscription')
   @UseGuards(AuthGuard())
+  @ApiOperation({
+    summary: 'Retorna lista de grupos según criterio',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Grupo solicitado',
+    type: [GroupSwaggerEntity],
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontrado',
+    type: NotFoundSwagger,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
   async getGroupsForInscription(
     @Body() command: GetGroupsForInscriptionCommand,
   ): Promise<JSON> {
@@ -197,6 +316,29 @@ export class StudentInscriptionController {
    */
   @Post('inscription/remove-group')
   @UseGuards(AuthGuard())
+  @ApiOperation({
+    summary: 'Remueve un grupo de una inscripcion',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Grupo removido',
+    type: GroupSwaggerEntity,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontrado',
+    type: NotFoundSwagger,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
   async removeGroup(@Body() command: RemoveGroupCommand): Promise<JSON> {
     const useCase = new RemoveGroupUseCase(
       this.groupService,
@@ -214,6 +356,29 @@ export class StudentInscriptionController {
    */
   @Post('inscription/update-state')
   @UseGuards(AuthGuard())
+  @ApiOperation({
+    summary: 'Actualiza el estado de una inscripcion',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Inscripcion solicitada',
+    type: InscriptionSwaggerEntity,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontrado',
+    type: NotFoundSwagger,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
   async updateInscriptionState(
     @Body() command: UpdateInscriptionStateCommand,
   ): Promise<JSON> {
@@ -239,6 +404,29 @@ export class StudentInscriptionController {
    * @memberof StudentInscriptionController
    */
   @Post('group/add')
+  @ApiOperation({
+    summary: 'crea un grupo',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Grupo creado',
+    type: GroupSwaggerEntity,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontrado',
+    type: NotFoundSwagger,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
   async createGroup(
     @Body()
     command: {
@@ -264,7 +452,29 @@ export class StudentInscriptionController {
    * @memberof StudentInscriptionController
    */
   @Get('token/:id')
-  createGroupRandom(@Param('id') id: string): string {
+  @ApiOperation({
+    summary: 'Retorna un token',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Token generado',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontrado',
+    type: NotFoundSwagger,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Parámetros inválidos',
+    type: BadRequestSwagger,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'No autorizado',
+    type: UnauthorizedSwagger,
+  })
+  createToken(@Param('id') id: string): string {
     return this.getJwtPayload({ id });
   }
 

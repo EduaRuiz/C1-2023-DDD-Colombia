@@ -76,6 +76,7 @@ const CommitInscriptionHelper = async (
               );
               groupsUpdated.push(updatedGroup);
             }
+            console.log(groupsUpdated);
             inscriptionSaved.groups = groupsUpdated;
             committedInscription.response = inscriptionSaved;
             gotInscriptions.publish();
@@ -83,7 +84,7 @@ const CommitInscriptionHelper = async (
             return committedInscription.response;
           }
           throw new AggregateRootException(
-            'Evento del tipo GotInscriptionInfoEventPublisher no recibido',
+            'Evento del tipo GotInscriptionsEventPublisher no recibido',
           );
         }
         throw new AggregateRootException(

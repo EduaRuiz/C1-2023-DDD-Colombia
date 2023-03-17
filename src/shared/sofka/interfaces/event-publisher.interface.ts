@@ -12,7 +12,7 @@ export interface IEventPublisher {
    * @template Input
    * @param {*} pattern
    * @param {Input} data
-   * @return {*}  {Promise<Result>}
+   * @return {Promise<Result>}
    * @memberof IEventPublisher
    */
   send<Result = any, Input = any>(pattern: any, data: Input): Promise<Result>;
@@ -23,7 +23,7 @@ export interface IEventPublisher {
    * @template Input
    * @param {*} pattern
    * @param {Input} data
-   * @return {*}  {Promise<Result>}
+   * @return {Promise<Result>}
    * @memberof IEventPublisher
    */
   emit<Result = any, Input = any>(pattern: any, data: Input): Promise<Result>;

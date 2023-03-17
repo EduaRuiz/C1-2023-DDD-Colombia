@@ -13,17 +13,12 @@ import {
   SubscribedGroupEventPublisher,
 } from '@contexts/student-inscription/domain/events';
 import { AggregateRootException } from '@sofka/exceptions';
-import { SubscribeGroupHelper } from '../subscribe-group/subscribe-group.helper';
 import { CommitInscriptionHelper } from '.';
 import * as helpers from '../';
 jest.mock('../subscribe-group/subscribe-group.helper');
 
 describe('CommitInscriptionHelper', () => {
-  let inscriptionServiceMock;
-  let groupServiceMock;
   let group: GroupDomainEntity;
-  let committedInscriptionEventMock;
-  let subscribedGroupEventMock;
   let inscription: InscriptionDomainEntity;
   let inscriptionService: IInscriptionDomainService;
   let groupService: IGroupDomainService;
@@ -207,66 +202,59 @@ describe('CommitInscriptionHelper', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  // it('should call SubscribeGroupHelper for each group and return updated inscription', async () => {
-  //   // Arrange
-  //   const inscriptionSaved = {
-  //     ...inscription,
-  //     inscriptionId: 'inscription_456',
-  //     groups: [],
-  //   };
-  //   inscriptionService.commitInscription = jest
-  //     .fn()
-  //     .mockResolvedValue(inscriptionSaved);
-  //   // jest.spyOn(helpers, 'SubscribeGroupHelper').mockResolvedValue(group);
-  //   const expectedGroup = {
-  //     ...group,
-  //     inscriptionId: inscriptionSaved.inscriptionId,
-  //   };
-  //   const expected = {
-  //     ...inscriptionSaved,
-  //     groups: [expectedGroup],
-  //   };
-  //   const expectedGroupUpdated = expectedGroup;
-  //   expectedGroupUpdated.groupId = 'group_456';
-  //   groupService.getAllGroupsByInscription = jest
-  //     .fn()
-  //     .mockResolvedValue([expectedGroupUpdated]);
-  //   subscribedGroupEvent.response = expectedGroupUpdated;
-  //   // Act
-  //   const result = await CommitInscriptionHelper(
-  //     inscription,
-  //     inscriptionService,
-  //     groupService,
-  //     committedInscriptionEvent,
-  //     subscribedGroupEvent,
-  //   );
-  //   // Assert
-  //   expect(result).toEqual(expected);
-  //   expect(subscribedGroupEvent.publish).toHaveBeenCalledTimes(1);
-  //   expect(subscribedGroupEvent.publish).toHaveBeenCalledWith();
-  //   expect(committedInscriptionEvent.publish).toHaveBeenCalledTimes(1);
-  //   expect(committedInscriptionEvent.publish).toHaveBeenCalledWith();
-  // });
+  it('should call SubscribeGroupHelper for each group and return updated inscription', async () => {
+    // Arrange
+    const inscriptionSaved = {
+      ...inscription,
+      inscriptionId: 'inscription_456',
+      groups: [],
+    } as unknown as InscriptionDomainEntity;
+    inscriptionService.commitInscription = jest
+      .fn()
+      .mockResolvedValue(inscriptionSaved);
+    jest.spyOn(helpers, 'SubscribeGroupHelper').mockResolvedValue(group);
+    const expected = {
+      ...inscriptionSaved,
+      groups: [group],
+    };
+    const expectedGroupUpdated = group;
+    expectedGroupUpdated.groupId = 'group_456';
+    groupService.getAllGroupsByInscription = jest
+      .fn()
+      .mockResolvedValue([expectedGroupUpdated]);
+    subscribedGroupEvent.response = expectedGroupUpdated;
+    // Act
+    const result = await CommitInscriptionHelper(
+      inscription,
+      inscriptionService,
+      groupService,
+      committedInscriptionEvent,
+      subscribedGroupEvent,
+      gotInscriptionsEventPublisher,
+    );
+    // Assert
+    expect(result).toEqual(expected);
+    expect(committedInscriptionEvent.publish).toHaveBeenCalledTimes(1);
+    expect(committedInscriptionEvent.publish).toHaveBeenCalledWith();
+  });
 
-  // it('should throw an error if there is an error subscribing a group', async () => {
-  //   // Arrange
-  //   groupService.getAllGroupsByInscription = jest
-  //     .fn()
-  //     .mockRejectedValue(new Error('Error subscribing group'));
-  //   const expectedMessage = 'Error subscribing group';
-  //   // Act
-  //   const result = () =>
-  //     CommitInscriptionHelper(
-  //       inscription,
-  //       inscriptionService,
-  //       groupService,
-  //       committedInscriptionEvent,
-  //       subscribedGroupEvent,
-  //     );
-  //   // Assert
-  //   await expect(result).rejects.toThrow(new Error(expectedMessage));
-  //   expect(committedInscriptionEvent.publish).not.toHaveBeenCalled();
-  // });
+  it('should throw an error if there is an error subscribing a group', async () => {
+    // Arrange
+    const expectedMessage =
+      'Evento del tipo GotInscriptionsEventPublisher no recibido';
+    // Act
+    const result = () =>
+      CommitInscriptionHelper(
+        inscription,
+        inscriptionService,
+        groupService,
+        committedInscriptionEvent,
+        subscribedGroupEvent,
+      );
+    // Assert
+    await expect(result).rejects.toThrow(new Error(expectedMessage));
+    expect(committedInscriptionEvent.publish).not.toHaveBeenCalled();
+  });
 
   // it('should call commitInscription and SubscribeGroupHelper functions and return the committed inscription', async () => {
   //   // Arrange

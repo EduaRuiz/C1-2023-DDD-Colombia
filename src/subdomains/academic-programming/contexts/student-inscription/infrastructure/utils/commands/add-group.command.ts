@@ -1,4 +1,5 @@
 import { IAddGroupCommand } from '@contexts/student-inscription/domain/interfaces';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsString } from 'class-validator';
 
 /**
@@ -15,6 +16,7 @@ export class AddGroupCommand implements IAddGroupCommand {
    * @type {string}
    * @memberof AddGroupCommand
    */
+  @ApiProperty()
   @IsDefined()
   @IsString({ message: 'Id de inscripcion obligatorio' })
   inscriptionId: string;
@@ -24,6 +26,7 @@ export class AddGroupCommand implements IAddGroupCommand {
    * @type {string}
    * @memberof AddGroupCommand
    */
+  @ApiProperty()
   @IsDefined()
   @IsString({ message: 'Id de grupo obligatorio' })
   groupId: string;

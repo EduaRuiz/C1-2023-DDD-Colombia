@@ -1,4 +1,5 @@
 import { IUpdateInscriptionStateCommand } from '@contexts/student-inscription/domain/interfaces';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsDefined, IsString } from 'class-validator';
 
 /**
@@ -17,6 +18,7 @@ export class UpdateInscriptionStateCommand
    * @type {string}
    * @memberof UpdateInscriptionStateCommand
    */
+  @ApiProperty()
   @IsDefined()
   @IsString({ message: 'Estado de inscripcion obligatorio' })
   inscriptionState: string;
@@ -26,6 +28,7 @@ export class UpdateInscriptionStateCommand
    * @type {string}
    * @memberof UpdateInscriptionStateCommand
    */
+  @ApiProperty()
   @IsDefined()
   @IsString({ message: 'Id de inscripcion obligatorio' })
   inscriptionId: string;

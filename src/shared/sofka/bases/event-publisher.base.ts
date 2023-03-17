@@ -51,7 +51,7 @@ export abstract class EventPublisherBase<Response> implements IEventPublisher {
    * @template Input
    * @param {*} pattern
    * @param {Input} data
-   * @return {*}  {Promise<Result>}
+   * @return {Promise<Result>} Resultado
    * @memberof EventPublisherBase
    */
   send<Result = any, Input = Response>(
@@ -68,7 +68,7 @@ export abstract class EventPublisherBase<Response> implements IEventPublisher {
    * @template Input
    * @param {*} pattern
    * @param {Input} data
-   * @return {*}  {Promise<Result>}
+   * @return {Promise<Result>}
    * @memberof EventPublisherBase
    */
   emit<Result = any, Input = Response>(
