@@ -23,7 +23,7 @@ describe('GetGroupHelper function', () => {
     } as unknown as GotGroupInfoEventPublisher;
   });
 
-  test('should throw an error if IGroupDomainService is not received', async () => {
+  it('should throw an error if IGroupDomainService is not received', async () => {
     // Arrange
     const service = undefined;
     const event = undefined;
@@ -35,7 +35,7 @@ describe('GetGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if GotGroupInfoEventPublisher is not received', async () => {
+  it('should throw an error if GotGroupInfoEventPublisher is not received', async () => {
     // Arrange
     const service = serviceMock;
     const event = undefined;
@@ -48,7 +48,7 @@ describe('GetGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should return a GroupDomainEntity object and publish the event', async () => {
+  it('should return a GroupDomainEntity object and publish the event', async () => {
     // Arrange
     const expected = group;
     const service = serviceMock;

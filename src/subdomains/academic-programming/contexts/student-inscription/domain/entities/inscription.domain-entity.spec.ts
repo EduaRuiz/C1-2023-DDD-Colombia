@@ -7,7 +7,7 @@ import {
 
 describe('InscriptionDomainEntity', () => {
   describe('constructor', () => {
-    test('should create an InscriptionDomainEntity object with the given parameters', () => {
+    it('should create an InscriptionDomainEntity object with the given parameters', () => {
       // Arrange
       const student = {} as unknown as StudentDomainEntity;
       const semester = {} as unknown as SemesterDomainEntity;
@@ -33,7 +33,7 @@ describe('InscriptionDomainEntity', () => {
       expect(inscription.inscriptionId).toBe(inscriptionId);
     });
 
-    test('should create an InscriptionDomainEntity object without dateTime and inscriptionId', () => {
+    it('should create an InscriptionDomainEntity object without dateTime and inscriptionId', () => {
       // Arrange
       const student = {} as unknown as StudentDomainEntity;
       const semester = {} as unknown as SemesterDomainEntity;

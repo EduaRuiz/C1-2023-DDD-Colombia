@@ -5,7 +5,7 @@ describe('GroupIdValueObject', () => {
   const mockCheckIsUUID4 = jest.requireMock('@validations').IsUUID4;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if group id is not a valid UUID v4', () => {
+    it('should set error if group id is not a valid UUID v4', () => {
       // Arrange
       const value = 'invalid-uuid';
       const expected = true;
@@ -22,7 +22,7 @@ describe('GroupIdValueObject', () => {
       expect(groupId.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if group id is a valid UUID v4', () => {
+    it('should not set error if group id is a valid UUID v4', () => {
       // Arrange
       const value = '814c10b3-3b3c-44a8-96d1-74c0a343a8bf';
       const expected = false;

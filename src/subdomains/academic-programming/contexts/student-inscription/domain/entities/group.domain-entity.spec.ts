@@ -3,7 +3,7 @@ import { InscriptionDomainEntity } from './inscription.domain-entity';
 
 describe('GroupDomainEntity', () => {
   describe('constructor', () => {
-    test('should create a GroupDomainEntity object with the given parameters', () => {
+    it('should create a GroupDomainEntity object with the given parameters', () => {
       // Arrange
       const groupId = '123';
       const classDays = [] as unknown as ClassDayDomainEntity[];
@@ -35,7 +35,7 @@ describe('GroupDomainEntity', () => {
       expect(group.inscription).toBe(inscription);
     });
 
-    test('should create a GroupDomainEntity object without inscription', () => {
+    it('should create a GroupDomainEntity object without inscription', () => {
       // Arrange
       const groupId = '123';
       const classDays = [] as unknown as ClassDayDomainEntity[];

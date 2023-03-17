@@ -16,12 +16,13 @@ export class InscriptionPostgresService
   async getAllInscriptionsByStudent(
     studentId: string,
   ): Promise<InscriptionPostgresEntity[]> {
-    const all = await this.inscriptionPostgresRepository.findAll();
+    const allInscriptions = await this.inscriptionPostgresRepository.findAll();
     const response: InscriptionPostgresEntity[] = [];
-    all.map((inscription) => {
-      inscription.student.studentId === studentId;
-      response.push(inscription);
-    });
+    for (const inscription of allInscriptions) {
+      if (inscription.student.studentId === studentId) {
+        response.push(inscription);
+      }
+    }
     return response;
   }
   async changeInscriptionState(

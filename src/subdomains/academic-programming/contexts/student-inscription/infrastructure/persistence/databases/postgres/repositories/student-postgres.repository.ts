@@ -25,41 +25,25 @@ export class StudentPostgresRepository
       ...entity,
       studentId: entityId,
     };
-    try {
-      return this.studentPostgresEntity.save(entityUpdated);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.studentPostgresEntity.save(entityUpdated);
   }
 
   async delete(entityId: string): Promise<StudentPostgresEntity> {
     const currentEntity = await this.findOneById(entityId);
-    try {
-      return this.studentPostgresEntity.remove(currentEntity);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.studentPostgresEntity.remove(currentEntity);
   }
 
   findAll(): Promise<StudentPostgresEntity[]> {
-    try {
-      return this.studentPostgresEntity.find();
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.studentPostgresEntity.find();
   }
 
   async findOneById(entityId: string): Promise<StudentPostgresEntity> {
-    try {
-      const currentEntity = await this.studentPostgresEntity.findOneBy({
-        studentId: entityId,
-      });
-      if (currentEntity) {
-        return currentEntity;
-      }
-      throw new NotFoundException('Estudiante no encontrado');
-    } catch (error) {
-      throw new NotFoundException('Estudiante no encontrado ' + error);
+    const currentEntity = await this.studentPostgresEntity.findOneBy({
+      studentId: entityId,
+    });
+    if (currentEntity) {
+      return currentEntity;
     }
+    throw new NotFoundException('Estudiante no encontrado!');
   }
 }

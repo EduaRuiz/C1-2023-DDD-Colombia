@@ -24,16 +24,6 @@ import { SubscribeGroupHelper } from '../subscribe-group/subscribe-group.helper'
  * @param {SubscribedGroupEventPublisher} [subscribedGroup] Evento publicador de la asignación por grupo
  * @return {Promise<InscriptionDomainEntity>} Retorna el objeto producto de la acción
  */
-/**
- *
- *
- * @param {InscriptionDomainEntity} inscription
- * @param {IInscriptionDomainService} [inscriptionService]
- * @param {IGroupDomainService} [groupService]
- * @param {CommittedInscriptionEventPublisher} [committedInscription]
- * @param {SubscribedGroupEventPublisher} [subscribedGroup]
- * @return {*}  {Promise<InscriptionDomainEntity>}
- */
 const CommitInscriptionHelper = async (
   inscription: InscriptionDomainEntity,
   inscriptionService?: IInscriptionDomainService,
@@ -49,8 +39,6 @@ const CommitInscriptionHelper = async (
             await inscriptionService.getAllInscriptionsByStudent(
               inscription.student.studentId.valueOf(),
             );
-          console.log('*******************************', inscription.groups);
-
           const semesterExist = currentInscriptions.find(
             (totalInscriptions) =>
               totalInscriptions.semester.semesterId.valueOf() ===
@@ -71,16 +59,15 @@ const CommitInscriptionHelper = async (
             throw new AggregateRootException('Id inscripcion indefinido');
           }
           const groupsUpdated: GroupDomainEntity[] = [];
-          currentGroups.map(async (group) => {
-            groupsUpdated.push(
-              await SubscribeGroupHelper(
-                inscriptionId.valueOf(),
-                group,
-                groupService,
-                subscribedGroup,
-              ),
+          for (const group of currentGroups) {
+            const updatedGroup = await SubscribeGroupHelper(
+              inscriptionId.valueOf(),
+              group,
+              groupService,
+              subscribedGroup,
             );
-          });
+            groupsUpdated.push(updatedGroup);
+          }
           inscriptionSaved.groups = groupsUpdated;
           committedInscription.response = inscriptionSaved;
           committedInscription.publish();

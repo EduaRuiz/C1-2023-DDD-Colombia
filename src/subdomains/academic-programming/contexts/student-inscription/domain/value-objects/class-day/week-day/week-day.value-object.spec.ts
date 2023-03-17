@@ -5,7 +5,7 @@ describe('WeekDayValueObject', () => {
   const mockCheckIsEmpty = jest.requireMock('@validations').IsEmpty;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if weekDay is empty', () => {
+    it('should set error if weekDay is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -21,7 +21,7 @@ describe('WeekDayValueObject', () => {
       expect(weekDay.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if weekDay is longer than 6 characters', () => {
+    it('should set error if weekDay is longer than 6 characters', () => {
       // Arrange
       const value = 'Martes 123';
       const expected = true;
@@ -38,7 +38,7 @@ describe('WeekDayValueObject', () => {
       expect(weekDay.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if weekDay has a valid length', () => {
+    it('should not set error if weekDay has a valid length', () => {
       // Arrange
       const value = 'L';
       const expected = false;

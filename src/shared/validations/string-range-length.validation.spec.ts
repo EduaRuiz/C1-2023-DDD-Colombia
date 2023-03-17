@@ -2,7 +2,7 @@ import { StringRangeLength } from '.';
 
 describe('StringRangeLength', () => {
   // Test case 1
-  test('should return true when length is within range', () => {
+  it('should return true when length is within range', () => {
     // Arrange
     const value = 'hello world';
     const min = 5;
@@ -15,7 +15,7 @@ describe('StringRangeLength', () => {
   });
 
   // Test case 2
-  test('should return false when length is less than min', () => {
+  it('should return false when length is less than min', () => {
     // Arrange
     const value = 'hello';
     const min = 10;
@@ -28,7 +28,7 @@ describe('StringRangeLength', () => {
   });
 
   // Test case 3
-  test('should return false when length is greater than max', () => {
+  it('should return false when length is greater than max', () => {
     // Arrange
     const value = 'hello world';
     const min = 1;
@@ -41,7 +41,7 @@ describe('StringRangeLength', () => {
   });
 
   // Test case 4
-  test('should ignore leading/trailing white spaces in value', () => {
+  it('should ignore leading/trailing white spaces in value', () => {
     // Arrange
     const value = '    hello world     ';
     const min = 5;

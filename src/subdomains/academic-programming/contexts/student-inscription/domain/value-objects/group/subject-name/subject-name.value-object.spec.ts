@@ -7,7 +7,7 @@ describe('SubjectNameValueObject', () => {
     jest.requireMock('@validations').StringRangeLength;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if subject name is empty', () => {
+    it('should set error if subject name is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -23,7 +23,7 @@ describe('SubjectNameValueObject', () => {
       expect(subjectName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if subject name length is less than 3', () => {
+    it('should set error if subject name length is less than 3', () => {
       // Arrange
       const value = 'a';
       const expected = true;
@@ -42,7 +42,7 @@ describe('SubjectNameValueObject', () => {
       expect(subjectName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if subject name length is greater than 255', () => {
+    it('should set error if subject name length is greater than 255', () => {
       // Arrange
       const value = 'a'.repeat(300);
       const expected = true;
@@ -61,7 +61,7 @@ describe('SubjectNameValueObject', () => {
       expect(subjectName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if subject name length is between 3 and 255', () => {
+    it('should not set error if subject name length is between 3 and 255', () => {
       // Arrange
       const value = 'a'.repeat(100);
       const expected = false;

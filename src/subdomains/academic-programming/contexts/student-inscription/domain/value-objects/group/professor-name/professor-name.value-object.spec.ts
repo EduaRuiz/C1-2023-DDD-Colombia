@@ -7,7 +7,7 @@ describe('ProfessorNameValueObject', () => {
     jest.requireMock('@validations').StringRangeLength;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if professorName is empty', () => {
+    it('should set error if professorName is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -23,7 +23,7 @@ describe('ProfessorNameValueObject', () => {
       expect(professorName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if professorName length is less than 5', () => {
+    it('should set error if professorName length is less than 5', () => {
       // Arrange
       const value = 'abcd';
       const expected = true;
@@ -41,7 +41,7 @@ describe('ProfessorNameValueObject', () => {
       expect(professorName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if professorName length is greater than 50', () => {
+    it('should set error if professorName length is greater than 50', () => {
       // Arrange
       const value = 'a'.repeat(51);
       const expected = true;
@@ -59,7 +59,7 @@ describe('ProfessorNameValueObject', () => {
       expect(professorName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if professorName length is between 5 and 50', () => {
+    it('should not set error if professorName length is between 5 and 50', () => {
       // Arrange
       const value = 'a'.repeat(30);
       const expected = false;

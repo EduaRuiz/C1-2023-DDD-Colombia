@@ -1,5 +1,4 @@
 jest.mock('@contexts/student-inscription/domain/value-objects');
-import * as objectValues from '@contexts/student-inscription/domain/value-objects';
 import { AddGroupUseCase } from '.';
 import {
   IAddGroupCommand,
@@ -13,6 +12,7 @@ import {
 import { InscriptionAggregateRoot } from '@contexts/student-inscription/domain/aggregates';
 import { ValueObjectException } from '@sofka/exceptions';
 import { GroupDomainEntity } from '@contexts/student-inscription/domain/entities';
+import { GroupIdValueObject } from '../../../domain/value-objects/group/group-id';
 
 describe('AddGroupUseCase', () => {
   let useCase: AddGroupUseCase;
@@ -52,19 +52,7 @@ describe('AddGroupUseCase', () => {
     const command: IAddGroupCommand = { inscriptionId, groupId };
     const group = { groupId: groupId } as unknown as GroupDomainEntity;
     // Act
-    const hasErrorsMock = jest.fn().mockReturnValue(false);
-    const hasErrorsOriginal = Object.getOwnPropertyDescriptor(
-      Object.getPrototypeOf(Object.getPrototypeOf(useCase)),
-      'hasErrors',
-    );
-    Object.defineProperty(
-      Object.getPrototypeOf(Object.getPrototypeOf(useCase)),
-      'hasErrors',
-      {
-        ...hasErrorsOriginal,
-        value: hasErrorsMock,
-      },
-    );
+    jest.spyOn(useCase, 'hasErrors').mockReturnValue(false);
     Object.defineProperty(useCase, 'inscriptionAggregateRoot', {
       value: inscriptionAggregateRootMock,
     });
@@ -81,44 +69,36 @@ describe('AddGroupUseCase', () => {
     expect(response.data).toEqual(group);
   });
 
+  it('should throw an exception if there are errors in the command like undefined', async () => {
+    // Arrange
+    const groupId = 'ee896699-6ab1-4fb7-bfce-9c4715ed7488';
+    const command = { undefined, groupId } as unknown as IAddGroupCommand;
+    const valueObject = new GroupIdValueObject('ss');
+    // Act
+    jest
+      .spyOn(useCase as any, 'createValueObjects')
+      .mockReturnValue([valueObject]);
+    jest.spyOn(valueObject, 'hasErrors').mockReturnValue(true);
+    Object.defineProperty(useCase, 'inscriptionAggregateRoot', {
+      value: inscriptionAggregateRootMock,
+    });
+    const result = () => useCase.execute(command);
+    // Act & Assert
+    await expect(result).rejects.toThrow(ValueObjectException);
+  });
+
   it('should throw an exception if there are errors in the command', async () => {
     // Arrange
     const inscriptionId = 'uuid';
     const groupId = 'uuid';
     const command: IAddGroupCommand = { inscriptionId, groupId };
     const expectedMessage = 'Existen algunos errores en el comando';
+    const valueObject = new GroupIdValueObject('ss');
     // Act
-    // jest.spyOn(objectValues.ClassDayIdValueObject.)
-    const hasErrorsMock = jest.fn().mockReturnValue(false);
-    Object.defineProperty(
-      objectValues.InscriptionIdValueObject.prototype,
-      'hasErrors',
-      {
-        value: jest.fn().mockReturnValue(false),
-      },
-    );
-    Object.defineProperty(
-      objectValues.GroupIdValueObject.prototype,
-      'hasErrors',
-      {
-        value: jest.fn().mockReturnValue(false),
-      },
-    );
-    // Object.defineProperty(useCase, 'hasErrors', {
-    //   value: hasErrorsMock,
-    // });
-    // const hasErrorsOriginal = Object.getOwnPropertyDescriptor(
-    //   Object.getPrototypeOf(Object.getPrototypeOf(useCase)),
-    //   'hasErrors',
-    // );
-    // Object.defineProperty(
-    //   Object.getPrototypeOf(Object.getPrototypeOf(useCase)),
-    //   'hasErrors',
-    //   {
-    //     ...hasErrorsOriginal,
-    //     value: hasErrorsMock,
-    //   },
-    // );
+    jest
+      .spyOn(useCase as any, 'createValueObjects')
+      .mockReturnValue([valueObject]);
+    jest.spyOn(valueObject, 'hasErrors').mockReturnValue(true);
     Object.defineProperty(useCase, 'inscriptionAggregateRoot', {
       value: inscriptionAggregateRootMock,
     });
@@ -136,20 +116,12 @@ describe('AddGroupUseCase', () => {
         inscriptionId: 'ee896699-6ab1-4fb7-bfce-9c4715ed7488',
         groupId: 'ee896699-6ab1-4fb7-bfce-9c4715ed7488',
       };
-      const hasErrorsMock = jest.fn().mockReturnValue(true);
-      const hasErrorsOriginal = Object.getOwnPropertyDescriptor(
-        Object.getPrototypeOf(Object.getPrototypeOf(useCase)),
-        'hasErrors',
-      );
-      Object.defineProperty(
-        Object.getPrototypeOf(Object.getPrototypeOf(useCase)),
-        'hasErrors',
-        {
-          ...hasErrorsOriginal,
-          value: hasErrorsMock,
-        },
-      );
+      const valueObject = new GroupIdValueObject('ss');
       // Act
+      jest
+        .spyOn(useCase as any, 'createValueObjects')
+        .mockReturnValue([valueObject]);
+      jest.spyOn(valueObject, 'hasErrors').mockReturnValue(true);
       Object.defineProperty(useCase, 'inscriptionAggregateRoot', {
         value: inscriptionAggregateRootMock,
       });

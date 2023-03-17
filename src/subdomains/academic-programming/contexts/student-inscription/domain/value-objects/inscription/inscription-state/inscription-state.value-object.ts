@@ -40,7 +40,7 @@ export class InscriptionStateValueObject extends ValueObjectBase<string> {
       this.setError({
         field: 'inscriptionState',
         message:
-          'El valor de InscriptionState no corresponde a un estado válido',
+          'El valor de InscriptionState no corresponde a un estado válido [cancelled, completed, active]',
       } as IErrorValueObject);
     }
   }

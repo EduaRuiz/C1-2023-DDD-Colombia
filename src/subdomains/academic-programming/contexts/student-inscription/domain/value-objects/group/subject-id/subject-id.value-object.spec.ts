@@ -5,7 +5,7 @@ describe('SubjectIdValueObject', () => {
   const mockIsUUID4 = jest.requireMock('@validations').IsUUID4;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if subject id is not a valid uuid v4', () => {
+    it('should set error if subject id is not a valid uuid v4', () => {
       // Arrange
       const value = 'invalid_uuid_v4';
       const expected = true;
@@ -22,7 +22,7 @@ describe('SubjectIdValueObject', () => {
       expect(subjectId.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if subject id is a valid uuid v4', () => {
+    it('should not set error if subject id is a valid uuid v4', () => {
       // Arrange
       const value = '48f9a778-2aaf-424e-a4e7-56c8b1d2cc39';
       const expected = false;

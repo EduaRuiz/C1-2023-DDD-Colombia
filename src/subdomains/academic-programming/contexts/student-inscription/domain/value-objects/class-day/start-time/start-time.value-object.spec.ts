@@ -6,7 +6,7 @@ describe('StartTimeValueObject', () => {
   const mockCheckNumberRange = jest.requireMock('@validations').NumberRange;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if startTime is empty', () => {
+    it('should set error if startTime is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -22,7 +22,7 @@ describe('StartTimeValueObject', () => {
       expect(startTime.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if startTime is not an integer', () => {
+    it('should set error if startTime is not an integer', () => {
       // Arrange
       const value = 8.5;
       const expected = true;
@@ -39,7 +39,7 @@ describe('StartTimeValueObject', () => {
       expect(startTime.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if startTime is not between 7:00 am and 8:00 pm, or equals to 1:00 pm', () => {
+    it('should set error if startTime is not between 7:00 am and 8:00 pm, or equals to 1:00 pm', () => {
       // Arrange
       const value1 = 6;
       const value2 = 21;
@@ -71,7 +71,7 @@ describe('StartTimeValueObject', () => {
       expect(startTime3.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if startTime is between 7:00 am and 8:00 pm, and not equals to 1:00 pm', () => {
+    it('should not set error if startTime is between 7:00 am and 8:00 pm, and not equals to 1:00 pm', () => {
       // Arrange
       const value1 = 7;
       const value2 = 14;

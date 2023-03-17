@@ -7,7 +7,7 @@ describe('FullNameValueObject', () => {
     jest.requireMock('@validations').StringRangeLength;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if fullName is empty', () => {
+    it('should set error if fullName is empty', () => {
       // Arrange
       const value = '';
       const expected = true;
@@ -23,7 +23,7 @@ describe('FullNameValueObject', () => {
       expect(fullName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if fullName is less than 10 characters', () => {
+    it('should set error if fullName is less than 10 characters', () => {
       // Arrange
       const value = 'John Doe';
       const expected = true;
@@ -41,7 +41,7 @@ describe('FullNameValueObject', () => {
       expect(fullName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if fullName is greater than 255 characters', () => {
+    it('should set error if fullName is greater than 255 characters', () => {
       // Arrange
       const value = 'a'.repeat(256);
       const expected = true;
@@ -59,7 +59,7 @@ describe('FullNameValueObject', () => {
       expect(fullName.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if fullName is between 10 and 255 characters', () => {
+    it('should not set error if fullName is between 10 and 255 characters', () => {
       // Arrange
       const value = 'John Doe Smith';
       const expected = false;

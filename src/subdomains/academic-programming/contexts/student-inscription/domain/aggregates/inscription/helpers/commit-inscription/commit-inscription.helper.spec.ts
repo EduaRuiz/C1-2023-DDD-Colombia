@@ -71,7 +71,7 @@ describe('CommitInscriptionHelper', () => {
     // subscribedGroupEvent = subscribedGroupEventMock;
   });
 
-  test('should throw an error if IInscriptionDomainService is not received', async () => {
+  it('should throw an error if IInscriptionDomainService is not received', async () => {
     // Arrange
     const inscriptionService = undefined;
     const expectedMessage =
@@ -90,7 +90,7 @@ describe('CommitInscriptionHelper', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if IGroupDomainService is not received', async () => {
+  it('should throw an error if IGroupDomainService is not received', async () => {
     // Arrange
     const groupService = undefined;
     const expectedMessage = 'Servicio del tipo IGroupDomainService no recibido';
@@ -108,7 +108,7 @@ describe('CommitInscriptionHelper', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if CommittedInscriptionEventPublisher is not received', async () => {
+  it('should throw an error if CommittedInscriptionEventPublisher is not received', async () => {
     // Arrange
     const committedInscriptionEvent = undefined;
     const expectedMessage =
@@ -127,7 +127,7 @@ describe('CommitInscriptionHelper', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if SubscribedGroupEventPublisher is not received', async () => {
+  it('should throw an error if SubscribedGroupEventPublisher is not received', async () => {
     // Arrange
     const subscribedGroupEvent = undefined;
     const expectedMessage =
@@ -146,7 +146,7 @@ describe('CommitInscriptionHelper', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if the student already has an active inscription for the semester', async () => {
+  it('should throw an error if the student already has an active inscription for the semester', async () => {
     // Arrange
     const expectedMessage =
       'El estudiante ya cuenta con una inscripción activa para el semestre informado';
@@ -175,7 +175,7 @@ describe('CommitInscriptionHelper', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if inscriptionId is undefined after commit', async () => {
+  it('should throw an error if inscriptionId is undefined after commit', async () => {
     // Arrange
     inscriptionService.commitInscription = jest.fn().mockResolvedValue({
       inscriptionId: undefined,
@@ -195,7 +195,7 @@ describe('CommitInscriptionHelper', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  // test('should call SubscribeGroupHelper for each group and return updated inscription', async () => {
+  // it('should call SubscribeGroupHelper for each group and return updated inscription', async () => {
   //   // Arrange
   //   const inscriptionSaved = {
   //     ...inscription,
@@ -236,7 +236,7 @@ describe('CommitInscriptionHelper', () => {
   //   expect(committedInscriptionEvent.publish).toHaveBeenCalledWith();
   // });
 
-  // test('should throw an error if there is an error subscribing a group', async () => {
+  // it('should throw an error if there is an error subscribing a group', async () => {
   //   // Arrange
   //   groupService.getAllGroupsByInscription = jest
   //     .fn()
@@ -256,7 +256,7 @@ describe('CommitInscriptionHelper', () => {
   //   expect(committedInscriptionEvent.publish).not.toHaveBeenCalled();
   // });
 
-  test('should call commitInscription and SubscribeGroupHelper functions and return the committed inscription', async () => {
+  it('should call commitInscription and SubscribeGroupHelper functions and return the committed inscription', async () => {
     // Arrange
     const expected = {
       ...inscription,

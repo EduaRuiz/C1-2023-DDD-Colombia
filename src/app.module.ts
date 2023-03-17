@@ -2,6 +2,7 @@ import { StudentInscriptionModule } from '@contexts/student-inscription/infrastr
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'node:path';
+import { AcademicOfferModule } from './subdomains/academic-programming/contexts/academic-offer/infrastructure/academic-offer.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { join } from 'node:path';
       ),
     }),
     StudentInscriptionModule,
+    AcademicOfferModule,
   ],
   controllers: [],
   providers: [],

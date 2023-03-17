@@ -6,7 +6,7 @@ describe('DurationValueObject', () => {
   const mockCheckNumberRange = jest.requireMock('@validations').NumberRange;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if duration is empty', () => {
+    it('should set error if duration is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -22,7 +22,7 @@ describe('DurationValueObject', () => {
       expect(duration.getErrors()[0]?.message).toBe(expectedMessage);
     });
     jest.clearAllMocks();
-    test('should set error if duration is less than 1 hour', () => {
+    it('should set error if duration is less than 1 hour', () => {
       // Arrange
       const value = 30;
       const expected = true;
@@ -40,7 +40,7 @@ describe('DurationValueObject', () => {
       expect(duration.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if duration is greater than 2 hours', () => {
+    it('should set error if duration is greater than 2 hours', () => {
       // Arrange
       const value = 180;
       const expected = true;
@@ -58,7 +58,7 @@ describe('DurationValueObject', () => {
       expect(duration.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if duration is between 1 and 2 hours', () => {
+    it('should not set error if duration is between 1 and 2 hours', () => {
       // Arrange
       const value = 90;
       const expected = false;

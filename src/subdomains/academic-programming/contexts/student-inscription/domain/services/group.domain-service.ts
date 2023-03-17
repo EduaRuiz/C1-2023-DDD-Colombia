@@ -32,11 +32,11 @@ export interface IGroupDomainService<
    * Método que deberá retornar un array de objetos del tipo GroupDomainEntity
    *
    * @param {string} subjectId UUID v4 de la materia para lista de grupos disponibles
-   * @param {string} semesterId UUID v4 del semestre para lista de grupos disponibles
+   * @param {string} groupState Estado del grupo que se espera se siempre abierto
    * @return {Promise<Entity[]>} Lista de grupos para inscripción
    * @memberof IGroupDomainService
    */
-  getAllGroups(subjectId: string, semesterId: string): Promise<Entity[]>;
+  getAllGroups(subjectId: string, groupState: string): Promise<Entity[]>;
 
   /**
    * Método que deberá retornar una confirmación en la suscripción a un grupo

@@ -16,7 +16,7 @@ export class AggregateRootExceptionFilter
     const response = context.getResponse<Response>();
     const message = exception.message;
     const statusCode = HttpStatus.BAD_REQUEST;
-    const errors = exception.name;
+    const errors = exception.message;
 
     response.status(statusCode).json({ statusCode, message, errors });
   }

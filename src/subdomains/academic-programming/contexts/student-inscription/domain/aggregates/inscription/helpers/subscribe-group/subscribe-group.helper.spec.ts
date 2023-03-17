@@ -29,7 +29,7 @@ describe('SubscribeGroupHelper function', () => {
           duration: 120,
         },
       ],
-      groupState: 'Open',
+      groupState: 'open',
       quoteAvailable: 5,
     } as unknown as GroupDomainEntity;
     currentGroups = [
@@ -48,7 +48,7 @@ describe('SubscribeGroupHelper function', () => {
             duration: 120,
           },
         ],
-        groupState: 'Open',
+        groupState: 'open',
         quoteAvailable: 5,
       } as unknown as GroupDomainEntity,
       {
@@ -66,7 +66,7 @@ describe('SubscribeGroupHelper function', () => {
             duration: 120,
           },
         ],
-        groupState: 'Open',
+        groupState: 'open',
         quoteAvailable: 5,
       } as unknown as GroupDomainEntity,
       {
@@ -84,7 +84,7 @@ describe('SubscribeGroupHelper function', () => {
             duration: 120,
           },
         ],
-        groupState: 'Open',
+        groupState: 'open',
         quoteAvailable: 5,
       } as unknown as GroupDomainEntity,
     ];
@@ -98,7 +98,7 @@ describe('SubscribeGroupHelper function', () => {
     } as unknown as SubscribedGroupEventPublisher;
   });
 
-  test('should throw an error if IGroupDomainService is not received', async () => {
+  it('should throw an error if IGroupDomainService is not received', async () => {
     // Arrange
     const service = undefined;
     const event = undefined;
@@ -111,7 +111,7 @@ describe('SubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if SubscribedGroupEventPublisher is not received', async () => {
+  it('should throw an error if SubscribedGroupEventPublisher is not received', async () => {
     // Arrange
     const service = serviceMock;
     const event = undefined;
@@ -125,7 +125,7 @@ describe('SubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if group has no available quotes', async () => {
+  it('should throw an error if group has no available quotes', async () => {
     // Arrange
     group.quoteAvailable = 0;
     const expectedMessage = 'No se puede inscribir grupos sin cupos';
@@ -139,7 +139,7 @@ describe('SubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if group is not open', async () => {
+  it('should throw an error if group is not open', async () => {
     // Arrange
     group.groupState = 'Closed';
     const expectedMessage = 'No se puede inscribir grupos no abiertos';
@@ -153,7 +153,7 @@ describe('SubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if group is already subscribed', async () => {
+  it('should throw an error if group is already subscribed', async () => {
     // Arrange
     const expectedMessage = 'No se puede inscribir grupos ya inscritos';
     const groups = [...currentGroups, group];
@@ -170,7 +170,7 @@ describe('SubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if there is another group with the same subject already subscribed', async () => {
+  it('should throw an error if there is another group with the same subject already subscribed', async () => {
     // Arrange
     const expectedMessage =
       'No se pueden inscribir grupos con la misma materia ya inscritas en otros grupos';
@@ -188,7 +188,7 @@ describe('SubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if the group to subscribe conflicts with other groups', async () => {
+  it('should throw an error if the group to subscribe conflicts with other groups', async () => {
     // Arrange
     const group1 = {
       groupId: 'group_123',
@@ -205,7 +205,7 @@ describe('SubscribeGroupHelper function', () => {
           duration: 120,
         },
       ],
-      groupState: 'Open',
+      groupState: 'open',
       quoteAvailable: 5,
     } as unknown as GroupDomainEntity;
     const group2 = {
@@ -223,7 +223,7 @@ describe('SubscribeGroupHelper function', () => {
           duration: 120,
         },
       ],
-      groupState: 'Open',
+      groupState: 'open',
       quoteAvailable: 5,
     } as unknown as GroupDomainEntity;
     const group3 = {
@@ -241,7 +241,7 @@ describe('SubscribeGroupHelper function', () => {
           duration: 120,
         },
       ],
-      groupState: 'Open',
+      groupState: 'open',
       quoteAvailable: 5,
     } as unknown as GroupDomainEntity;
     // group.classDays = [
@@ -277,7 +277,7 @@ describe('SubscribeGroupHelper function', () => {
     await expect(result3).rejects.toThrow(expectedMessage);
   });
 
-  test('should return a GroupDomainEntity object and publish the event', async () => {
+  it('should return a GroupDomainEntity object and publish the event', async () => {
     // Arrange
     const expected = group;
     serviceMock.getAllGroupsByInscription = jest
@@ -298,7 +298,7 @@ describe('SubscribeGroupHelper function', () => {
 });
 
 describe('scheduleAvailable function', () => {
-  test('should return true if the schedules do not conflict', () => {
+  it('should return true if the schedules do not conflict', () => {
     // Arrange
     const newGroup = {
       classDays: [
@@ -333,7 +333,7 @@ describe('scheduleAvailable function', () => {
     // Assert
     expect(result).toBeTruthy();
   });
-  test('should return false if the schedules do conflict', () => {
+  it('should return false if the schedules do conflict', () => {
     // Arrange
     const newGroup = {
       classDays: [

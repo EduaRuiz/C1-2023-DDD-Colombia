@@ -5,7 +5,7 @@ describe('InscriptionStateValueObject', () => {
   const mockCheckIsEmpty = jest.requireMock('@validations').IsEmpty;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if inscriptionState is empty', () => {
+    it('should set error if inscriptionState is empty', () => {
       // Arrange
       const value = '';
       const expected = true;
@@ -21,13 +21,13 @@ describe('InscriptionStateValueObject', () => {
       expect(inscriptionState.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if inscriptionState is not a valid state', () => {
+    it('should set error if inscriptionState is not a valid state', () => {
       // Arrange
       const value = 'invalid';
       const expected = true;
       const expectedField = 'inscriptionState';
       const expectedMessage =
-        'El valor de InscriptionState no corresponde a un estado válido';
+        'El valor de InscriptionState no corresponde a un estado válido [cancelled, completed, active]';
       // Act
       mockCheckIsEmpty.mockReturnValue(false);
       const inscriptionState = new InscriptionStateValueObject(value);
@@ -38,7 +38,7 @@ describe('InscriptionStateValueObject', () => {
       expect(inscriptionState.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if inscriptionState is valid', () => {
+    it('should not set error if inscriptionState is valid', () => {
       // Arrange
       const value = 'active';
       const expected = false;

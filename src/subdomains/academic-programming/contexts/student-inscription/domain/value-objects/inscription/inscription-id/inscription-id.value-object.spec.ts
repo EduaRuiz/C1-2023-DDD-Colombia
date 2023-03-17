@@ -7,7 +7,7 @@ describe('InscriptionIdValueObject', () => {
   beforeEach(() => jest.clearAllMocks());
 
   describe('constructor', () => {
-    test('should create a new instance with the provided value', () => {
+    it('should create a new instance with the provided value', () => {
       // Arrange
       const value = 'd83405ee-7ce6-4f2f-aa75-11a8c7b9f9b2';
       // Act
@@ -19,7 +19,7 @@ describe('InscriptionIdValueObject', () => {
       expect(inscriptionId.value).toBe(value);
     });
 
-    test('should create a new instance with non provided value', () => {
+    it('should create a new instance with non provided value', () => {
       // Arrange
       const expected = false;
       // Act
@@ -31,7 +31,7 @@ describe('InscriptionIdValueObject', () => {
       expect(inscriptionId.hasErrors()).toBe(expected);
     });
 
-    test('should set error if value is null, "", etc', () => {
+    it('should set error if value is null, "", etc', () => {
       // Arrange
       const value = '';
       const expected = true;
@@ -49,7 +49,7 @@ describe('InscriptionIdValueObject', () => {
   });
 
   describe('validateData', () => {
-    test('should set error if inscriptionId is not a valid uuid', () => {
+    it('should set error if inscriptionId is not a valid uuid', () => {
       // Arrange
       const value = 'Id';
       const expected = true;
@@ -67,7 +67,7 @@ describe('InscriptionIdValueObject', () => {
       expect(inscriptionId.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if inscriptionId is a valid uuid', () => {
+    it('should not set error if inscriptionId is a valid uuid', () => {
       // Arrange
       const value = 'd83405ee-7ce6-4f2f-aa75-11a8c7b9f9b2';
       const expected = false;

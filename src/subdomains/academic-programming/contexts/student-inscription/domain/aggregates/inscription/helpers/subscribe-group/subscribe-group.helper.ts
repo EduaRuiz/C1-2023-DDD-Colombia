@@ -57,7 +57,7 @@ export const canSuscribeGroup = (
     );
   }
   if (currentGroups.length != 0) {
-    currentGroups.map((currentGroup) => {
+    for (const currentGroup of currentGroups) {
       if (currentGroup.groupId === newGroup.groupId) {
         throw new AggregateRootException(
           'No se puede inscribir grupos ya inscritos',
@@ -73,7 +73,7 @@ export const canSuscribeGroup = (
           'No se puede inscribir grupos que se cruzan en horarios con otros grupos ya inscritos',
         );
       }
-    });
+    }
   }
 };
 
@@ -89,8 +89,8 @@ export const scheduleAvailable = (
   currentGroup: GroupDomainEntity,
 ): boolean => {
   let answer = true;
-  newGroup.classDays.map((newClassDay) => {
-    currentGroup.classDays.map((currentClassDay) => {
+  for (const newClassDay of newGroup.classDays) {
+    for (const currentClassDay of currentGroup.classDays) {
       if (currentClassDay.weekDay.valueOf() === newClassDay.weekDay.valueOf()) {
         if (
           currentClassDay.startTime.valueOf() ===
@@ -115,7 +115,7 @@ export const scheduleAvailable = (
           }
         }
       }
-    });
-  });
+    }
+  }
   return answer;
 };

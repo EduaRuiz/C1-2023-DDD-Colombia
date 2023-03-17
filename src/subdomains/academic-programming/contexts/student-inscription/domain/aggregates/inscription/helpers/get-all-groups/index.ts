@@ -1,2 +1,2 @@
 
-export * from './get-all-groups.helper';
+export {default as GetAllGroupsHelper} from './get-all-groups.helper';

@@ -5,7 +5,7 @@ describe('YearValueObject', () => {
   const mockCheckIsEmpty = jest.requireMock('@validations').IsEmpty;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if year is empty', () => {
+    it('should set error if year is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -21,7 +21,7 @@ describe('YearValueObject', () => {
       expect(year.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if year is not current year', () => {
+    it('should set error if year is not current year', () => {
       // Arrange
       const value = new Date('2022-01-01');
       const expected = true;
@@ -38,7 +38,7 @@ describe('YearValueObject', () => {
       expect(year.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if year is current year', () => {
+    it('should not set error if year is current year', () => {
       // Arrange
       const value = new Date();
       const expected = true;

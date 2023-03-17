@@ -23,7 +23,7 @@ describe('GetInscriptionHelper function', () => {
     } as unknown as GotInscriptionInfoEventPublisher;
   });
 
-  test('should throw an error if IInscriptionDomainService is not received', async () => {
+  it('should throw an error if IInscriptionDomainService is not received', async () => {
     // Arrange
     const service = undefined;
     const event = undefined;
@@ -36,7 +36,7 @@ describe('GetInscriptionHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if GotInscriptionInfoEventPublisher is not received', async () => {
+  it('should throw an error if GotInscriptionInfoEventPublisher is not received', async () => {
     // Arrange
     const service = serviceMock;
     const event = undefined;
@@ -49,7 +49,7 @@ describe('GetInscriptionHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should return an InscriptionDomainEntity object and publish the event', async () => {
+  it('should return an InscriptionDomainEntity object and publish the event', async () => {
     // Arrange
     const expected = inscription;
     const service = serviceMock;

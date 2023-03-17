@@ -5,7 +5,7 @@ describe('PartValueObject', () => {
   const mockCheckIsEmpty = jest.requireMock('@validations').IsEmpty;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if part is empty', () => {
+    it('should set error if part is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -21,7 +21,7 @@ describe('PartValueObject', () => {
       expect(part.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if part is not 1 or 2', () => {
+    it('should set error if part is not 1 or 2', () => {
       // Arrange
       const value = 3;
       const expected = true;
@@ -37,7 +37,7 @@ describe('PartValueObject', () => {
       expect(part.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if part is 1 or 2', () => {
+    it('should not set error if part is 1 or 2', () => {
       // Arrange
       const value = 1;
       const expected = false;

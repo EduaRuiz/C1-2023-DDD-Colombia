@@ -26,7 +26,7 @@ describe('UnsubscribeGroupHelper function', () => {
     } as unknown as UnsubscribedGroupEventPublisher;
   });
 
-  test('should throw an error if IGroupDomainService is not received', async () => {
+  it('should throw an error if IGroupDomainService is not received', async () => {
     // Arrange
     const service = undefined;
     const event = undefined;
@@ -39,7 +39,7 @@ describe('UnsubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if UnsubscribedGroupEventPublisher is not received', async () => {
+  it('should throw an error if UnsubscribedGroupEventPublisher is not received', async () => {
     // Arrange
     const service = serviceMock;
     const event = undefined;
@@ -53,7 +53,7 @@ describe('UnsubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if there is only one group in the inscription', async () => {
+  it('should throw an error if there is only one group in the inscription', async () => {
     // Arrange
     const expectedMessage =
       'no se puede remover el grupo siendo este el único dentro de la inscripción';
@@ -71,7 +71,7 @@ describe('UnsubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if the group to unsubscribe does not exist in the inscription', async () => {
+  it('should throw an error if the group to unsubscribe does not exist in the inscription', async () => {
     // Arrange
     groupId = 'another';
     const expectedMessage =
@@ -90,7 +90,7 @@ describe('UnsubscribeGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should return a GroupDomainEntity object and publish the event', async () => {
+  it('should return a GroupDomainEntity object and publish the event', async () => {
     // Arrange
     const expected = group;
     const groups = [group, { groupId: 'ddddd' }];

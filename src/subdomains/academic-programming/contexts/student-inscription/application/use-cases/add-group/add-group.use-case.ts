@@ -2,7 +2,11 @@ import {
   IAddGroupCommand,
   IAddedGroupResponse,
 } from '@contexts/student-inscription/domain/interfaces';
-import { EventPublisherBase, ValueObjectErrorHandler } from '@sofka/bases';
+import {
+  EventPublisherBase,
+  ValueObjectBase,
+  ValueObjectErrorHandler,
+} from '@sofka/bases';
 import { IUseCase } from '@sofka/interfaces';
 import {
   GotGroupInfoEventPublisher,
@@ -26,13 +30,13 @@ export class AddGroupUseCase
   extends ValueObjectErrorHandler
   implements IUseCase<IAddGroupCommand, IAddedGroupResponse>
 {
-  // /**
-  //  * Instancia del agregado root
-  //  *
-  //  * @private
-  //  * @type {InscriptionAggregateRoot}
-  //  * @memberof AddGroupUseCase
-  //  */
+  /**
+   * Instancia del agregado root
+   *
+   * @private
+   * @type {InscriptionAggregateRoot}
+   * @memberof AddGroupUseCase
+   */
   private readonly inscriptionAggregateRoot: InscriptionAggregateRoot;
 
   /**
@@ -40,9 +44,6 @@ export class AddGroupUseCase
    *
    * @param {SubscribedGroupEventPublisher} subscribedGroupEventPublisher Evento publicador de la suscripción
    * @param {IGroupDomainService} group$ Servicio que gestiona los grupos
-   * @param {GroupIdExistQuery} groupIdExistQuery Query que valida la existencia del grupo a inscribir
-   * @param {InscriptionIdExistQuery} inscriptionIdExistQuery Query que valida la existencia de la inscripción a actualizar
-   * @param {SubjectIdExistQuery} subjectIdExistQuery Query que valida la existencia de la materia a inscribir
    * @memberof AddGroupUseCase
    */
   constructor(
@@ -67,23 +68,71 @@ export class AddGroupUseCase
    * @memberof AddGroupUseCase
    */
   async execute(command: IAddGroupCommand): Promise<IAddedGroupResponse> {
+    this.validateCommand(command);
+    const valueObjects = this.createValueObjects(command);
+    this.validateValueObjects(valueObjects);
+    const group = await this.inscriptionAggregateRoot.getGroup(
+      command.groupId.valueOf(),
+    );
+    const data = await this.inscriptionAggregateRoot.subscribeGroup(
+      command.inscriptionId.valueOf(),
+      group,
+    );
+    return { success: data ? true : false, data };
+  }
+
+  /**
+   * Valida si el comando no tiene valores indefinidos
+   *
+   * @private
+   * @param {ICommitInscriptionCommand} command Objeto con toda la información necesaria
+   * @memberof CommitInscriptionUseCase
+   */
+  private validateCommand(command: IAddGroupCommand): void {
+    if (!command.groupId || !command.inscriptionId) {
+      throw new ValueObjectException(
+        `commando invalido groupId e inscriptionId, deben ser enviados, ${JSON.stringify(
+          command,
+        )}`,
+        this.getErrors(),
+      );
+    }
+  }
+
+  /**
+   * Crea los Objetos de valor que se van a evaluar
+   *
+   * @private
+   * @param {ICommitInscriptionCommand} command Objeto con toda la información necesaria
+   * @return {ValueObjectBase<any>[]} Retorna Array de objetos de valor
+   * @memberof CommitInscriptionUseCase
+   */
+  private createValueObjects(
+    command: IAddGroupCommand,
+  ): ValueObjectBase<any>[] {
     const inscriptionId = new InscriptionIdValueObject(command.inscriptionId);
     const groupId = new GroupIdValueObject(command.groupId);
-    if (inscriptionId.hasErrors()) this.setErrors(inscriptionId.getErrors());
-    if (groupId.hasErrors()) this.setErrors(groupId.getErrors());
+    return [inscriptionId, groupId];
+  }
+
+  /**
+   * Valida todos los objetos de valor
+   *
+   * @private
+   * @param {ValueObjectBase<any>[]} valueObjects Lista de objetos de valor
+   * @memberof CommitInscriptionUseCase
+   */
+  private validateValueObjects(valueObjects: ValueObjectBase<any>[]) {
+    for (const valueObject of valueObjects) {
+      if (valueObject.hasErrors()) {
+        this.setErrors(valueObject.getErrors());
+      }
+    }
     if (this.hasErrors()) {
       throw new ValueObjectException(
         'Existen algunos errores en el comando',
         this.getErrors(),
       );
     }
-    const group = await this.inscriptionAggregateRoot.getGroup(
-      command.groupId.valueOf(),
-    );
-    const data = await this.inscriptionAggregateRoot.subscribeGroup(
-      inscriptionId.valueOf(),
-      group,
-    );
-    return { success: data ? true : false, data };
   }
 }

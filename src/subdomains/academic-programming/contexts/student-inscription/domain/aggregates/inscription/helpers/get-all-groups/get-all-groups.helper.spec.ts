@@ -32,7 +32,7 @@ describe('GetAllClassDaysByGroupHelper function', () => {
     helper = GetAllGroupsHelper;
   });
 
-  test('should throw an error if IGroupDomainService is not received', async () => {
+  it('should throw an error if IGroupDomainService is not received', async () => {
     // Arrange
     const service = undefined;
     const event = undefined;
@@ -44,7 +44,7 @@ describe('GetAllClassDaysByGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if GotGroupsEventPublisher is not received', async () => {
+  it('should throw an error if GotGroupsEventPublisher is not received', async () => {
     // Arrange
     const service = serviceMock;
     const event = undefined;
@@ -57,7 +57,7 @@ describe('GetAllClassDaysByGroupHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should return an array of ClassDayDomainEntity and publish the event', async () => {
+  it('should return an array of ClassDayDomainEntity and publish the event', async () => {
     // Arrange
     const expected = allGroups;
     const service = serviceMock;

@@ -5,7 +5,7 @@ describe('DateTimeValueObject', () => {
   const mockCurrentDateTime = jest.requireMock('@validations').CurrentDateTime;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if date is more than 1 second away from current date', () => {
+    it('should set error if date is more than 1 second away from current date', () => {
       // Arrange
       const now = new Date();
       const value = new Date(now.setSeconds(now.getSeconds() - 2));
@@ -23,7 +23,7 @@ describe('DateTimeValueObject', () => {
       expect(date.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if date is less than or equal to 1 second away from current date', () => {
+    it('should not set error if date is less than or equal to 1 second away from current date', () => {
       // Arrange
       const now = new Date();
       const value = new Date(now.setSeconds(now.getSeconds() - 1));
@@ -36,7 +36,7 @@ describe('DateTimeValueObject', () => {
       expect(date.hasErrors()).toBe(expected);
     });
 
-    test('should not set error if date is less than or equal to 1 second away from current date', () => {
+    it('should not set error if date is less than or equal to 1 second away from current date', () => {
       // Arrange
       const expected = false;
       // Act

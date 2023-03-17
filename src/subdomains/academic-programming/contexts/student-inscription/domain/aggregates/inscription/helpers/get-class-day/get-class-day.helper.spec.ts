@@ -23,7 +23,7 @@ describe('GetClassDayHelper function', () => {
     } as unknown as GotClassDayInfoEventPublisher;
   });
 
-  test('should throw an error if IClassDayDomainService is not received', async () => {
+  it('should throw an error if IClassDayDomainService is not received', async () => {
     // Arrange
     const service = undefined;
     const event = undefined;
@@ -36,7 +36,7 @@ describe('GetClassDayHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if GotClassDayInfoEventPublisher is not received', async () => {
+  it('should throw an error if GotClassDayInfoEventPublisher is not received', async () => {
     // Arrange
     const service = serviceMock;
     const event = undefined;
@@ -49,7 +49,7 @@ describe('GetClassDayHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should return a ClassDayDomainEntity object and publish the event', async () => {
+  it('should return a ClassDayDomainEntity object and publish the event', async () => {
     // Arrange
     const expected = classDay;
     const service = serviceMock;

@@ -23,7 +23,7 @@ describe('GetSemesterHelper function', () => {
     } as unknown as GotSemesterInfoEventPublisher;
   });
 
-  test('should throw an error if ISemesterDomainService is not received', async () => {
+  it('should throw an error if ISemesterDomainService is not received', async () => {
     // Arrange
     const service = undefined;
     const event = undefined;
@@ -36,7 +36,7 @@ describe('GetSemesterHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should throw an error if GotSemesterInfoEventPublisher is not received', async () => {
+  it('should throw an error if GotSemesterInfoEventPublisher is not received', async () => {
     // Arrange
     const service = serviceMock;
     const event = undefined;
@@ -49,7 +49,7 @@ describe('GetSemesterHelper function', () => {
     await expect(result).rejects.toThrow(expectedMessage);
   });
 
-  test('should return a SemesterDomainEntity object and publish the event', async () => {
+  it('should return a SemesterDomainEntity object and publish the event', async () => {
     // Arrange
     const expected = semester;
     const service = serviceMock;

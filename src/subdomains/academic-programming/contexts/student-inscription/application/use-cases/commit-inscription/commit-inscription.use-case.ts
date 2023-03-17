@@ -32,15 +32,37 @@ import {
 import { ValueObjectException } from '@sofka/exceptions';
 import { IUseCase } from '@sofka/interfaces';
 
+/**
+ * Genera el caso de uso al crear una inscripcion
+ *
+ * @export
+ * @class CommitInscriptionUseCase
+ * @extends {ValueObjectErrorHandler}
+ * @implements {IUseCase<ICommitInscriptionCommand, ICommittedInscriptionResponse>}
+ */
 export class CommitInscriptionUseCase
   extends ValueObjectErrorHandler
   implements IUseCase<ICommitInscriptionCommand, ICommittedInscriptionResponse>
 {
   private readonly inscriptionAggregateRoot: InscriptionAggregateRoot;
 
+  /**
+   * Crea la instancia de CommitInscriptionUseCase.
+   *
+   * @param {IInscriptionDomainService} inscription$ Servicio de inscripcion
+   * @param {IGroupDomainService} group$ Servicio de grupos
+   * @param {IStudentDomainService} student$ Servicio de estudiantes
+   * @param {ISemesterDomainService} semester$ Servicio de semestres
+   * @param {CommittedInscriptionEventPublisher} committedInscriptionEventPublisher Publicador del caso de uso
+   * @param {GotGroupInfoEventPublisher} gotGroupInfoEventPublisher Publicador de grupos consultados
+   * @param {GotStudentInfoEventPublisher} gotStudentInfoEventPublisher Publicador de estudiantes consultados
+   * @param {GotSemesterInfoEventPublisher} gotSemesterInfoEventPublisher Publicador de semestres consultados
+   * @param {SubscribedGroupEventPublisher} subscribedGroupEventPublisher Publicador de grupos suscritos
+   * @memberof CommitInscriptionUseCase
+   */
   constructor(
     inscription$: IInscriptionDomainService,
-    group$: IGroupDomainService,
+    private readonly group$: IGroupDomainService,
     student$: IStudentDomainService,
     semester$: ISemesterDomainService,
     committedInscriptionEventPublisher: CommittedInscriptionEventPublisher,
@@ -64,6 +86,13 @@ export class CommitInscriptionUseCase
       semester$,
     });
   }
+  /**
+   * Método que ejecuta todo el caso de uso
+   *
+   * @param {ICommitInscriptionCommand} command Comando con la información necesaria
+   * @return {Promise<ICommittedInscriptionResponse>} Retorna la entidad al crearla
+   * @memberof CommitInscriptionUseCase
+   */
   async execute(
     command: ICommitInscriptionCommand,
   ): Promise<ICommittedInscriptionResponse> {
@@ -71,6 +100,14 @@ export class CommitInscriptionUseCase
     return { success: data ? true : false, data };
   }
 
+  /**
+   * Reparte las responsabilidad
+   *
+   * @private
+   * @param {ICommitInscriptionCommand} command Objeto con toda la información necesaria
+   * @return {(Promise<InscriptionDomainEntity | null>)} Retorna la entidad creada o en su defecto u null
+   * @memberof CommitInscriptionUseCase
+   */
   private async executeCommand(
     command: ICommitInscriptionCommand,
   ): Promise<InscriptionDomainEntity | null> {
@@ -81,6 +118,13 @@ export class CommitInscriptionUseCase
     return this.executeAggregateRoot(entity);
   }
 
+  /**
+   * Valida si el comando no tiene valores indefinidos
+   *
+   * @private
+   * @param {ICommitInscriptionCommand} command Objeto con toda la información necesaria
+   * @memberof CommitInscriptionUseCase
+   */
   private validateCommand(command: ICommitInscriptionCommand): void {
     if (!command.groupIds || !command.semesterId || !command.studentId) {
       throw new ValueObjectException(
@@ -92,13 +136,21 @@ export class CommitInscriptionUseCase
     }
   }
 
+  /**
+   * Crea los Objetos de valor que se van a evaluar
+   *
+   * @private
+   * @param {ICommitInscriptionCommand} command Objeto con toda la información necesaria
+   * @return {ValueObjectBase<any>[]} Retorna Array de objetos de valor
+   * @memberof CommitInscriptionUseCase
+   */
   private createValueObjects(
     command: ICommitInscriptionCommand,
   ): ValueObjectBase<any>[] {
     const groupIdsValueObjects: GroupIdValueObject[] = [];
-    command.groupIds.map((groupId) => {
+    for (const groupId of command.groupIds) {
       groupIdsValueObjects.push(new GroupIdValueObject(groupId));
-    });
+    }
     const semesterId = new SemesterIdValueObject(command.semesterId);
     const studentId = new StudentIdValueObject(command.semesterId);
     const dateTime = new DateTimeValueObject();
@@ -112,12 +164,19 @@ export class CommitInscriptionUseCase
     ];
   }
 
+  /**
+   * Valida todos los objetos de valor
+   *
+   * @private
+   * @param {ValueObjectBase<any>[]} valueObjects Lista de objetos de valor
+   * @memberof CommitInscriptionUseCase
+   */
   private validateValueObjects(valueObjects: ValueObjectBase<any>[]) {
-    valueObjects.map((valueObject) => {
+    for (const valueObject of valueObjects) {
       if (valueObject.hasErrors()) {
         this.setErrors(valueObject.getErrors());
       }
-    });
+    }
     if (this.hasErrors()) {
       throw new ValueObjectException(
         'Existen algunos errores en el comando',
@@ -126,20 +185,28 @@ export class CommitInscriptionUseCase
     }
   }
 
+  /**
+   * Genera la entidad a ser enviada en el agregado
+   *
+   * @private
+   * @param {ICommitInscriptionCommand} command Objeto con toda la información necesaria
+   * @return {Promise<InscriptionDomainEntity>} Entidad a crear
+   * @memberof CommitInscriptionUseCase
+   */
   private async createEntityInscription(
     command: ICommitInscriptionCommand,
   ): Promise<InscriptionDomainEntity> {
-    const groups: GroupDomainEntity[] = [];
-    command.groupIds.map(async (groupId) => {
-      const group = await this.inscriptionAggregateRoot.getGroup(groupId);
-      groups.push(group);
-    });
     const student = await this.inscriptionAggregateRoot.getStudent(
       command.studentId,
     );
     const semester = await this.inscriptionAggregateRoot.getSemester(
       command.semesterId,
     );
+    const groups: GroupDomainEntity[] = [];
+    for (const groupId of command.groupIds) {
+      const group = await this.group$.getGroup(groupId);
+      groups.push(group);
+    }
     return new InscriptionDomainEntity(
       student,
       semester,
@@ -149,6 +216,14 @@ export class CommitInscriptionUseCase
     );
   }
 
+  /**
+   * Ejecuta el método del agregado encargado del final del proceso
+   *
+   * @private
+   * @param {InscriptionDomainEntity} entity Entidad a guardar
+   * @return {(Promise<InscriptionDomainEntity | null>)} Retorna la entidad guardada o null
+   * @memberof CommitInscriptionUseCase
+   */
   private executeAggregateRoot(
     entity: InscriptionDomainEntity,
   ): Promise<InscriptionDomainEntity | null> {

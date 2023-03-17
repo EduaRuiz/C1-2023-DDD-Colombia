@@ -217,17 +217,18 @@ export class InscriptionAggregateRoot
    * para esto es necesario dicho servicio y un evento del tipo GotGroupsEventPublisher
    * inyectados desde el constructor
    *
-   * @param {string} studentId UUID v4 del estudiante para traer los grupos
+   * @param {string} subjectId UUID v4 de la materia
+   * @param {string} groupState Estado del grupo
    * @return {Promise<GroupDomainEntity[]>} Retorna la lista de Groups de la Inscription correspondiente
    * @memberof InscriptionAggregateRoot
    */
   getAllGroups(
     subjectId: string,
-    semesterId: string,
+    groupState: string,
   ): Promise<GroupDomainEntity[]> {
     return GetAllGroupsHelper(
       subjectId,
-      semesterId,
+      groupState,
       this.group$,
       this.events.get(Topic.GotGroups),
     );

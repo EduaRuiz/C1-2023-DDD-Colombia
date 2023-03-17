@@ -27,41 +27,25 @@ export class SemesterPostgresRepository
       ...entity,
       semesterId: entityId,
     };
-    try {
-      return this.semesterPostgresEntity.save(entityUpdated);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.semesterPostgresEntity.save(entityUpdated);
   }
 
   async delete(entityId: string): Promise<SemesterPostgresEntity> {
     const currentEntity = await this.findOneById(entityId);
-    try {
-      return this.semesterPostgresEntity.remove(currentEntity);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.semesterPostgresEntity.remove(currentEntity);
   }
 
   findAll(): Promise<SemesterPostgresEntity[]> {
-    try {
-      return this.semesterPostgresEntity.find();
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.semesterPostgresEntity.find();
   }
 
   async findOneById(entityId: string): Promise<SemesterPostgresEntity> {
-    try {
-      const currentEntity = await this.semesterPostgresEntity.findOne({
-        where: { semesterId: entityId },
-      });
-      if (currentEntity) {
-        return currentEntity;
-      }
-      throw new NotFoundException('Semestre no encontrado');
-    } catch (error) {
-      throw new NotFoundException('Semestre no encontrado ' + error);
+    const currentEntity = await this.semesterPostgresEntity.findOne({
+      where: { semesterId: entityId },
+    });
+    if (currentEntity) {
+      return currentEntity;
     }
+    throw new NotFoundException('Semestre no encontrado');
   }
 }

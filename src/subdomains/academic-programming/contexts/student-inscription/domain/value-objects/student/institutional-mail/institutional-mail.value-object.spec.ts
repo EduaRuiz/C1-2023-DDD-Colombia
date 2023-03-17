@@ -8,7 +8,7 @@ describe('InstitutionalMailValueObject', () => {
     jest.requireMock('@validations').IsInstitutionalMail;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if institutionalMail is empty', () => {
+    it('should set error if institutionalMail is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -24,7 +24,7 @@ describe('InstitutionalMailValueObject', () => {
       expect(institutionalMail.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if institutionalMail is not a valid email structure', () => {
+    it('should set error if institutionalMail is not a valid email structure', () => {
       // Arrange
       const value = 'invalid email';
       const expected = true;
@@ -42,7 +42,7 @@ describe('InstitutionalMailValueObject', () => {
       expect(institutionalMail.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if institutionalMail is not an institutional email', () => {
+    it('should set error if institutionalMail is not an institutional email', () => {
       // Arrange
       const value = 'example@gmail.com';
       const expected = true;
@@ -61,7 +61,7 @@ describe('InstitutionalMailValueObject', () => {
       expect(institutionalMail.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if institutionalMail is valid', () => {
+    it('should not set error if institutionalMail is valid', () => {
       // Arrange
       const value = 'example@sofka.com';
       const expected = false;

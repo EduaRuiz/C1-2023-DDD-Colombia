@@ -5,7 +5,7 @@ describe('GroupStateValueObject', () => {
   const mockCheckIsEmpty = jest.requireMock('@validations').IsEmpty;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if GroupState is empty', () => {
+    it('should set error if GroupState is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -21,7 +21,7 @@ describe('GroupStateValueObject', () => {
       expect(groupState.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if GroupState is not a valid state', () => {
+    it('should set error if GroupState is not a valid state', () => {
       // Arrange
       const value = 'invalid';
       const expected = true;
@@ -38,7 +38,7 @@ describe('GroupStateValueObject', () => {
       expect(groupState.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if GroupState is a valid state', () => {
+    it('should not set error if GroupState is a valid state', () => {
       // Arrange
       const value = 'open';
       const expected = false;

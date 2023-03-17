@@ -8,11 +8,14 @@ import {
   NotFoundExceptionFilter,
   ObjectValueExceptionFilter,
 } from './utils/exception-filters';
+import { HttpModule } from '@nestjs/axios';
+import { SubjectIdExistService } from './utils/services';
 
 @Module({
-  imports: [PersistenceModule, MessagingModule],
+  imports: [HttpModule, PersistenceModule, MessagingModule],
   controllers: [StudentInscriptionController],
   providers: [
+    SubjectIdExistService,
     {
       provide: APP_FILTER,
       useClass: ObjectValueExceptionFilter,

@@ -6,7 +6,7 @@ describe('ClassDayIdValueObject', () => {
   const mockCheckIsEmpty = jest.requireMock('@validations').IsEmpty;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should not set error if value is a valid UUID v4', () => {
+    it('should not set error if value is a valid UUID v4', () => {
       // Arrange
       const value = '56352ab1-2118-4112-9e82-70df36a7d0af';
       const expected = false;
@@ -20,7 +20,7 @@ describe('ClassDayIdValueObject', () => {
       expect(classDayId.hasErrors()).toBe(expected);
     });
 
-    test('should set error if id is not a valid UUID', () => {
+    it('should set error if id is not a valid UUID', () => {
       // Arrange
       const value = 'not-a-uuid';
       const expected = true;
@@ -38,7 +38,7 @@ describe('ClassDayIdValueObject', () => {
       expect(classDayId.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if value is empty', () => {
+    it('should set error if value is empty', () => {
       // Arrange
       const value = '';
       const expected = true;

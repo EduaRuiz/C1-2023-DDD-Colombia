@@ -6,7 +6,7 @@ describe('QuotaAvailableValueObject', () => {
   const mockCheckNumberRange = jest.requireMock('@validations').NumberRange;
   beforeEach(() => jest.clearAllMocks());
   describe('validateData', () => {
-    test('should set error if quotaAvailable is empty', () => {
+    it('should set error if quotaAvailable is empty', () => {
       // Arrange
       const value = undefined;
       const expected = true;
@@ -22,7 +22,7 @@ describe('QuotaAvailableValueObject', () => {
       expect(quotaAvailable.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if quotaAvailable is less than 0', () => {
+    it('should set error if quotaAvailable is less than 0', () => {
       // Arrange
       const value = -5;
       const expected = true;
@@ -40,7 +40,7 @@ describe('QuotaAvailableValueObject', () => {
       expect(quotaAvailable.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should set error if quotaAvailable is greater than 30', () => {
+    it('should set error if quotaAvailable is greater than 30', () => {
       // Arrange
       const value = 31;
       const expected = true;
@@ -58,7 +58,7 @@ describe('QuotaAvailableValueObject', () => {
       expect(quotaAvailable.getErrors()[0]?.message).toBe(expectedMessage);
     });
 
-    test('should not set error if quotaAvailable is between 0 and 30', () => {
+    it('should not set error if quotaAvailable is between 0 and 30', () => {
       // Arrange
       const value = 15;
       const expected = false;

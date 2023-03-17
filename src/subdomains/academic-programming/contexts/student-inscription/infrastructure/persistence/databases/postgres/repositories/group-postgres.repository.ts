@@ -2,7 +2,7 @@ import { IRepositoryBaseInterface } from './interfaces';
 import { GroupPostgresEntity } from '../entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 
 export class GroupPostgresRepository
   implements IRepositoryBaseInterface<GroupPostgresEntity>
@@ -25,28 +25,16 @@ export class GroupPostgresRepository
       ...entity,
       groupId: entityId,
     };
-    try {
-      return this.groupPostgresEntity.save(entityUpdated);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.groupPostgresEntity.save(entityUpdated);
   }
 
   async delete(entityId: string): Promise<GroupPostgresEntity> {
     const currentEntity = await this.findOneById(entityId);
-    try {
-      return this.groupPostgresEntity.remove(currentEntity);
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.groupPostgresEntity.remove(currentEntity);
   }
 
   findAll(): Promise<GroupPostgresEntity[]> {
-    try {
-      return this.groupPostgresEntity.find({ relations: ['classDays'] });
-    } catch (error) {
-      throw new BadRequestException(error);
-    }
+    return this.groupPostgresEntity.find({ relations: ['classDays'] });
   }
 
   async findOneById(entityId: string): Promise<GroupPostgresEntity> {

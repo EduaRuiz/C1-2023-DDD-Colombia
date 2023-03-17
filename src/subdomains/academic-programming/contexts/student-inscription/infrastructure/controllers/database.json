@@ -1,0 +1,954 @@
+{
+  "groups": [
+    {
+      "professorName": "Profesor 0",
+      "subjectId": "ad8d5023-1760-421a-815c-366bd79386e5",
+      "subjectName": "Subject 0",
+      "groupState": "open",
+      "quoteAvailable": 20,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 18,
+          "duration": 107
+        },
+        {
+          "weekDay": "MC",
+          "startTime": 15,
+          "duration": 113
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 1",
+      "subjectId": "dc75123c-79d7-4da4-8c63-b88a0d6f6961",
+      "subjectName": "Subject 1",
+      "groupState": "open",
+      "quoteAvailable": 38,
+      "classDays": [
+        {
+          "weekDay": "M",
+          "startTime": 12,
+          "duration": 100
+        },
+        {
+          "weekDay": "L",
+          "startTime": 13,
+          "duration": 105
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 2",
+      "subjectId": "f191c8c3-9ca1-4248-80db-12098c7eca8b",
+      "subjectName": "Subject 2",
+      "groupState": "cancelled",
+      "quoteAvailable": 4,
+      "classDays": [
+        {
+          "weekDay": "M",
+          "startTime": 8,
+          "duration": 97
+        },
+        {
+          "weekDay": "J",
+          "startTime": 14,
+          "duration": 73
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 3",
+      "subjectId": "f46fb994-6fbd-41bf-8d9f-f28969c7bc28",
+      "subjectName": "Subject 3",
+      "groupState": "open",
+      "quoteAvailable": 16,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 7,
+          "duration": 108
+        },
+        {
+          "weekDay": "M",
+          "startTime": 17,
+          "duration": 75
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 4",
+      "subjectId": "492519e4-5b15-49d8-bcea-2c7219e9a278",
+      "subjectName": "Subject 4",
+      "groupState": "cancelled",
+      "quoteAvailable": 8,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 8,
+          "duration": 61
+        },
+        {
+          "weekDay": "S",
+          "startTime": 9,
+          "duration": 109
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 5",
+      "subjectId": "29823381-75c1-46cd-81cf-95944701d3df",
+      "subjectName": "Subject 5",
+      "groupState": "cancelled",
+      "quoteAvailable": 18,
+      "classDays": [
+        {
+          "weekDay": "MC",
+          "startTime": 20,
+          "duration": 90
+        },
+        {
+          "weekDay": "M",
+          "startTime": 8,
+          "duration": 87
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 6",
+      "subjectId": "07b793ce-52d3-4344-b9f1-5fa5e415e3d4",
+      "subjectName": "Subject 6",
+      "groupState": "cancelled",
+      "quoteAvailable": 11,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 17,
+          "duration": 99
+        },
+        {
+          "weekDay": "L",
+          "startTime": 15,
+          "duration": 105
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 7",
+      "subjectId": "f593bee8-72be-4688-8e3a-9fad4f2e5160",
+      "subjectName": "Subject 7",
+      "groupState": "cancelled",
+      "quoteAvailable": 34,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 18,
+          "duration": 89
+        },
+        {
+          "weekDay": "MC",
+          "startTime": 13,
+          "duration": 77
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 8",
+      "subjectId": "35e20f59-ce2c-4b26-8fa2-8d206b40e306",
+      "subjectName": "Subject 8",
+      "groupState": "open",
+      "quoteAvailable": 37,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 7,
+          "duration": 103
+        },
+        {
+          "weekDay": "J",
+          "startTime": 11,
+          "duration": 116
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 9",
+      "subjectId": "2293452b-9e55-4a8f-aeb8-a5b6a29cbcaa",
+      "subjectName": "Subject 9",
+      "groupState": "closed",
+      "quoteAvailable": 8,
+      "classDays": [
+        {
+          "weekDay": "L",
+          "startTime": 10,
+          "duration": 115
+        },
+        {
+          "weekDay": "MC",
+          "startTime": 8,
+          "duration": 87
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 10",
+      "subjectId": "1b22d9c1-feb8-43a6-afe5-9bd7124a484e",
+      "subjectName": "Subject 10",
+      "groupState": "open",
+      "quoteAvailable": 13,
+      "classDays": [
+        {
+          "weekDay": "MC",
+          "startTime": 10,
+          "duration": 86
+        },
+        {
+          "weekDay": "V",
+          "startTime": 11,
+          "duration": 117
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 11",
+      "subjectId": "124c2be3-7f85-49de-be4c-b736dc8ead7b",
+      "subjectName": "Subject 11",
+      "groupState": "cancelled",
+      "quoteAvailable": 44,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 10,
+          "duration": 88
+        },
+        {
+          "weekDay": "L",
+          "startTime": 9,
+          "duration": 120
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 12",
+      "subjectId": "90ac6f7e-41ea-4484-8293-0e9e0dcd6663",
+      "subjectName": "Subject 12",
+      "groupState": "closed",
+      "quoteAvailable": 44,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 9,
+          "duration": 84
+        },
+        {
+          "weekDay": "V",
+          "startTime": 7,
+          "duration": 86
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 13",
+      "subjectId": "a2dee450-5d8a-4acc-b4d2-44cc8d110263",
+      "subjectName": "Subject 13",
+      "groupState": "closed",
+      "quoteAvailable": 43,
+      "classDays": [
+        {
+          "weekDay": "M",
+          "startTime": 12,
+          "duration": 117
+        },
+        {
+          "weekDay": "V",
+          "startTime": 10,
+          "duration": 107
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 14",
+      "subjectId": "78c9485b-303c-4fec-a39f-e9817d70b44f",
+      "subjectName": "Subject 14",
+      "groupState": "cancelled",
+      "quoteAvailable": 36,
+      "classDays": [
+        {
+          "weekDay": "V",
+          "startTime": 8,
+          "duration": 92
+        },
+        {
+          "weekDay": "V",
+          "startTime": 11,
+          "duration": 81
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 15",
+      "subjectId": "d91f3fdc-fc5d-4911-86c2-3136a15151a1",
+      "subjectName": "Subject 15",
+      "groupState": "closed",
+      "quoteAvailable": 12,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 14,
+          "duration": 94
+        },
+        {
+          "weekDay": "J",
+          "startTime": 7,
+          "duration": 94
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 16",
+      "subjectId": "2ad31b27-2f9c-4c7f-b2de-1f7be124f15d",
+      "subjectName": "Subject 16",
+      "groupState": "finalized",
+      "quoteAvailable": 21,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 16,
+          "duration": 85
+        },
+        {
+          "weekDay": "S",
+          "startTime": 15,
+          "duration": 62
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 17",
+      "subjectId": "e584a52c-cf88-4705-9fc1-7546d3e3a6a7",
+      "subjectName": "Subject 17",
+      "groupState": "open",
+      "quoteAvailable": 13,
+      "classDays": [
+        {
+          "weekDay": "V",
+          "startTime": 12,
+          "duration": 114
+        },
+        {
+          "weekDay": "M",
+          "startTime": 12,
+          "duration": 67
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 18",
+      "subjectId": "0bb485b0-d890-46d7-a85d-2309e6f4e54d",
+      "subjectName": "Subject 18",
+      "groupState": "closed",
+      "quoteAvailable": 50,
+      "classDays": [
+        {
+          "weekDay": "M",
+          "startTime": 20,
+          "duration": 105
+        },
+        {
+          "weekDay": "S",
+          "startTime": 15,
+          "duration": 90
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 19",
+      "subjectId": "dfb367ca-ac20-4d9a-95f7-be349e101c4e",
+      "subjectName": "Subject 19",
+      "groupState": "cancelled",
+      "quoteAvailable": 1,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 18,
+          "duration": 95
+        },
+        {
+          "weekDay": "M",
+          "startTime": 7,
+          "duration": 67
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 20",
+      "subjectId": "e57a039f-50de-40f6-afd6-a6ba9270c80b",
+      "subjectName": "Subject 20",
+      "groupState": "open",
+      "quoteAvailable": 33,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 18,
+          "duration": 98
+        },
+        {
+          "weekDay": "MC",
+          "startTime": 18,
+          "duration": 81
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 21",
+      "subjectId": "b5f64612-2e06-4ad1-8458-0bf0c1207f0d",
+      "subjectName": "Subject 21",
+      "groupState": "open",
+      "quoteAvailable": 22,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 14,
+          "duration": 81
+        },
+        {
+          "weekDay": "J",
+          "startTime": 12,
+          "duration": 93
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 22",
+      "subjectId": "0aa27b58-2291-41e2-92f5-77082f0254bd",
+      "subjectName": "Subject 22",
+      "groupState": "cancelled",
+      "quoteAvailable": 47,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 18,
+          "duration": 115
+        },
+        {
+          "weekDay": "MC",
+          "startTime": 19,
+          "duration": 90
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 23",
+      "subjectId": "8913fbcd-bb30-4127-b5d7-f2000a119cea",
+      "subjectName": "Subject 23",
+      "groupState": "finalized",
+      "quoteAvailable": 50,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 18,
+          "duration": 109
+        },
+        {
+          "weekDay": "M",
+          "startTime": 18,
+          "duration": 64
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 24",
+      "subjectId": "3cd46edf-898a-46eb-a848-97a3c317ad99",
+      "subjectName": "Subject 24",
+      "groupState": "finalized",
+      "quoteAvailable": 31,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 15,
+          "duration": 89
+        },
+        {
+          "weekDay": "S",
+          "startTime": 7,
+          "duration": 80
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 25",
+      "subjectId": "e67b69ed-1fc2-4609-9a24-664303c9ccf1",
+      "subjectName": "Subject 25",
+      "groupState": "cancelled",
+      "quoteAvailable": 10,
+      "classDays": [
+        {
+          "weekDay": "MC",
+          "startTime": 15,
+          "duration": 61
+        },
+        {
+          "weekDay": "J",
+          "startTime": 16,
+          "duration": 117
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 26",
+      "subjectId": "123e24f7-3abd-4817-bb3e-7fd2cf6536f4",
+      "subjectName": "Subject 26",
+      "groupState": "open",
+      "quoteAvailable": 5,
+      "classDays": [
+        {
+          "weekDay": "MC",
+          "startTime": 8,
+          "duration": 118
+        },
+        {
+          "weekDay": "M",
+          "startTime": 13,
+          "duration": 68
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 27",
+      "subjectId": "e6de365f-417c-4c71-bc7f-e5330e78f736",
+      "subjectName": "Subject 27",
+      "groupState": "finalized",
+      "quoteAvailable": 5,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 9,
+          "duration": 118
+        },
+        {
+          "weekDay": "J",
+          "startTime": 20,
+          "duration": 103
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 28",
+      "subjectId": "b6999446-7fd9-4a9f-9c26-f050a69e3ba9",
+      "subjectName": "Subject 28",
+      "groupState": "closed",
+      "quoteAvailable": 15,
+      "classDays": [
+        {
+          "weekDay": "M",
+          "startTime": 11,
+          "duration": 83
+        },
+        {
+          "weekDay": "V",
+          "startTime": 19,
+          "duration": 99
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 29",
+      "subjectId": "f4bcef3e-95d1-4c64-a579-bc87702c1312",
+      "subjectName": "Subject 29",
+      "groupState": "finalized",
+      "quoteAvailable": 38,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 17,
+          "duration": 75
+        },
+        {
+          "weekDay": "V",
+          "startTime": 18,
+          "duration": 72
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 30",
+      "subjectId": "a97c2dd7-32ed-4211-bf47-465a1ff40601",
+      "subjectName": "Subject 30",
+      "groupState": "closed",
+      "quoteAvailable": 17,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 7,
+          "duration": 60
+        },
+        {
+          "weekDay": "L",
+          "startTime": 18,
+          "duration": 77
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 31",
+      "subjectId": "9b8e5660-9b4d-4231-bc10-e633e85b599c",
+      "subjectName": "Subject 31",
+      "groupState": "cancelled",
+      "quoteAvailable": 44,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 8,
+          "duration": 97
+        },
+        {
+          "weekDay": "V",
+          "startTime": 8,
+          "duration": 70
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 32",
+      "subjectId": "149ec582-047d-461b-a9e3-6a24c05741f5",
+      "subjectName": "Subject 32",
+      "groupState": "finalized",
+      "quoteAvailable": 43,
+      "classDays": [
+        {
+          "weekDay": "L",
+          "startTime": 16,
+          "duration": 90
+        },
+        {
+          "weekDay": "J",
+          "startTime": 9,
+          "duration": 66
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 33",
+      "subjectId": "6aa4eb10-a17d-423f-8aa5-4e803d35f16b",
+      "subjectName": "Subject 33",
+      "groupState": "open",
+      "quoteAvailable": 41,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 12,
+          "duration": 90
+        },
+        {
+          "weekDay": "L",
+          "startTime": 10,
+          "duration": 119
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 34",
+      "subjectId": "304c9403-3275-4dc8-ae29-5c8b7184149c",
+      "subjectName": "Subject 34",
+      "groupState": "open",
+      "quoteAvailable": 8,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 14,
+          "duration": 117
+        },
+        {
+          "weekDay": "V",
+          "startTime": 20,
+          "duration": 94
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 35",
+      "subjectId": "48e35f79-0ae9-4ea2-9b9a-d119770bfa6a",
+      "subjectName": "Subject 35",
+      "groupState": "open",
+      "quoteAvailable": 40,
+      "classDays": [
+        {
+          "weekDay": "M",
+          "startTime": 11,
+          "duration": 99
+        },
+        {
+          "weekDay": "V",
+          "startTime": 7,
+          "duration": 101
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 36",
+      "subjectId": "dfbb1966-f0d6-4ab4-bef5-416fbfc4eb52",
+      "subjectName": "Subject 36",
+      "groupState": "open",
+      "quoteAvailable": 1,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 15,
+          "duration": 94
+        },
+        {
+          "weekDay": "S",
+          "startTime": 16,
+          "duration": 108
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 37",
+      "subjectId": "d59120ba-414d-4996-8324-30d5e42bcdea",
+      "subjectName": "Subject 37",
+      "groupState": "closed",
+      "quoteAvailable": 49,
+      "classDays": [
+        {
+          "weekDay": "L",
+          "startTime": 19,
+          "duration": 76
+        },
+        {
+          "weekDay": "J",
+          "startTime": 13,
+          "duration": 97
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 38",
+      "subjectId": "77fa2005-78fe-40fc-8d8b-7c233d26f681",
+      "subjectName": "Subject 38",
+      "groupState": "open",
+      "quoteAvailable": 16,
+      "classDays": [
+        {
+          "weekDay": "MC",
+          "startTime": 19,
+          "duration": 66
+        },
+        {
+          "weekDay": "S",
+          "startTime": 12,
+          "duration": 63
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 39",
+      "subjectId": "7c2c6223-0451-4f76-ba33-e324b42332c1",
+      "subjectName": "Subject 39",
+      "groupState": "open",
+      "quoteAvailable": 25,
+      "classDays": [
+        {
+          "weekDay": "M",
+          "startTime": 9,
+          "duration": 77
+        },
+        {
+          "weekDay": "V",
+          "startTime": 10,
+          "duration": 78
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 40",
+      "subjectId": "46905fe7-e7aa-403b-b827-9a204e6b89d6",
+      "subjectName": "Subject 40",
+      "groupState": "open",
+      "quoteAvailable": 26,
+      "classDays": [
+        {
+          "weekDay": "MC",
+          "startTime": 15,
+          "duration": 78
+        },
+        {
+          "weekDay": "V",
+          "startTime": 11,
+          "duration": 77
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 41",
+      "subjectId": "f5f261c1-7cfd-465a-8e85-b697259c4b95",
+      "subjectName": "Subject 41",
+      "groupState": "open",
+      "quoteAvailable": 32,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 13,
+          "duration": 80
+        },
+        {
+          "weekDay": "V",
+          "startTime": 8,
+          "duration": 64
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 42",
+      "subjectId": "6ab74f7b-c78a-4fad-a817-c72ddd08f812",
+      "subjectName": "Subject 42",
+      "groupState": "finalized",
+      "quoteAvailable": 7,
+      "classDays": [
+        {
+          "weekDay": "S",
+          "startTime": 20,
+          "duration": 98
+        },
+        {
+          "weekDay": "V",
+          "startTime": 15,
+          "duration": 86
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 43",
+      "subjectId": "76a8bfb0-3f5e-481b-b6a6-2c0ff3badcc0",
+      "subjectName": "Subject 43",
+      "groupState": "cancelled",
+      "quoteAvailable": 45,
+      "classDays": [
+        {
+          "weekDay": "V",
+          "startTime": 18,
+          "duration": 89
+        },
+        {
+          "weekDay": "V",
+          "startTime": 8,
+          "duration": 106
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 44",
+      "subjectId": "03cd304f-b373-4266-bfb8-00f88112eab3",
+      "subjectName": "Subject 44",
+      "groupState": "cancelled",
+      "quoteAvailable": 24,
+      "classDays": [
+        {
+          "weekDay": "V",
+          "startTime": 14,
+          "duration": 78
+        },
+        {
+          "weekDay": "J",
+          "startTime": 16,
+          "duration": 97
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 45",
+      "subjectId": "372d8364-c6f7-4a0d-9a96-971dce637501",
+      "subjectName": "Subject 45",
+      "groupState": "cancelled",
+      "quoteAvailable": 42,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 11,
+          "duration": 110
+        },
+        {
+          "weekDay": "MC",
+          "startTime": 9,
+          "duration": 116
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 46",
+      "subjectId": "3d83a0a7-5e23-42ee-8e1a-8a196970dc75",
+      "subjectName": "Subject 46",
+      "groupState": "finalized",
+      "quoteAvailable": 1,
+      "classDays": [
+        {
+          "weekDay": "V",
+          "startTime": 17,
+          "duration": 71
+        },
+        {
+          "weekDay": "V",
+          "startTime": 16,
+          "duration": 70
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 47",
+      "subjectId": "0d7c9d3f-2b53-4f17-9097-e7193fac2960",
+      "subjectName": "Subject 47",
+      "groupState": "closed",
+      "quoteAvailable": 39,
+      "classDays": [
+        {
+          "weekDay": "J",
+          "startTime": 16,
+          "duration": 107
+        },
+        {
+          "weekDay": "S",
+          "startTime": 16,
+          "duration": 70
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 48",
+      "subjectId": "61a340a3-1321-4efb-8dfc-e6ed81fdca37",
+      "subjectName": "Subject 48",
+      "groupState": "finalized",
+      "quoteAvailable": 33,
+      "classDays": [
+        {
+          "weekDay": "M",
+          "startTime": 8,
+          "duration": 113
+        },
+        {
+          "weekDay": "V",
+          "startTime": 20,
+          "duration": 78
+        }
+      ]
+    },
+    {
+      "professorName": "Profesor 49",
+      "subjectId": "bc1dd761-4331-49aa-83d5-bacd9fdf993d",
+      "subjectName": "Subject 49",
+      "groupState": "finalized",
+      "quoteAvailable": 38,
+      "classDays": [
+        {
+          "weekDay": "V",
+          "startTime": 15,
+          "duration": 61
+        },
+        {
+          "weekDay": "S",
+          "startTime": 20,
+          "duration": 108
+        }
+      ]
+    }
+  ]
+}

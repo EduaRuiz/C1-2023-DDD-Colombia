@@ -28,15 +28,15 @@ export class GroupPostgresService
 
   async getAllGroups(
     subjectId: string,
-    semesterId: string,
+    groupState: string,
   ): Promise<GroupPostgresEntity[]> {
     const allGroups = await this.groupPostgresRepository.findAll();
     const response: GroupPostgresEntity[] = [];
-    allGroups.map((group) => {
-      if (group.subjectId === subjectId) {
-        allGroups.push(group);
+    for (const group of allGroups) {
+      if (group.subjectId === subjectId && group.groupState === groupState) {
+        response.push(group);
       }
-    });
+    }
     return response;
   }
 
