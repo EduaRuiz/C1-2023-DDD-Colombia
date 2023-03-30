@@ -18,7 +18,12 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class AcademicOfferController {
   @EventPattern('student-inscription.committed-inscription')
   inscriptionCommitted(@Payload() data: any, @Ctx() context: KafkaContext) {
-    console.log(data, context);
+    console.log(`
+    -----------------------------------------------------------------------
+    SUBSCRIPTOR: {student-inscription.committed-inscription}
+    
+    ${data}, ${context}
+    `);
   }
 
   /**
@@ -30,7 +35,12 @@ export class AcademicOfferController {
    */
   @EventPattern('student-inscription.unsubscribed-group')
   unsubscribedGroup(@Payload() data: any, @Ctx() context: KafkaContext) {
-    console.log(data, context);
+    console.log(`
+    -----------------------------------------------------------------------
+    SUBSCRIPTOR: {student-inscription.unsubscribed-group}
+    
+    ${data}, ${context}
+    `);
   }
 
   /**
@@ -42,7 +52,12 @@ export class AcademicOfferController {
    */
   @EventPattern('student-inscription.subscribed-group')
   subscribedGroup(@Payload() data: any, @Ctx() context: KafkaContext) {
-    console.log(data, context);
+    console.log(`
+    -----------------------------------------------------------------------
+    SUBSCRIPTOR: {student-inscription.subscribed-group}
+    
+    ${data}, ${context}
+    `);
   }
 
   /**

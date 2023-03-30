@@ -47,7 +47,8 @@ const CommitInscriptionHelper = async (
             const semesterExist = currentInscriptions.find(
               (totalInscriptions) =>
                 totalInscriptions.semester.semesterId.valueOf() ===
-                inscription.semester.semesterId.valueOf(),
+                  inscription.semester.semesterId.valueOf() &&
+                totalInscriptions.inscriptionState === 'active',
             );
             if (
               semesterExist &&
@@ -76,7 +77,6 @@ const CommitInscriptionHelper = async (
               );
               groupsUpdated.push(updatedGroup);
             }
-            console.log(groupsUpdated);
             inscriptionSaved.groups = groupsUpdated;
             committedInscription.response = inscriptionSaved;
             gotInscriptions.publish();
